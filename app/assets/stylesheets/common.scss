@@ -1,0 +1,121 @@
+html,body,ul,li,input,h1,h2,h3,h4,h5,p{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+ul{
+  list-style: none;
+}
+a{
+  text-decoration: none;
+  color: black;
+}
+.content-width{
+  padding: 0 40px;
+}
+.contents-tidy{
+  display: flex;
+  justify-content: center;
+  align-items:center;
+}
+.search-box{
+  margin:20px 5px;
+}
+.icon{
+  vertical-align:middle;
+  border-radius: 50%;
+}
+
+/*header*/
+header{
+  position: fixed;
+  z-index:100;
+  width: 100%;
+  background-color: burlywood;
+  .header-inner{
+    justify-content: space-between;
+    height: 50px;
+    margin-right: 30px;
+    margin-left: 30px;
+  }
+  .header-form{
+    padding: 10px 0;
+    padding-left:16px;
+    border-radius:5px;
+  }
+  .logo {
+    margin-right: 30px;
+    width:50px;
+    img{
+      width: 100%;
+    }
+  }
+  .header-right-block{
+    font-size: 17px;
+    a{
+      color: white;
+    }
+    .button{
+      background-color: chocolate;
+      font-size: 13px;
+      margin-left: 15px;
+      padding: 5px 13px;
+      border-radius: 6px;
+    }
+    .user-menu{
+      display: inline-block;
+      position: relative;
+      .user-menu-inner{
+        background-color: white;
+        width:150px;
+        display: none;
+        position: absolute;
+        bottom: -170px;
+        left:50%;
+        transform: translateX(-50%);
+        border-radius: 4px;
+        box-shadow: 1px 1px 4px;
+        &::before{
+          content: "";
+          background-color: white;
+          position: absolute;
+          top: -6px;
+          right: 50%;
+          width: 12px;
+          height: 12px;
+          margin-right: -6px;
+          transform: rotate(-135deg);
+        }
+        a{
+          color: black;
+          z-index: 1000;
+          display: block;
+          font-size: 12px;
+          padding: 17px 15px;
+        }
+        .menu-border{
+          position: relative;
+          &::after{
+            content:"";
+            display:block;
+            width: 100%;
+            height:1px;
+            background-color:gray;
+            position:absolute;
+            bottom: 0;
+            left: 0;
+          }
+        }
+        &.active{
+          display: block;
+        }
+      }
+    }
+  }
+}
+
+/*footer*/
+footer{
+  background-color: burlywood;
+  padding: 100px 0;
+}
