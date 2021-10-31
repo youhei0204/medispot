@@ -21,6 +21,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rubocop', require: false
   gem 'rubocop-airbnb', require: false
+  gem 'rspec-rails'
 end
 
 group :development do

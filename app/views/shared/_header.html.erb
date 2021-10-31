@@ -1,0 +1,18 @@
+<header>
+  <div class="header-inner content-width contents-tidy">
+    <div class="header-left-block contents-tidy">
+      <div class="logo">
+        <%= link_to image_tag('logo.png', alt:'header-logo'), root_path %>
+      </div>
+      <%= form_with url: '#', method: :get, local: true ,class: 'search-box' do |f| %>
+        <%= f.text_field :area, class: 'header-form', value: @area, placeholder: 'エリア検索' %>
+        <%= f.text_field :keyword, class: 'header-form', value: @keyword, placeholder: 'キーワード検索' %>
+        <%= f.submit '検索'%>
+      <% end %>
+    </div>
+    <div class="header-right-block">
+      <%= link_to 'MediSpotとは？', '#' %><span> | </span>
+      <%= link_to 'ログイン', '#' %>
+    </div>
+  </div>
+</header>
