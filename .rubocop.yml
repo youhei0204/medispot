@@ -1,6 +1,7 @@
 AllCops:
   Exclude:
     - "db/schema.rb"
+    - "db/migrate/*"
     - "bin/*"
     - "config/**/*"
     - "Gemfile"
@@ -10,4 +11,8 @@ AllCops:
 ##################### Style #######################
 
 Style/Documentation:
+  Enabled: false
+
+##################### Metrics #######################
+Metrics/BlockLength:
   Enabled: false
