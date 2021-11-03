@@ -1,12 +1,14 @@
-require "rails_helper"
+# frozen_string_literal: true
 
-RSpec.feature "GET /home" do
+require 'rails_helper'
+
+RSpec.feature 'HomePages' do
   background do
     visit home_pages_home_path
   end
 
-  scenario "move home page from header logo" do
-    click_link "header-logo"
-    expect(current_path).to eq home_pages_home_path
+  scenario 'ヘッダーロゴからホームページに遷移する' do
+    click_link 'header-logo'
+    expect(current_path).to eq root_path
   end
 end
