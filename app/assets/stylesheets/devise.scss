@@ -2,11 +2,11 @@
   padding:8px 6px;
   width:100%;
   font-size: 14px;
+  border-radius: 5px;
   &.alert{
     margin-bottom: 10px;
     color:red;
     border: 1px solid #F5C9CD;
-    border-radius: 5px;
     background-color:#FFFBFB;
   }
   &.notice{
