@@ -41,8 +41,8 @@ Rails.application.configure do
     port:                 587,
     address:              'smtp.gmail.com',
     domain:               'smtp.gmail.com',
-    user_name:            'info.medispot@gmail.com',
-    password:             'dhgqwejxbsflbtef',
+    user_name:            ENV['GMAIL'],
+    password:             ENV['GMAIL_PASSWORD'],
     authentication:       'login',
     enable_starttls_auto: true
   }
