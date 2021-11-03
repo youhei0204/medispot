@@ -10,9 +10,21 @@
         <%= f.submit '検索'%>
       <% end %>
     </div>
-    <div class="header-right-block">
-      <%= link_to 'MediSpotとは？', '#' %><span> | </span>
-      <%= link_to 'ログイン', '#' %>
-    </div>
+    <% if user_signed_in? %>
+      <div class="header-right-block contents-tidy">
+        <%= link_to 'プロフィール変更', edit_user_registration_path %>
+        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+      </div>
+    <% else %>
+      <div class="header-right-block">
+        <%= link_to 'サインアップ', new_user_registration_path %>
+        <%= link_to 'ログイン', new_user_session_path %>
+      </div>
+    <% end %>
   </div>
+  <% if notice.present? %>
+    <p class="flash notice">
+      <%= notice %> 
+    </p>
+  <% end %>
 </header>

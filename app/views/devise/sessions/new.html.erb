@@ -1,0 +1,40 @@
+<section class="login"> 
+  <div class="user-form-block">
+    <% if notice.present? %>
+      <p class="flash notice">
+        <%= notice %> 
+      </p>
+    <% end %>
+    <div class="logo">
+      <%= link_to image_tag('logo.png'), root_path %>
+    </div>
+    <h2 class="user-form-heading">Login</h2>
+    <% if alert.present? %>
+      <p class="flash alert">
+        <%= alert %> 
+      </p>
+    <% end %>
+    <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+      <div class="form-group">
+        <%= f.label :email, 'メール' %><br>
+        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+      </div>
+      <div class="form-group">
+        <div class="password-label">
+          <%= f.label :password, 'パスワード' %>
+        </div>
+        <%= f.password_field :password, autocomplete: "current-password" %>
+      </div>
+      <% if devise_mapping.rememberable? %>
+        <div class="field">
+          <%= f.check_box :remember_me %>
+          <%= f.label :remember_me, 'ログイン状態を保持する' %>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <%= f.submit 'ログイン', class: 'submit-button' %>
+      </div>
+      <%= link_to '新規ユーザー登録はこちら', new_user_registration_path %>
+    <% end %>
+  </div>
+</section>
