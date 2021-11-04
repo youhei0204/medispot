@@ -36,6 +36,10 @@ RSpec.describe 'Users::Registrations', type: :request do
         expect(User.count).to eq user_num + 1
       end
 
+      it 'nameカラムに値が存在すること' do
+        expect(User.last.name).to eq user_params[:name]
+      end
+
       it 'リダイレクトされること' do
         expect(response).to redirect_to root_url
       end

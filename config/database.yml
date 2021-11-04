@@ -4,18 +4,21 @@ default: &default
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   username: root
   password: password
-  host: db
 
 development:
   <<: *default
   database: medispot_development
+  host: db
 
 test:
   <<: *default
   database: medispot_test
+  host: db
 
 production:
   <<: *default
   database: medispot_production
   username: medispot
   password: <%= ENV['MEDISPOT_DATABASE_PASSWORD'] %>
+  host: 'localhost'
+  url: <%= ENV['JAWSDB_URL']&.sub('mysql://', 'mysql2://') %>
