@@ -19,6 +19,7 @@ gem 'devise'
 gem 'rails-i18n', '~> 5.1'
 gem 'devise-i18n'
 gem 'dotenv-rails'
+gem 'jquery-rails'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -37,7 +38,6 @@ end
 
 group :test do
   gem 'capybara', '>= 2.15'
-  gem 'chromedriver-helper'
   gem 'selenium-webdriver'
   gem 'factory_bot_rails'
   gem 'database_cleaner'
