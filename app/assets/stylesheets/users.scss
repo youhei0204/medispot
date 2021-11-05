@@ -1,0 +1,36 @@
+.user-show {
+  .profile-block {
+    height: 30vh;
+    padding: 60px 0;
+    background-color: antiquewhite;
+    .profile-block-inner {
+      padding-top: 20px;
+      .user-thumbnail {
+        padding-right: 30px;
+        width: 17%;
+        img {
+          width: 100%;
+          border-radius: 50%;
+        }
+      }
+      .user-profile {
+        max-width: 300px;
+        .contents-tidy {
+          justify-content: flex-start;
+        }
+        .user-name {
+          font-size: 40px;
+        }
+        .user-follow-info {
+          font-size: 16px;
+        }
+        .user-introduction {
+          font-size: 14px;
+          &.no-introduction{
+            color: gray;
+          }
+        }
+      }
+    }
+  }
+}

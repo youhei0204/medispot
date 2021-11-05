@@ -1,0 +1,29 @@
+<section class="edit-info">
+  <div class="user-form-block">
+    <div class="logo">
+      <%= link_to image_tag('logo.png'), root_path %>
+    </div>
+    <h1 class="user-form-heading">Edit Profile</h1>
+
+    <%= form_with(model: @user, local: true) do |f| %>
+    <%= render "devise/shared/error_messages", resource: @user %>
+    <div class="form-group">
+      <%= f.label :name, 'ユーザーネーム' %>
+      <%= f.text_field :name, value: @user.name %>
+    </div>
+    <div class="form-group">
+      <%= f.label :introduction, '自己紹介' %><br>
+      <%= f.text_area :introduction, value: @user.introduction, class:'introduction' %>
+    </div>
+    <div class="form-group">
+      <%= f.submit '更新', class: 'submit-button' %>
+    </div>
+    <% end %>
+    <p>
+      <%= link_to 'アカウント情報の変更はこちら', edit_user_registration_path(@user) %>
+    </p>
+    <p>
+      <%= link_to 'TOPへ戻る', root_path %>
+    </p>
+  </div>
+</section>
