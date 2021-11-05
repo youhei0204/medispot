@@ -2,8 +2,9 @@
 
 FactoryBot.define do
   factory :user do
-    name { 'user' }
+    name { 'testuser1' }
     email { 'user@test.com' }
     password { 'testuser' }
+    introduction { 'I was created just for testing' }
   end
 end
