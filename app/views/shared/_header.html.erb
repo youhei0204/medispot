@@ -12,19 +12,26 @@
     </div>
     <% if user_signed_in? %>
       <div class="header-right-block contents-tidy">
-        <%= link_to 'プロフィール変更', edit_user_registration_path %>
-        <%= link_to "ログアウト", destroy_user_session_path, method: :delete %>
+        <div class="user-menu">      
+          <%= image_tag('guest_user.png', size: "35x35", class: 'icon', id: 'icon' ) %>
+          <div class="user-menu-inner">
+            <%= link_to 'マイページ', current_user %>
+            <%= link_to 'プロフィール編集', edit_user_path(current_user), class: 'menu-border' %>
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+          </div>            
+        </div>
+        <%= link_to '投稿', '#', class: 'button' %>
       </div>
     <% else %>
       <div class="header-right-block">
-        <%= link_to 'サインアップ', new_user_registration_path %>
+        <%= link_to '新規登録', new_user_registration_path %>
         <%= link_to 'ログイン', new_user_session_path %>
       </div>
     <% end %>
   </div>
-  <% if notice.present? %>
-    <p class="flash notice">
-      <%= notice %> 
-    </p>
+  <% flash.each do |message_type, message| %>
+    <div class="flash <%= message_type %>">
+      <%= message %>
+    </div>
   <% end %>
 </header>
