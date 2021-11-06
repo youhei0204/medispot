@@ -20,6 +20,7 @@ gem 'rails-i18n', '~> 5.1'
 gem 'devise-i18n'
 gem 'dotenv-rails'
 gem 'jquery-rails'
+gem 'mini_magick'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
