@@ -3,13 +3,18 @@ html,body,ul,li,input,h1,h2,h3,h4,h5,p{
   padding: 0;
   box-sizing: border-box;
 }
+body{
+  background-color: #E5E5E5;
+}
 ul{
   list-style: none;
 }
 a{
   text-decoration: none;
   color: black;
-}
+  &:hover{
+    opacity: 0.8;
+  }}
 .content-width{
   padding: 0 40px;
 }
@@ -28,8 +33,6 @@ a{
 
 /*header*/
 header{
-  position: fixed;
-  z-index:100;
   width: 100%;
   background-color: burlywood;
   .header-inner{
@@ -70,6 +73,7 @@ header{
         width:150px;
         display: none;
         position: absolute;
+        z-index:100;
         bottom: -170px;
         left:50%;
         transform: translateX(-50%);

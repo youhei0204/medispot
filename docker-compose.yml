@@ -15,7 +15,13 @@ services:
       - .:/medispot
     ports:
       - "3000:3000"
-    links:
+    depends_on:
       - db
+      - chrome
     tty: true
     stdin_open: true
+
+  chrome:
+    image: selenium/standalone-chrome:latest
+    ports: 
+      - 4444:4444

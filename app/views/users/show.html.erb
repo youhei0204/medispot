@@ -1,0 +1,25 @@
+<%= render 'shared/header' %>
+<section class="user-show">
+  <div class="profile-block">
+    <div class="profile-block-inner contents-tidy">
+      <div class="user-thumbnail">
+        <%= image_tag('guest_user.png') %>
+      </div>
+      <div class="user-profile">
+        <div class="contents-tidy">
+          <h3 class="user-name"><%= @user.name %></h3>
+        </div>
+        <% if @user.introduction.present? %>
+          <p class="user-introduction">
+            <%= @user.introduction %>
+          </p>
+        <% else %>
+          <p class="user-introduction no-introduction">
+            < 自己紹介文はまだありません >
+          </p>
+        <% end %>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
