@@ -21,6 +21,7 @@ gem 'devise-i18n'
 gem 'dotenv-rails'
 gem 'jquery-rails'
 gem 'mini_magick'
+gem 'font-awesome-sass'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
