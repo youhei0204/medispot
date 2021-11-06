@@ -3,7 +3,11 @@
   <div class="profile-block">
     <div class="profile-block-inner contents-tidy">
       <div class="user-thumbnail">
-        <%= image_tag('guest_user.png') %>
+        <% if @user.image.attached? %>
+          <%= image_tag(@user.image) %>
+        <% else %>
+          <%= image_tag('guest_user.png') %>
+        <% end %>
       </div>
       <div class="user-profile">
         <div class="contents-tidy">
