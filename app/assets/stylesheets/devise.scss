@@ -16,6 +16,12 @@
     background-color: #D3ECF2;
   }
 }
+.flex-y{
+  display: flex;
+  align-items: center;
+  justify-content:center;
+  min-height:100vh;
+}
 .user-form-block{
   font-size: 16px;
   font-weight: 400;
@@ -26,10 +32,6 @@
   display: flex;
   flex-flow: column;
   align-items: center;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform:  translate(-50%,-50%);
   a{
     color: #767676;
     font-size: 17px;
@@ -76,6 +78,18 @@
     a{
       font-size: 14px;
     }
+    &.image{
+
+      img{
+        width:200px;
+        height: 200px;
+        object-fit: cover;
+        border-radius: 50%;
+        &:hover{
+        opacity: 0.7;
+        }
+      }
+    }
   }
   .delete-account{
     width: 100%;
@@ -90,7 +104,7 @@
     }
   }
 }
-.sineup{
+.signup{
   .signup-left-panel{
     background-image: image-url('signup.jpg');
     //background-image: image-url('background.jpg');
