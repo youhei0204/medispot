@@ -3,7 +3,7 @@
 require 'rails_helper'
 
 RSpec.describe 'Users::Sessions', type: :request do
-  let!(:user) { create(:user).confirm }
+  let!(:user) { create(:user) }
   let(:user_params) { attributes_for(:user) }
   let(:invalid_user_params) { attributes_for(:user, email: 'incorrect@test.com') }
 
@@ -17,27 +17,23 @@ RSpec.describe 'Users::Sessions', type: :request do
   describe 'POST /users/sign_in' do
     context 'パラメータが正常なとき' do
       before do
+        user.confirm
         post user_session_path, params: { user: user_params }
       end
-
       it 'リクエストが成功すること' do
         expect(response.status).to eq 302
       end
-
       it 'リダイレクトされること' do
         expect(response).to redirect_to root_url
       end
     end
-
     context 'パラメータが不正な場合' do
       before do
         post user_session_path, params: { user: invalid_user_params }
       end
-
       it 'リクエストが成功すること' do
         expect(response.status).to eq 200
       end
-
       it 'エラーが表示されること' do
         expect(response.body).to include 'Eメール もしくはパスワードが不正です。'
       end

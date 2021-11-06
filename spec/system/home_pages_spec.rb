@@ -2,12 +2,12 @@
 
 require 'rails_helper'
 
-RSpec.feature 'HomePages' do
-  background do
+RSpec.describe 'HomePages', type: :system do
+  before do
     visit home_pages_home_path
   end
 
-  scenario 'ヘッダーロゴからホームページに遷移する' do
+  it 'ヘッダーロゴからホームページに遷移する' do
     click_link 'header-logo'
     expect(current_path).to eq root_path
   end
