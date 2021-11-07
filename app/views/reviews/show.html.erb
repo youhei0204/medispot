@@ -1,0 +1,12 @@
+<section class="review-show content-width">
+  <div class="main-block">
+    <%= link_to @review.user, class:'user-profile contents-tidy' do %>
+      <p class="user-name"><span><%= @review.user.name %></span>さんの口コミ</p>
+    <% end %>
+    <h1 class="review-title"><%= @review.title %></h1>
+    <p class="review-content"><%= @review.content %></p>
+    <p>
+      <%= link_to "削除", review_path(@review), data: { confirm: "本当に削除しますか？" }, "data-turbolinks": false, method: :delete %>
+    </p>
+  </div>
+</section>
