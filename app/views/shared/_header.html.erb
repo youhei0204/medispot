@@ -24,7 +24,7 @@
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
           </div>            
         </div>
-        <%= link_to '投稿', '#', class: 'button' %>
+        <%= link_to '投稿', new_review_path, class: 'button' %>
       </div>
     <% else %>
       <div class="header-right-block">

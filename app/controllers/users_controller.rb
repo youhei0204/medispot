@@ -2,10 +2,12 @@
 
 class UsersController < ApplicationController
   before_action :authenticate_user!
-  before_action :own_page?, only: [:edit, :update]
+  before_action :own_user?, only: [:edit, :update]
   before_action :set_user
 
-  def show; end
+  def show
+    @reviews = @user.reviews.order(created_at: :desc)
+  end
 
   def edit; end
 
@@ -25,7 +27,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
   end
 
-  def own_page?
+  def own_user?
     redirect_to root_path unless current_user == User.find(params[:id])
   end
 

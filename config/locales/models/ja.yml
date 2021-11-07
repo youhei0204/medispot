@@ -3,6 +3,7 @@ ja:
     models:
       user: ユーザー
       spot: スポット
+      review: レビュー
     attributes:
       user:
         name: 名前
@@ -10,4 +11,6 @@ ja:
       spot:
         name: 名前
         address: 住所
-
+      review:
+        title: タイトル
+        content: 本文

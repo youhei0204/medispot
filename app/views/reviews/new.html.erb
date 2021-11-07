@@ -1,0 +1,23 @@
+<section class="review-new content-width">
+  <div class="review-area area" id="review">
+    <%= form_with(model: @review) do |f| %>
+
+    <% if f.object.errors.any? %>
+  <ul class="error_message">
+    <% f.object.errors.full_messages.each do |error_message| %>
+      <li><%= error_message %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+      <div class="text-area">
+        <div id="error_explanation"></div>
+        <div>
+          <%= f.text_field :title, placeholder: "レビュータイトル" %>
+        </div>
+        <%= f.text_area :content, placeholder: "あなたの体験をシェアしませんか？" %>
+        <%= f.submit '投稿', class: 'submit-button' %>
+      </div>
+    <% end %>
+  </div>
+</section>

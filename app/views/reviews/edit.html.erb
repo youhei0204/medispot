@@ -1,0 +1,15 @@
+<section class="review-new content-width">
+  <div class="review-area area" id="review">
+    <%= form_with(model: @review) do |f| %>
+      <div class="text-area">
+        <div>
+          <%= f.text_field :title, placeholder: "レビュータイトル" %>
+        </div>
+        <%= f.text_area :content, placeholder: "あなたの体験をシェアしませんか？" %>
+        <%= f.submit '投稿', class: 'submit-button' %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :spot, id: 'spot-info', value: '' %>
+      </div>
+    <% end %>
+  </div>
+</section>

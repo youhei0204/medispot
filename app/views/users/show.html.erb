@@ -26,4 +26,16 @@
       </div>
     </div>
   </div>
+
+    <div class="content-area">
+      <div class="content show content-width" id="review_prev">
+        <% if @reviews.empty? %>
+          <h3 class="no-content-block">
+            < このユーザーのレビューはありません >
+          </h3>
+        <% end %>
+        <%= render @reviews %>
+      </div>
+    </div>
+  </div>
 </section>
