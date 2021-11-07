@@ -1,0 +1,15 @@
+<div class="box myreview-box contents-tidy">
+  <div class="left-block">
+    <h5 class="title"><%= review.title %></h5>
+    <p class="text">
+      <%= review.content.slice(0..72) %><%= '...'  if review.content.length > 72 %>
+    </p>
+    <span><%= link_to '詳細を見る', review %></span>|
+    <span><%= link_to '編集する', edit_review_path(review.id) %></span>
+  </div>
+  <div class="right-block">
+    <div class="spot-thumbnail">
+      <%= image_tag('noimage.png') %>
+    </div>
+  </div>
+</div>
