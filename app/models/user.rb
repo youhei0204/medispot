@@ -2,6 +2,7 @@
 
 class User < ApplicationRecord
   has_one_attached :image
+  has_many :reviews, dependent: :destroy
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
   validates :name, presence: true, length: { maximum: 30 }
