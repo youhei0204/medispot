@@ -6,9 +6,11 @@ class MapsController < ApplicationController
   def map
     keyword = params[:keyword]
     nihongo = "https://maps.googleapis.com/maps/api/place/textsearch/json?" \
-              "query=#{keyword}&" \
-              "key=#{ENV['GOOGLE_API_KEY']}" \
+              "&region=jp" \
+              "&query=#{keyword}" \
+              "&key=#{ENV['GOOGLE_API_KEY']}" \
               "&language=ja"
+
     uri_str = URI.encode nihongo
     url = URI.parse(uri_str)
     json = Net::HTTP.get(url)
