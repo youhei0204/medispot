@@ -14,12 +14,31 @@ class ReviewsController < ApplicationController
   end
 
   def create
-    @review = current_user.reviews.build(review_params)
-    if @review.save
-      flash[:success] = "レビューを投稿しました"
-      redirect_to current_user
-    else
-      render 'new'
+    spot_info = session[:spots].find do |x|
+      x["place_id"] == params[:review][:spot]
+    end.deep_symbolize_keys
+    spot = Spot.find_by(place_id: spot_info[:place_id])
+
+    if spot.nil?
+      spot = Spot.create!(
+        name: spot_info[:name],
+        address: spot_info[:formatted_address],
+        lat: spot_info[:geometry][:location][:lat],
+        lng: spot_info[:geometry][:location][:lng],
+        place_id: spot_info[:place_id]
+      )
+    end
+
+    @review = spot.reviews.build(review_params)
+    @review.user_id = current_user.id
+
+    respond_to do |format|
+      if @review.save
+        flash[:success] = "投稿が完了しました"
+        format.html { redirect_to current_user }
+      else
+        format.js
+      end
     end
   end
 

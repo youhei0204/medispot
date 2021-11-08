@@ -1,0 +1,30 @@
+<% spots.each do |spot| %>
+
+<div class="spot-box contents-tidy">
+  <div class="spot-info">
+    <h3 class="spot-name"><%= spot[:name] %></h3>
+    <p class="spot-address"><%= spot[:formatted_address] %></p>
+    <p class="spot-dicision" onclick="displayReview(<%= spot.to_json %>)">このスポットのレビューを書く</p>
+  </div>
+  <div class="spot-img">
+    <%= image_tag("http://maps.googleapis.com/maps/api/staticmap?markers=#{spot[:geometry][:location][:lat]},#{spot[:geometry][:location][:lng]}&size=240x160&scale=1&zoom=15&key=#{ENV['GOOGLE_API_KEY']}") %>
+  </div>
+</div>
+
+<% end %>
+
+<script>
+  function displayReview(spot){
+    $('#search').hide();
+    $('#spot').hide();
+    $('#review').fadeIn();
+    $('#spot-name').text(spot.name);
+    $('#spot-address').text(spot.formatted_address);
+    src_url = 'http://maps.googleapis.com/maps/api/staticmap?markers=' +
+                spot.geometry.location.lat + ',' + 
+                spot.geometry.location.lng + 
+                '&size=180x110&scale=1&zoom=15&key=<%= ENV['GOOGLE_API_KEY'] %>';
+    $('#image').children('img').attr('src', src_url);
+    $("#spot-info").val(spot.place_id);
+  }
+</script>

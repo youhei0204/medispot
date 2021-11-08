@@ -11,6 +11,9 @@ ja:
       spot:
         name: 名前
         address: 住所
+        lat: 緯度
+        lng: 経度
+        place_id: プレイスID
       review:
         title: タイトル
         content: 本文

@@ -4,11 +4,12 @@ require 'rails_helper'
 
 RSpec.describe Review, type: :model do
   let(:user) { create(:user) }
-  let(:review) { build(:review, :user) }
-  let(:review_without_user) { build(:review) }
+  let(:review) { build(:review, :user, :spot) }
+  let(:review_without_user) { build(:review, :spot) }
+  let(:review_without_spot) { build(:review, :user) }
 
   describe 'モデルの関連付け' do
-    context 'userに紐づくとき' do
+    context 'userとspotに紐づくとき' do
       it 'オブジェクトが有効であること' do
         expect(review).to be_valid
       end
@@ -21,11 +22,27 @@ RSpec.describe Review, type: :model do
       end
     end
 
+    context 'spotに紐づかないとき' do
+      it 'オブジェクトが無効であること' do
+        expect(review_without_spot).to be_invalid
+        expect(review_without_spot.errors.full_messages[0]).to eq('Spotを入力してください')
+      end
+    end
+
     context '関連先のuserが削除されたとき' do
       it 'オブジェクトが削除されること' do
         review.save!
         expect do
           review.user.destroy
+        end.to change { Review.count }.by(-1)
+      end
+    end
+
+    context '関連先のspotが削除されたとき' do
+      it 'オブジェクトが削除されること' do
+        review.save!
+        expect do
+          review.spot.destroy
         end.to change { Review.count }.by(-1)
       end
     end
@@ -156,7 +173,7 @@ RSpec.describe Review, type: :model do
       it 'オブジェクトが無効であること' do
         review.rate = ''
         expect(review).to be_invalid
-        expect(review.errors.full_messages[0]).to eq('星評価を入力してください')
+        expect(review.errors.full_messages[0]).to eq('星評価は数値で入力してください')
       end
     end
 
@@ -164,7 +181,7 @@ RSpec.describe Review, type: :model do
       it 'オブジェクトが無効であること' do
         review.rate = ' '
         expect(review).to be_invalid
-        expect(review.errors.full_messages[0]).to eq('星評価を入力してください')
+        expect(review.errors.full_messages[0]).to eq('星評価は数値で入力してください')
       end
     end
 
@@ -172,7 +189,7 @@ RSpec.describe Review, type: :model do
       it 'オブジェクトが無効であること' do
         review.rate = nil
         expect(review).to be_invalid
-        expect(review.errors.full_messages[0]).to eq('星評価を入力してください')
+        expect(review.errors.full_messages[0]).to eq('星評価は数値で入力してください')
       end
     end
   end

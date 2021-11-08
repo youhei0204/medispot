@@ -9,5 +9,8 @@ FactoryBot.define do
     trait :user do
       association :user
     end
+    trait :spot do
+      association :spot
+    end
   end
 end
