@@ -5,7 +5,7 @@ require 'rails_helper'
 RSpec.describe 'Reviews', type: :system, js: true do
   let(:user) { create(:user) }
   let(:user_params) { attributes_for(:user) }
-  let!(:review) { create(:review, user_id: user.id) }
+  let!(:review) { create(:review, :spot, user_id: user.id) }
 
   before do
     user.confirm
@@ -16,6 +16,9 @@ RSpec.describe 'Reviews', type: :system, js: true do
     before do
       visit root_path
       click_link '投稿'
+      fill_in 'keyword', with: '東京スカイツリー'
+      click_button '検索'
+      find('.spot-dicision').click
     end
 
     context 'フォームの入力値が正常なとき' do
@@ -25,8 +28,9 @@ RSpec.describe 'Reviews', type: :system, js: true do
         find('#star').find("img[alt='3']").click
         click_button '投稿'
         expect(page).to have_current_path(user_path(user))
-        expect(page).to have_content 'レビューを投稿しました'
+        expect(page).to have_content '投稿が完了しました'
         within '#review_prev' do
+          expect(page).to have_content '東京スカイツリー'
           expect(page).to have_content 'title1'
           expect(page).to have_content 'content1'
           expect(page).to have_content 3.0

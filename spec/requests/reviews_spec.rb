@@ -2,9 +2,9 @@ require 'rails_helper'
 
 RSpec.describe 'Review', type: :request do
   let(:user) { create(:user) }
-  let(:review) { create(:review, user_id: user.id) }
+  let(:review) { create(:review, :spot, user_id: user.id) }
   let(:review_params) { attributes_for(:review) }
-  let(:other_review) { create(:review, :user) }
+  let(:other_review) { create(:review, :user, :spot) }
 
   before { user.confirm }
 
@@ -84,10 +84,29 @@ RSpec.describe 'Review', type: :request do
     end
   end
 
-  describe 'POST /reviews' do
-    before { sign_in user }
+  describe 'POST /reviews', js: true do
+    before do
+      sign_in user
+      spot_info = [{
+        "name" => "プレイス1",
+        "formatted_address" => "東京都X区Y町",
+        "geometry" =>
+          {
+            "location" => { "lat" => 12.3456, "lng" => 12.3456 },
+            "viewport" =>
+              {
+                "northeast" => { "lat" => 12.3456, "lng" => 12.3456 },
+                "southwest" => { "lat" => 12.3456, "lng" => 12.3456 }
+              }
+          },
+        "place_id" => "PLACEID001"
+      }]
+      allow_any_instance_of(ActionDispatch::Request).
+        to receive(:session).and_return(spots: spot_info)
+      review_params[:spot] = spot_info[0]["place_id"]
+    end
 
-    context 'パラメータが正常なとき' do
+    context 'パラメータが正常かつ対象スポットがDBに存在しないとき' do
       before do
         review_params[:title] = 'NewTitle1'
         post reviews_path, params: { review: review_params }
@@ -95,6 +114,30 @@ RSpec.describe 'Review', type: :request do
 
       it 'リクエストが成功すること' do
         expect(response.status).to eq 302
+      end
+      it 'スポットが作成されること' do
+        expect(Spot.last.place_id).to eq 'PLACEID001'
+      end
+      it 'レビューが作成されること' do
+        expect(Review.last.title).to eq 'NewTitle1'
+      end
+      it 'プロフィール画面にリダイレクトされること' do
+        expect(response).to redirect_to user_path(user)
+      end
+    end
+
+    context 'パラメータが正常かつ対象スポットがDBに存在するとき' do
+      before do
+        review.spot.update!(place_id: 'PLACEID001')
+        review_params[:title] = 'NewTitle1'
+        post reviews_path, params: { review: review_params }
+      end
+
+      it 'リクエストが成功すること' do
+        expect(response.status).to eq 302
+      end
+      it 'スポットが作成されないこと' do
+        expect(Spot.find_by(name: 'プレイス1')).to be nil
       end
       it 'レビューが作成されること' do
         expect(Review.last.title).to eq 'NewTitle1'
@@ -107,17 +150,17 @@ RSpec.describe 'Review', type: :request do
     context 'パラメータが不正なとき' do
       before do
         review_params[:title] = 'a' * 51
-        post reviews_path, params: { review: review_params }
+        post reviews_path, params: { review: review_params, format: :js }
       end
 
       it 'リクエストが成功すること' do
         expect(response.status).to eq 200
       end
       it 'エラーが表示されること' do
-        # Ajax用ファイル作成後に追加
+        expect(response.body).to include 'タイトルは50文字以内で入力してください'
       end
       it 'レビューが作成されないこと' do
-        expect(Review.count).to eq 0
+        expect(Review.find_by(title: 'NewTitle1')).to be nil
       end
     end
   end
