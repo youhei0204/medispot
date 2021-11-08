@@ -19,3 +19,7 @@ Style/TrailingCommaInHashLiteral:
 ##################### Metrics #######################
 Metrics/BlockLength:
   Enabled: false
+
+##################### Airbnb #######################
+Airbnb/ModuleMethodInWrongFile:
+  Enabled: false

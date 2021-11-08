@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Users::Registrations', type: :system do
+RSpec.describe 'Reviews', type: :system, js: true do
   let(:user) { create(:user) }
   let(:user_params) { attributes_for(:user) }
   let!(:review) { create(:review, user_id: user.id) }
@@ -22,12 +22,14 @@ RSpec.describe 'Users::Registrations', type: :system do
       it '新規作成が成功する' do
         fill_in 'review_title', with: 'title1'
         fill_in 'review_content', with: 'content1'
+        find('#star').find("img[alt='3']").click
         click_button '投稿'
-        expect(current_path).to eq user_path user
+        expect(page).to have_current_path(user_path(user))
         expect(page).to have_content 'レビューを投稿しました'
         within '#review_prev' do
           expect(page).to have_content 'title1'
           expect(page).to have_content 'content1'
+          expect(page).to have_content 3.0
         end
       end
     end
@@ -35,7 +37,6 @@ RSpec.describe 'Users::Registrations', type: :system do
     context 'フォームの本文が空のとき' do
       it '新規作成が失敗する' do
         expect do
-          fill_in 'review_title', with: 'title1'
           fill_in 'review_content', with: ''
           click_button '投稿'
         end.to change { Review.count }.by(0)
@@ -53,19 +54,20 @@ RSpec.describe 'Users::Registrations', type: :system do
       it '更新が成功する' do
         fill_in 'review_title', with: 'title1'
         fill_in 'review_content', with: 'content1'
+        find('#star').find("img[alt='4']").click
         click_button '投稿'
-        expect(current_path).to eq user_path user
+        expect(page).to have_current_path(user_path(user))
         expect(page).to have_content 'レビューを更新しました'
         within '.myreview-box' do
           expect(page).to have_content 'title1'
           expect(page).to have_content 'content1'
+          expect(page).to have_content 4.0
         end
       end
     end
 
     context 'フォームの本文が空のとき' do
       it '更新が失敗する' do
-        fill_in 'review_title', with: 'title1'
         fill_in 'review_content', with: ''
         click_button '投稿'
         visit user_path user
