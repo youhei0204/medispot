@@ -1,5 +1,7 @@
 <div class="box myreview-box contents-tidy">
   <div class="left-block">
+    <span class="rate" data-score="<%= review.rate %>"></span>
+    <span><%= review.rate %></span>
     <h5 class="title"><%= review.title %></h5>
     <p class="text">
       <%= review.content.slice(0..72) %><%= '...'  if review.content.length > 72 %>

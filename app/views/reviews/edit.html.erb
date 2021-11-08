@@ -2,6 +2,10 @@
   <div class="review-area area" id="review">
     <%= form_with(model: @review) do |f| %>
       <div class="text-area">
+        <div id="star">
+          <%= f.label :rate,'評価 ' %>
+          <%= f.hidden_field :rate, id: :review_star %>
+        </div>
         <div>
           <%= f.text_field :title, placeholder: "レビュータイトル" %>
         </div>
@@ -13,3 +17,14 @@
     <% end %>
   </div>
 </section>
+<script>
+  $('#review').show();
+  $('#star').empty();
+  $('#star').raty({
+    size: 16,
+    starOff: '<%= asset_path('star-off.png') %>',
+    starOn: '<%= asset_path('star-on.png') %>',
+    score: <%= @review.rate %>,
+    scoreName: 'review[rate]'
+  });
+</script>
