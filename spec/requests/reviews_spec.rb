@@ -3,6 +3,7 @@ require 'rails_helper'
 RSpec.describe 'Review', type: :request do
   let(:user) { create(:user) }
   let(:review) { create(:review, user_id: user.id) }
+  let(:review_params) { attributes_for(:review) }
   let(:other_review) { create(:review, :user) }
 
   before { user.confirm }
@@ -79,6 +80,82 @@ RSpec.describe 'Review', type: :request do
         sign_in user
         get edit_review_path other_review
         expect(response).to redirect_to root_path
+      end
+    end
+  end
+
+  describe 'POST /reviews' do
+    before { sign_in user }
+
+    context 'パラメータが正常なとき' do
+      before do
+        review_params[:title] = 'NewTitle1'
+        post reviews_path, params: { review: review_params }
+      end
+
+      it 'リクエストが成功すること' do
+        expect(response.status).to eq 302
+      end
+      it 'レビューが作成されること' do
+        expect(Review.last.title).to eq 'NewTitle1'
+      end
+      it 'プロフィール画面にリダイレクトされること' do
+        expect(response).to redirect_to user_path(user)
+      end
+    end
+
+    context 'パラメータが不正なとき' do
+      before do
+        review_params[:title] = 'a' * 51
+        post reviews_path, params: { review: review_params }
+      end
+
+      it 'リクエストが成功すること' do
+        expect(response.status).to eq 200
+      end
+      it 'エラーが表示されること' do
+        # Ajax用ファイル作成後に追加
+      end
+      it 'レビューが作成されないこと' do
+        expect(Review.count).to eq 0
+      end
+    end
+  end
+
+  describe 'PUTCH /reviews' do
+    before { sign_in user }
+
+    context 'パラメータが正常なとき' do
+      before do
+        review_params[:title] = 'EditedTitle1'
+        patch review_path(review), params: { review: review_params }
+      end
+
+      it 'リクエストが成功すること' do
+        expect(response.status).to eq 302
+      end
+      it 'レビュー情報が更新されること' do
+        expect(review.reload.title).to eq 'EditedTitle1'
+      end
+      it 'プロフィール画面にリダイレクトされること' do
+        expect(response).to redirect_to user_path(user)
+      end
+    end
+
+    context 'パラメータが不正なとき' do
+      before do
+        review_params[:title] = 'a' * 51
+        patch review_path(review), params: { review: review_params }
+      end
+
+      it 'リクエストが成功すること' do
+        expect(response.status).to eq 200
+      end
+      it 'エラーが表示されること' do
+        # Ajax用ファイル作成後に追加
+      end
+      it 'レビュー情報が更新されないこと' do
+        expect(review.reload.title).not_to eq 'a' * 51
       end
     end
   end

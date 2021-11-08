@@ -1,17 +1,12 @@
 <section class="review-new content-width">
   <div class="review-area area" id="review">
     <%= form_with(model: @review) do |f| %>
-
-    <% if f.object.errors.any? %>
-  <ul class="error_message">
-    <% f.object.errors.full_messages.each do |error_message| %>
-      <li><%= error_message %></li>
-    <% end %>
-  </ul>
-<% end %>
-
       <div class="text-area">
         <div id="error_explanation"></div>
+        <div id="star">
+          <%= f.label :rate, '評価' %>
+          <%= f.hidden_field :rate, id: :review_star %>
+        </div>
         <div>
           <%= f.text_field :title, placeholder: "レビュータイトル" %>
         </div>
@@ -21,3 +16,12 @@
     <% end %>
   </div>
 </section>
+<script>
+  $('#star').empty();
+  $('#star').raty({
+    size: 16,
+    starOff: '<%= asset_path('star-off.png') %>',
+    starOn: '<%= asset_path('star-on.png') %>',
+    scoreName: 'review[rate]'
+  });
+</script>

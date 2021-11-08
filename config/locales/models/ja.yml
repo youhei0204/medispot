@@ -14,3 +14,4 @@ ja:
       review:
         title: タイトル
         content: 本文
+        rate: 星評価

@@ -12,7 +12,7 @@ RSpec.describe 'Users', type: :system do
   end
 
   describe 'プロフィール画面の表示' do
-    it 'プロフィール画面が表示される' do
+    it 'プロフィール画面が表示されること' do
       click_link 'マイページ'
       expect(current_path).to eq user_path user
       within '.profile-block' do
@@ -29,7 +29,7 @@ RSpec.describe 'Users', type: :system do
     end
 
     context 'フォームの入力値が正常なとき' do
-      it '更新が成功する' do
+      it '更新が成功すること' do
         fill_in 'user_name', with: 'EditedUser'
         fill_in 'user_introduction', with: 'EditedIntroduction'
         attach_file 'user_image', file_fixture("test_user.png")
@@ -45,14 +45,14 @@ RSpec.describe 'Users', type: :system do
     end
 
     context 'ユーザーネームが不正なとき' do
-      it '更新が失敗する' do
+      it '更新が失敗すること' do
         fill_in 'user_name', with: 'a' * 31
         fill_in 'user_introduction', with: 'EditedIntroduction'
         click_button '更新'
         expect(page).to have_content '名前は30文字以内で入力してください'
         expect(current_path).to eq user_path(user)
-        expect(user.name).to eq user_params[:name]
-        expect(user.introduction).to eq user_params[:introduction]
+        expect(user.name).not_to eq 'a' * 31
+        expect(user.introduction).not_to eq 'EditedIntroduction'
       end
     end
   end

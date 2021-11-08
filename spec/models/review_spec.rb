@@ -10,10 +10,6 @@ RSpec.describe Review, type: :model do
   describe 'モデルの関連付け' do
     context 'userに紐づくとき' do
       it 'オブジェクトが有効であること' do
-        review = user.reviews.build(
-          title: 'title',
-          content: "content",
-        )
         expect(review).to be_valid
       end
     end
@@ -113,6 +109,70 @@ RSpec.describe Review, type: :model do
         review.content = nil
         expect(review).to be_invalid
         expect(review.errors.full_messages[0]).to eq('本文を入力してください')
+      end
+    end
+  end
+
+  describe 'rateのバリデーション' do
+    context '値が0以上で存在するとき' do
+      it 'オブジェクトが有効であること' do
+        review.rate = 0
+        expect(review).to be_valid
+      end
+    end
+
+    context '値が5.0以下で存在するとき' do
+      it 'オブジェクトが有効であること' do
+        review.rate = 5.0
+        expect(review).to be_valid
+      end
+    end
+
+    context '値が5.0を超えるとき' do
+      it 'オブジェクトが無効であること' do
+        review.rate = 5.1
+        expect(review).to be_invalid
+        expect(review.errors.full_messages[0]).to eq('星評価は5.0以下の値にしてください')
+      end
+    end
+
+    context '値がマイナスとき' do
+      it 'オブジェクトが無効であること' do
+        review.rate = -1
+        expect(review).to be_invalid
+        expect(review.errors.full_messages[0]).to eq('星評価は0以上の値にしてください')
+      end
+    end
+
+    context '値が文字列のとき' do
+      it 'オブジェクトが無効であること' do
+        review.rate = 'hello'
+        expect(review).to be_invalid
+        expect(review.errors.full_messages[0]).to eq('星評価は数値で入力してください')
+      end
+    end
+
+    context '空のとき' do
+      it 'オブジェクトが無効であること' do
+        review.rate = ''
+        expect(review).to be_invalid
+        expect(review.errors.full_messages[0]).to eq('星評価を入力してください')
+      end
+    end
+
+    context '空白のとき' do
+      it 'オブジェクトが無効であること' do
+        review.rate = ' '
+        expect(review).to be_invalid
+        expect(review.errors.full_messages[0]).to eq('星評価を入力してください')
+      end
+    end
+
+    context 'nilのとき' do
+      it 'オブジェクトが無効であること' do
+        review.rate = nil
+        expect(review).to be_invalid
+        expect(review.errors.full_messages[0]).to eq('星評価を入力してください')
       end
     end
   end

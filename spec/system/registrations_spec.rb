@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Users::Registrations', type: :system, js: true do
+RSpec.describe 'Registrations', type: :system, js: true do
   let(:user) { create(:user) }
   let(:user_params) { attributes_for(:user) }
 
@@ -11,6 +11,7 @@ RSpec.describe 'Users::Registrations', type: :system, js: true do
       visit root_path
       click_link '新規登録'
     end
+
     context 'フォームの入力値が正常なとき' do
       it '新規作成が成功する' do
         expect do
@@ -24,8 +25,10 @@ RSpec.describe 'Users::Registrations', type: :system, js: true do
         end.to change { User.count }.by(1)
       end
     end
+
     context 'emailが登録済みのとき' do
       before { user.confirm }
+
       it '新規作成が失敗する' do
         expect do
           fill_in 'user_name', with: 'user1'
@@ -48,6 +51,7 @@ RSpec.describe 'Users::Registrations', type: :system, js: true do
       click_link 'プロフィール編集'
       click_link 'アカウント情報の変更はこちら'
     end
+
     context 'フォームの入力値が正常なとき' do
       it '更新が成功する' do
         fill_in 'user_email', with: 'edited@email.com'
@@ -58,6 +62,7 @@ RSpec.describe 'Users::Registrations', type: :system, js: true do
         expect(user.reload.email).to eq('edited@email.com')
       end
     end
+
     context 'パスワードが不正なとき' do
       it '更新が失敗する' do
         fill_in 'user_email', with: 'edited@email.com'
@@ -65,7 +70,7 @@ RSpec.describe 'Users::Registrations', type: :system, js: true do
         click_button '更新'
         expect(current_path).to eq user_registration_path
         expect(page).to have_content '現在のパスワードは不正な値です'
-        expect(user.reload.email).to eq('user@test.com')
+        expect(user.reload.email).not_to eq('edited@email.com')
       end
     end
   end

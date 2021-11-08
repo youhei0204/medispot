@@ -1,0 +1,13 @@
+$(document).on('turbolinks:load', function () {
+  $(function () {
+    $('.rate').empty();
+    $('.rate').raty({
+      readOnly: true,
+      score: $(this).attr('data-score'),
+      starOn: "<%= asset_path('star-on.png') %>",
+      starOff: "<%= asset_path('star-off.png') %>",
+      starHalf: "<%= asset_path('star-half.png') %>",
+      number: 5
+    });
+  });
+});
