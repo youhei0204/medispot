@@ -1,22 +1,51 @@
 <section class="review-new content-width">
+  <div class="search-area area" id="search">
+    <h2 class="search-title">レビューするスポットを選択してください</h2>
+    <%= form_with(url: map_request_path, method: :get) do |f| %>
+      <%= f.text_field :keyword, id: "keyword", placeholder: "施設、最寄駅等を入力" %>
+      <%= f.submit '検索', class: "submit" %>
+    <% end %>
+  </div>
+  <div class="select-spot-area" id="spot"></div>
   <div class="review-area area" id="review">
-    <%= form_with(model: @review) do |f| %>
-      <div class="text-area">
-        <div id="error_explanation"></div>
-        <div id="star">
-          <%= f.label :rate, '評価' %>
-          <%= f.hidden_field :rate, id: :review_star %>
+    <div class="spot-area">
+      <div class="spot-box contents-tidy">
+        <div class="spot-info">
+          <h3 class="spot-name" id="spot-name"></h3>
+          <p class="spot-address" id="spot-address"></p>
+          <h5 onclick="displaySearch()">変更する</h5>
         </div>
-        <div>
-          <%= f.text_field :title, placeholder: "レビュータイトル" %>
+        <div class="spot-img" id="image">
+          <img src="" alt="地図">
         </div>
-        <%= f.text_area :content, placeholder: "あなたの体験をシェアしませんか？" %>
-        <%= f.submit '投稿', class: 'submit-button' %>
       </div>
+    </div>
+
+    <%= form_with(model: @review) do |f| %>
+    <div class="text-area">
+      <div id="error_explanation"></div>
+
+      <div id="star">
+        <%= f.label :rate,'評価 ' %>
+        <%= f.hidden_field :rate, id: :review_star %>
+      </div>
+      <div>
+      <%= f.text_field :title, placeholder: "レビュータイトル" %>
+      </div>
+      <%= f.text_area :content, placeholder: "あなたの体験をシェアしませんか？" %>
+      <%= f.submit '投稿', class: 'submit-button' %>
+      <%= f.hidden_field :spot, id: 'spot-info', value: '' %>
+    </div>
     <% end %>
   </div>
 </section>
+
 <script>
+  function displaySearch() {
+    $('#search').fadeIn();
+    $('#spot').fadeIn();
+    $('#review').fadeOut();
+  }
   $('#star').empty();
   $('#star').raty({
     size: 16,
