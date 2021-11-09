@@ -13,11 +13,13 @@ class UsersController < ApplicationController
 
   def update
     @user = User.find(params[:id])
-    if @user.update(user_params)
-      flash[:success] = 'プロフィールを更新しました'
-      redirect_to @user
-    else
-      render 'edit'
+    respond_to do |format|
+      if @user.update(user_params)
+        flash[:success] = 'プロフィールを更新しました'
+        format.html { redirect_to current_user }
+      else
+        format.js
+      end
     end
   end
 
