@@ -5,7 +5,10 @@ require 'rails_helper'
 RSpec.describe Spot, type: :model do
   let(:spot) { build(:spot) }
   let(:other_spot) { build(:spot) }
+  let(:review_1) { create(:review, :user, :spot) }
+  let(:review_2) { create(:review, :user, spot_id: review_1.spot.id) }
 
+  describe 'バリデーション' do
   describe ':name' do
     context '100文字以内で値が存在するとき' do
       it 'オブジェクトが有効であること' do
@@ -193,6 +196,16 @@ RSpec.describe Spot, type: :model do
         spot.place_id = nil
         expect(spot).to be_invalid
         expect(spot.errors.full_messages[0]).to eq('プレイスIDを入力してください')
+      end
+    end
+  end
+
+  describe "メソッド" do
+    describe "#average_rate" do
+      it "スポットの平均レビューを取得すること" do
+        review_1.update!(rate: 1)
+        review_2.update!(rate: 2)
+        expect(review_1.spot.average_rate).to eq 1.5
       end
     end
   end

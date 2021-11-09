@@ -4,7 +4,7 @@ RSpec.describe 'Review', type: :request do
   let(:user) { create(:user) }
   let(:review) { create(:review, :spot, user_id: user.id) }
   let(:review_params) { attributes_for(:review) }
-  let(:other_review) { create(:review, :user, :spot) }
+  let!(:other_review) { create(:review, :user, spot_id: review.spot.id) }
 
   before { user.confirm }
 
@@ -21,6 +21,9 @@ RSpec.describe 'Review', type: :request do
       it 'レビュー情報が表示されること' do
         expect(response.body).to include review.title
         expect(response.body).to include review.content
+      end
+      it '同じスポットの他ユーザーのレビュー情報が表示されること' do
+        expect(response.body).to include other_review.title
       end
     end
 
@@ -188,14 +191,14 @@ RSpec.describe 'Review', type: :request do
     context 'パラメータが不正なとき' do
       before do
         review_params[:title] = 'a' * 51
-        patch review_path(review), params: { review: review_params }
+        patch review_path(review), params: { review: review_params, format: :js  }
       end
 
       it 'リクエストが成功すること' do
         expect(response.status).to eq 200
       end
       it 'エラーが表示されること' do
-        # Ajax用ファイル作成後に追加
+        expect(response.body).to include 'タイトルは50文字以内で入力してください'
       end
       it 'レビュー情報が更新されないこと' do
         expect(review.reload.title).not_to eq 'a' * 51
