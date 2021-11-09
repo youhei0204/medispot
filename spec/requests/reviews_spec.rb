@@ -191,7 +191,7 @@ RSpec.describe 'Review', type: :request do
     context 'パラメータが不正なとき' do
       before do
         review_params[:title] = 'a' * 51
-        patch review_path(review), params: { review: review_params, format: :js  }
+        patch review_path(review), params: { review: review_params, format: :js }
       end
 
       it 'リクエストが成功すること' do

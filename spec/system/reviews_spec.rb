@@ -74,11 +74,7 @@ RSpec.describe 'Reviews', type: :system, js: true do
       it '更新が失敗する' do
         fill_in 'review_content', with: ''
         click_button '投稿'
-        visit user_path user
-        within '#review_prev' do
-          expect(page).not_to have_content 'title1'
-          expect(page).not_to have_content 'content1'
-        end
+        expect(page).to have_content '本文を入力してください'
       end
     end
   end
