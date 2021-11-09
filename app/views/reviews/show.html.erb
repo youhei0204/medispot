@@ -1,3 +1,4 @@
+<%= render 'shared/header' %>
 <section class="review-show content-width">
   <div class="spot-block">
     <div class="spot-info">
@@ -29,8 +30,19 @@
     <span><%= @review.rate %></span>
     <h1 class="review-title"><%= @review.title %></h1>
     <p class="review-content"><%= @review.content %></p>
+    <ul class="review-image contents-tidy">
+      <% @review.images.each do |image| %>
+        <li><%= image_tag(image) %></li>
+      <% end %>
+    </ul>
+      <%= link_to "削除", review_path(@review), data: { confirm: "本当に削除しますか？" }, 
+        "data-turbolinks": false, method: :delete if @review.user == current_user
+      %>
+    <div class="modal">
+      <div class="bigimg"><%=image_tag('') %></div>
+      <p class="close-btn"><a href="">✖</a></p>
+    </div>
   </div>
-
   <div class="review-block" id="review">
     <h2>このスポットのその他のレビュー</h2>
     <% @other_reviews.each do |review| %>
@@ -46,15 +58,19 @@
         </div>
         <div class="right-block">
           <div class="spot-thumbnail">
-            <%= image_tag('noimage.png') %>
+            <% if review.images.attached? %>
+              <%= image_tag(review.images[0])%>
+            <% else %>
+              <%= image_tag('noimage.png') %>
+            <% end %>
           </div>
         </div>
       <% end %>
     <% end %>
     <% if @other_reviews.empty? %>
-      <h3>
-        <%= 'その他のレビューはありません' %>
-      </h3>
+    <h3>
+      <%= 'その他のレビューはありません' %>
+    </h3>
     <% end %>
   </div>
 </section>
