@@ -1,7 +1,19 @@
 <section class="review-new content-width">
   <div class="review-area area" id="review">
+    <div class="spot-area">
+      <div class="spot-box contents-tidy">
+        <div class="spot-info">
+          <h3 class="spot-name"><%= @review.spot.name %></h3>
+          <p class="spot-address"><%= @review.spot.address %></p>
+        </div>
+        <div class="spot-img" id="image">
+          <img src="" alt="地図">
+        </div>
+      </div>
+    </div>
     <%= form_with(model: @review) do |f| %>
       <div class="text-area">
+        <div id="error_explanation"></div>
         <div id="star">
           <%= f.label :rate,'評価 ' %>
           <%= f.hidden_field :rate, id: :review_star %>
@@ -27,4 +39,9 @@
     score: <%= @review.rate %>,
     scoreName: 'review[rate]'
   });
+  src_url = 'http://maps.googleapis.com/maps/api/staticmap?markers=' +
+              <%= @review.spot.lat %> + ',' + 
+              <%= @review.spot.lng %> + 
+              '&size=180x110&scale=1&zoom=15&key=<%= ENV['GOOGLE_API_KEY'] %>';
+  $('#image').children('img').attr('src', src_url);
 </script>
