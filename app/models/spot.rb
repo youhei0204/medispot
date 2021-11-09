@@ -9,4 +9,20 @@ class Spot < ApplicationRecord
   def average_rate
     reviews.average(:rate)
   end
+
+  def images(num)
+    images = []
+    is_break = false
+    reviews.each do |review|
+      review.images.each do |image|
+        images << image
+        if images.length >= num
+          is_break = true
+          break
+        end
+      end
+      break if is_break
+    end
+    images
+  end
 end

@@ -49,6 +49,47 @@ a{
 .hidden{
   display: none;
 }
+/*slick*/
+.slick-prev {
+  color: #000;
+  left: 0!important;
+  z-index: 100;
+}
+.slick-next {
+  color: #000;
+  right: 0!important;
+  z-index: 100;
+}
+.box{
+  background-color: white;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  .left-block {
+    width: 60%;
+    padding-right: 25px;
+    .name {
+     font-size: 20px;
+     font-weight: 500;
+     margin-bottom: 4px;
+    }
+    .title {
+      font-size: 17px;
+      padding: 14px 0;
+    }
+    .text {
+      font-size: 15px;
+    }
+  }
+  .right-block {
+    .spot-thumbnail img{
+      width: 280px;
+      height: 140px;
+      object-fit: cover;
+      border-radius: 10px;
+      box-shadow: 1px 1px 1px #999;
+    }
+  }
+}
 
 /*header*/
 header{

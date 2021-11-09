@@ -5,8 +5,59 @@
       <div class="spot-name">
         <h1><%= @spot.name %></h1>
       </div>
+      <p class="spot-star">
+        <span class="rate" data-score="<%= @spot.average_rate %>"></span>
+        <span><%= @spot.average_rate.round(2) %></span>
+        <span class="review-num">
+          <i class="fas fa-regular fa-comment-dots"></i>
+          <%= @spot.reviews.count %>件
+        </span>
+      </p>
       <i class="fas fa-regular fa-map-pin"></i>
       <span class="spot-address"><%= @spot.address %></span>
     </div>
+
+    <div class="spot-images">
+      <ul class="slider spot-slider">
+        <% @spot.images(@max_slider_image_num).each do |image| %>
+        <li>
+          <%= image_tag(image, class:'slider-image') %>
+        </li>
+        <% end %>
+      </ul>
+
+      <ul class="thumbnail">
+        <% @spot.images(@max_slider_image_num).each do |image| %>
+        <li><%= image_tag(image, class:'slider-image') %></li>
+        <% end %>
+      </ul>
+    </div>
+
+  </div>
+
+  <div class="review-block" id="review">
+    <h2>このスポットのレビュー一覧</h2>
+    <% @spot.reviews.each do |review| %>
+      <%= link_to review, class:'box review-box contents-tidy' do %>
+        <div class="left-block">
+          <h4 class="name"><%= review.spot.name %></h4>
+          <span class="rate" data-score="<%= review.rate %>"></span>
+          <span><%= review.rate %></span>
+          <h5 class="title"><%= review.title %></h5>
+          <p class="text">
+            <%= review.content.slice(0..72) %><%= '...'  if review.content.length > 72 %>
+          </p>
+        </div>
+        <div class="right-block">
+          <div class="spot-thumbnail">
+            <% if review.images.attached? %>
+              <%= image_tag(review.images[0])%>
+            <% else %>
+              <%= image_tag('noimage.png') %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
   </div>
 </section>
