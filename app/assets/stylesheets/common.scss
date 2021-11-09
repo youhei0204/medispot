@@ -4,7 +4,10 @@ html,body,ul,li,input,h1,h2,h3,h4,h5,p{
   box-sizing: border-box;
 }
 body{
-  background-color: #E5E5E5;
+  background-color: white;
+  &.users, &.sessions, &.registrations{
+    background-color: #E5E5E5;
+  }
 }
 ul{
   list-style: none;
@@ -14,7 +17,12 @@ a{
   color: black;
   &:hover{
     opacity: 0.8;
-  }}
+  }
+}
+.error_message{
+  color: red;
+  font-size: 15px;
+}
 .content-width{
   padding: 0 40px;
 }

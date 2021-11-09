@@ -2,7 +2,7 @@
 
 FactoryBot.define do
   factory :review do
-    title { 'test_title' }
+    sequence(:title) { |n| "title_#{n}" }
     content { 'test_content' }
     rate { 3.0 }
 

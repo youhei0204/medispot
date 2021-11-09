@@ -1,14 +1,60 @@
 <section class="review-show content-width">
+  <div class="spot-block">
+    <div class="spot-info">
+      <h1 class="spot-name">
+        <%= link_to @review.spot.name, @review.spot %>
+      </h1>
+      <span class="rate average-rate" data-score="<%= @review.spot.average_rate %>"></span>
+      <span><%= @review.spot.average_rate.round(2) %></span>
+      <span>
+        <i class="fas fa-regular fa-comment-dots"></i>
+          <%= @review.spot.reviews.count %>件
+      </span>
+      <p>
+        <i class="fas fa-regular fa-map-pin"></i>
+        <span class="spot-address"><%= @review.spot.address %></span>
+      </p>
+    </div>
+  </div>
   <div class="main-block">
     <%= link_to @review.user, class:'user-profile contents-tidy' do %>
+      <% if @review.user.image.attached? %>
+        <%= image_tag(@review.user.image, size: "35x35", class: 'icon') %>
+      <% else %>
+        <%= image_tag('guest_user.png', size: "35x35", class: 'icon') %>
+      <% end %>
       <p class="user-name"><span><%= @review.user.name %></span>さんの口コミ</p>
     <% end %>
     <span class="rate" data-score="<%= @review.rate %>"></span>
     <span><%= @review.rate %></span>
     <h1 class="review-title"><%= @review.title %></h1>
     <p class="review-content"><%= @review.content %></p>
-    <p>
-      <%= link_to "削除", review_path(@review), data: { confirm: "本当に削除しますか？" }, "data-turbolinks": false, method: :delete %>
-    </p>
+  </div>
+
+  <div class="review-block" id="review">
+    <h2>このスポットのその他のレビュー</h2>
+    <% @other_reviews.each do |review| %>
+      <%= link_to review, class:'box review-box contents-tidy' do %>
+        <div class="left-block">
+          <h4 class="name"><%= review.spot.name %></h4>
+          <span class="rate" data-score="<%= review.rate %>"></span>
+          <span><%= review.rate %></span>
+          <h5 class="title"><%= review.title %></h5>
+          <p class="text">
+            <%= review.content.slice(0..72) %><%= '...'  if review.content.length > 72 %>
+          </p>
+        </div>
+        <div class="right-block">
+          <div class="spot-thumbnail">
+            <%= image_tag('noimage.png') %>
+          </div>
+        </div>
+      <% end %>
+    <% end %>
+    <% if @other_reviews.empty? %>
+      <h3>
+        <%= 'その他のレビューはありません' %>
+      </h3>
+    <% end %>
   </div>
 </section>
