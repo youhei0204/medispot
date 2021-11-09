@@ -22,6 +22,7 @@ gem 'dotenv-rails'
 gem 'jquery-rails'
 gem 'mini_magick'
 gem 'font-awesome-sass'
+gem 'aws-sdk-s3'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
