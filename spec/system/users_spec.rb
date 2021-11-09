@@ -22,7 +22,7 @@ RSpec.describe 'Users', type: :system do
     end
   end
 
-  describe 'プロフィールの更新' do
+  describe 'プロフィールの更新', js: true do
     before do
       find('#icon').click
       click_link 'プロフィール編集'
@@ -32,7 +32,7 @@ RSpec.describe 'Users', type: :system do
       it '更新が成功すること' do
         fill_in 'user_name', with: 'EditedUser'
         fill_in 'user_introduction', with: 'EditedIntroduction'
-        attach_file 'user_image', file_fixture("test_user.png")
+        attach_file 'user_image', file_fixture("test_user.png"), make_visible: true
         click_button '更新'
         expect(page).to have_content 'プロフィールを更新しました'
         expect(current_path).to eq user_path(user)
@@ -50,7 +50,7 @@ RSpec.describe 'Users', type: :system do
         fill_in 'user_introduction', with: 'EditedIntroduction'
         click_button '更新'
         expect(page).to have_content '名前は30文字以内で入力してください'
-        expect(current_path).to eq user_path(user)
+        expect(current_path).to eq edit_user_path(user)
         expect(user.name).not_to eq 'a' * 31
         expect(user.introduction).not_to eq 'EditedIntroduction'
       end

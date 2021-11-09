@@ -22,11 +22,20 @@ RSpec.describe 'Reviews', type: :system, js: true do
     end
 
     context 'フォームの入力値が正常なとき' do
-      it '新規作成が成功する' do
+      before do
         fill_in 'review_title', with: 'title1'
         fill_in 'review_content', with: 'content1'
+        attach_file 'img-file',
+          [
+            file_fixture("test_review1.png"),
+            file_fixture("test_review2.png"),
+          ],
+          make_visible: true
         find('#star').find("img[alt='3']").click
         click_button '投稿'
+      end
+
+      it '新規作成が成功し、プロフィール画面に内容が表示される' do
         expect(page).to have_current_path(user_path(user))
         expect(page).to have_content '投稿が完了しました'
         within '#review_prev' do
@@ -34,6 +43,30 @@ RSpec.describe 'Reviews', type: :system, js: true do
           expect(page).to have_content 'title1'
           expect(page).to have_content 'content1'
           expect(page).to have_content 3.0
+          expect(page).to have_selector("img[src$='test_review1.png']")
+        end
+      end
+      it '新規作成が成功し、レビュー詳細画面に内容が表示される' do
+        expect(page).to have_current_path(user_path(user))
+        expect(page).to have_content '投稿が完了しました'
+        visit(review_path(Review.last))
+        within '.main-block' do
+          expect(page).to have_content 'title1'
+          expect(page).to have_content 'content1'
+          expect(page).to have_content 3.0
+          expect(page).to have_selector("img[src$='test_review1.png']")
+          expect(page).to have_selector("img[src$='test_review2.png']")
+        end
+      end
+      it '新規作成が成功し、スポット詳細画面に内容が表示される' do
+        expect(page).to have_current_path(user_path(user))
+        expect(page).to have_content '投稿が完了しました'
+        visit(spot_path(Review.last.spot))
+        within '.review-box' do
+          expect(page).to have_content 'title1'
+          expect(page).to have_content 'content1'
+          expect(page).to have_content 3.0
+          expect(page).to have_selector("img[src$='test_review1.png']")
         end
       end
     end
