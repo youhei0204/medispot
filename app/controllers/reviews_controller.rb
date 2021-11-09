@@ -4,6 +4,8 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update]
 
   def show
+    @review = Review.find(params[:id])
+    @other_reviews = @review.spot.reviews.where.not(id: params[:id])
   end
 
   def new

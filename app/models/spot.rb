@@ -5,4 +5,8 @@ class Spot < ApplicationRecord
   validates :lat, presence: true
   validates :lng, presence: true
   validates :place_id, presence: true, uniqueness: true
+
+  def average_rate
+    reviews.average(:rate)
+  end
 end
