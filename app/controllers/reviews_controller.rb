@@ -72,5 +72,5 @@ def own_review?
 end
 
 def review_params
-  params.require(:review).permit(:review, :title, :content, :rate)
+  params.require(:review).permit(:review, :title, :content, :rate, images: [])
 end

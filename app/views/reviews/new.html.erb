@@ -20,26 +20,34 @@
         </div>
       </div>
     </div>
-
     <%= form_with(model: @review) do |f| %>
-    <div class="text-area">
-      <div id="error_explanation"></div>
-
-      <div id="star">
-        <%= f.label :rate,'評価 ' %>
-        <%= f.hidden_field :rate, id: :review_star %>
+      <div class="image-area">
+        <p>写真投稿</p>
+        <h5>最大で4枚までアップロードできます</h5>
+        <%= f.file_field :images, multiple: true, class:"hidden", id:"img-file" %>
+        <div class="image-block">
+          <label for="img-file" class="add-image-box" id="add-image">
+            <i class="fas fa-solid fa-image"></i>
+          </label>
+        </div>
       </div>
-      <div>
-      <%= f.text_field :title, placeholder: "レビュータイトル" %>
+      <div class="text-area">
+        <div id="error_explanation"></div>
+        <div id="star">
+          <%= f.label :rate,'評価 ' %>
+          <%= f.hidden_field :rate, id: :review_star %>
+        </div>
+        <div>
+        <%= f.text_field :title, placeholder: "レビュータイトル" %>
+        </div>
+        <%= f.text_area :content, placeholder: "あなたの体験をシェアしませんか？" %>
+        <%= f.submit '投稿', class: 'submit-button' %>
+        <%= f.hidden_field :user_id, value: current_user.id %>
+        <%= f.hidden_field :spot, id: 'spot-info', value: '' %>
       </div>
-      <%= f.text_area :content, placeholder: "あなたの体験をシェアしませんか？" %>
-      <%= f.submit '投稿', class: 'submit-button' %>
-      <%= f.hidden_field :spot, id: 'spot-info', value: '' %>
-    </div>
     <% end %>
   </div>
 </section>
-
 <script>
   function displaySearch() {
     $('#search').fadeIn();
