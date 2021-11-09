@@ -20,7 +20,6 @@ class ReviewsController < ApplicationController
       x["place_id"] == params[:review][:spot]
     end.deep_symbolize_keys
     spot = Spot.find_by(place_id: spot_info[:place_id])
-
     if spot.nil?
       spot = Spot.create!(
         name: spot_info[:name],
@@ -31,10 +30,9 @@ class ReviewsController < ApplicationController
       )
     end
 
-    @review = spot.reviews.build(review_params)
-    @review.user_id = current_user.id
-
     respond_to do |format|
+      @review = spot.reviews.build(review_params)
+      @review.user_id = current_user.id
       if @review.save
         flash[:success] = "投稿が完了しました"
         format.html { redirect_to current_user }
@@ -45,11 +43,14 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    if @review.update(review_params)
-      flash[:success] = "レビューを更新しました"
-      redirect_to current_user
-    else
-      render 'edit'
+    @review = Review.find(params[:id])
+    respond_to do |format|
+      if @review.update(review_params)
+        flash[:success] = "レビューを更新しました"
+        format.html { redirect_to current_user }
+      else
+        format.js
+      end
     end
   end
 
