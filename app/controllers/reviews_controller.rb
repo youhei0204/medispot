@@ -1,10 +1,10 @@
 class ReviewsController < ApplicationController
+  MAX_IMAGE_UPLOAD_NUM = 4
   before_action :authenticate_user!
   before_action :own_review?, only: [:edit, :update, :destroy]
   before_action :set_review, only: [:show, :edit, :update]
 
   def show
-    @review = Review.find(params[:id])
     @other_reviews = @review.spot.reviews.where.not(id: params[:id])
   end
 
@@ -43,13 +43,25 @@ class ReviewsController < ApplicationController
   end
 
   def update
-    @review = Review.find(params[:id])
+    if params[:initial_image_keys].nil?
+      delete_images = @review.images.attached? ? @review.images : []
+    else
+      delete_images = @review.images.select do |image|
+        !params[:initial_image_keys].include?(image.key)
+      end
+    end
     respond_to do |format|
-      if @review.update(review_params)
-        flash[:success] = "レビューを更新しました"
+      if params[:initial_image_keys]&.length.to_i +
+          params[:review][:images]&.length.to_i > MAX_IMAGE_UPLOAD_NUM
         format.html { redirect_to current_user }
       else
-        format.js
+        if @review.update(review_params)
+          delete_images.map(&:purge)
+          flash[:success] = "レビューを更新しました"
+          format.html { redirect_to current_user }
+        else
+          format.js
+        end
       end
     end
   end

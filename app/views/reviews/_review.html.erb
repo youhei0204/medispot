@@ -7,8 +7,8 @@
     <p class="text">
       <%= review.content.slice(0..72) %><%= '...'  if review.content.length > 72 %>
     </p>
-    <span><%= link_to '詳細を見る', review %></span>|
-    <span><%= link_to '編集する', edit_review_path(review.id) %></span>
+    <span><%= link_to '詳細', review %></span>|
+    <span><%= link_to '編集', edit_review_path(review.id) %></span>
   </div>
   <div class="right-block">
     <div class="spot-thumbnail">
