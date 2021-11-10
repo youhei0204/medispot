@@ -4,25 +4,25 @@
       <div class="logo">
         <%= link_to image_tag('logo.png', alt:'header-logo'), root_path %>
       </div>
-      <%= form_with url: '#', method: :get, local: true ,class: 'search-box' do |f| %>
-        <%= f.text_field :area, class: 'header-form', value: @area, placeholder: 'エリア検索' %>
-        <%= f.text_field :keyword, class: 'header-form', value: @keyword, placeholder: 'キーワード検索' %>
-        <%= f.submit '検索'%>
+      <%= form_with url: spots_path, method: :get, local: true ,class: 'search-box' do |f| %>
+        <%= f.text_field :area, id: "header-area", class: 'header-form', value: @area, placeholder: 'エリア検索' %>
+        <%= f.text_field :keyword, id: "header-keyword", class: 'header-form', value: @keyword, placeholder: 'キーワード検索' %>
+        <%= f.submit '検索' %>
       <% end %>
     </div>
     <% if user_signed_in? %>
       <div class="header-right-block contents-tidy">
-        <div class="user-menu">  
+        <div class="user-menu">
           <% if current_user.image.attached? %>
             <%= image_tag(current_user.image , class: 'icon', id:'icon') %>
           <% else %>
             <%= image_tag('guest_user.png', class: 'icon', id:'icon') %>
-          <% end %>    
+          <% end %>
           <div class="user-menu-inner">
             <%= link_to 'マイページ', current_user %>
             <%= link_to 'プロフィール編集', edit_user_path(current_user), class: 'menu-border' %>
             <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
-          </div>            
+          </div>
         </div>
         <%= link_to '投稿', new_review_path, class: 'button' %>
       </div>
