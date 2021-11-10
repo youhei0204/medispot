@@ -12,6 +12,29 @@
       </div>
     </div>
     <%= form_with(model: @review) do |f| %>
+      <div class="image-area">
+        <p>写真投稿</p>
+        <h5>最大で4枚までアップロードできます</h5>
+        <%= f.file_field :images, multiple: true, style:'display: none;', id:"img-file" %>
+        <div class="image-block">
+
+          <% f.object.images.each do |image| %>
+            <div class='image-box initial-image'>
+              <div class='item-image'>
+                <%= image_tag image %>
+                <%= hidden_field_tag 'initial_image_keys[]', image.key %>
+              </div>
+              <div class='delete-box'>
+                <div class='initial-image-delete'>削除</div>
+              </div>
+            </div>
+          <% end %>
+
+          <label for="img-file" class="add-image-box" id="add-image">
+            <i class="fas fa-solid fa-image"></i>
+          </label>
+        </div>
+      </div>
       <div class="text-area">
         <div id="error_explanation"></div>
         <div id="star">
@@ -22,7 +45,7 @@
           <%= f.text_field :title, placeholder: "レビュータイトル" %>
         </div>
         <%= f.text_area :content, placeholder: "あなたの体験をシェアしませんか？" %>
-        <%= f.submit '投稿', class: 'submit-button' %>
+        <%= f.submit '更新', class: 'submit-button' %>
         <%= f.hidden_field :user_id, value: current_user.id %>
         <%= f.hidden_field :spot, id: 'spot-info', value: '' %>
       </div>
@@ -34,9 +57,9 @@
   $('#star').empty();
   $('#star').raty({
     size: 16,
-    starOff: '<%= asset_path('star-off.png') %>',
-    starOn: '<%= asset_path('star-on.png') %>',
-    score: <%= @review.rate %>,
+    starOff:  '<%= asset_path('star-off.png') %>',
+    starOn:   '<%= asset_path('star-on.png') %>',
+    score:     <%= @review.rate %>,
     scoreName: 'review[rate]'
   });
   src_url = 'http://maps.googleapis.com/maps/api/staticmap?markers=' +
@@ -44,4 +67,12 @@
               <%= @review.spot.lng %> + 
               '&size=180x110&scale=1&zoom=15&key=<%= ENV['GOOGLE_API_KEY'] %>';
   $('#image').children('img').attr('src', src_url);
+  if ($(".initial-image").length  >= 4) {
+    $('.add-image-box').css('display', 'none')
+  }
+  $(document).on("click", '.initial-image-delete', function () {
+    var target_image = $(this).parent().parent()
+    target_image.remove()
+    $('.add-image-box').show()
+  })
 </script>

@@ -1,13 +1,13 @@
 $(document).on('turbolinks:load', function () {
   $(function () {
     var dataBox = new DataTransfer();
-
     var file_field = document.querySelector('input[type=file]');
 
     $('#img-file').change(function () {
       $.each(this.files, function (i, file) {
         dataBox.items.add(file)
         file_field.files = dataBox.files
+        initial_image_num = $(".initial-image").length 
         var fileReader = new FileReader();
         fileReader.readAsDataURL(file);
 
@@ -24,7 +24,7 @@ $(document).on('turbolinks:load', function () {
           $('.add-image-box').before(html);
         };
         const MAX_IMAGE_UPLOAD_NUM = 4
-        if (file_field.files.length == MAX_IMAGE_UPLOAD_NUM) {
+        if ( initial_image_num + file_field.files.length >= MAX_IMAGE_UPLOAD_NUM) {
           $('.add-image-box').css('display', 'none')
           return false;
         }

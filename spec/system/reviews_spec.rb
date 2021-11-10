@@ -83,22 +83,57 @@ RSpec.describe 'Reviews', type: :system, js: true do
 
   describe 'レビューの更新' do
     before do
-      visit user_path user
-      click_link '編集する'
+      visit root_path
+      click_link '投稿'
+      fill_in 'keyword', with: '東京スカイツリー'
+      click_button '検索'
+      find('.spot-dicision').click
+      fill_in 'review_title', with: 'title1'
+      fill_in 'review_content', with: 'content1'
+      attach_file 'img-file', file_fixture("test_review1.png"), make_visible: true
+      find('#star').find("img[alt='3']").click
+      click_button '投稿'
     end
 
     context 'フォームの入力値が正常なとき' do
-      it '更新が成功する' do
-        fill_in 'review_title', with: 'title1'
-        fill_in 'review_content', with: 'content1'
+      it '更新が成功し、レビュー詳細画面に内容が表示される' do
+        click_link '編集', match: :first
+        fill_in 'review_title', with: 'updated_title1'
+        fill_in 'review_content', with: 'updated_content1'
+        attach_file 'img-file', file_fixture("test_review2.png"), make_visible: true
         find('#star').find("img[alt='4']").click
-        click_button '投稿'
+        click_button '更新'
         expect(page).to have_current_path(user_path(user))
         expect(page).to have_content 'レビューを更新しました'
-        within '.myreview-box' do
-          expect(page).to have_content 'title1'
-          expect(page).to have_content 'content1'
+
+        visit review_path(Review.last)
+        within '.main-block' do
+          expect(page).to have_content 'updated_title1'
+          expect(page).to have_content 'updated_content1'
           expect(page).to have_content 4.0
+          expect(page).to have_selector("img[src$='test_review1.png']")
+          expect(page).to have_selector("img[src$='test_review2.png']")
+        end
+      end
+    end
+
+    context 'フォームの入力値が正常かつ既存の画像を削除するとき' do
+      it '更新が成功し、レビュー詳細画面に内容が表示される' do
+        click_link '編集', match: :first
+        fill_in 'review_title', with: 'updated_title1'
+        fill_in 'review_content', with: 'updated_content1'
+        find('.initial-image-delete').click
+        find('#star').find("img[alt='4']").click
+        click_button '更新'
+        expect(page).to have_current_path(user_path(user))
+        expect(page).to have_content 'レビューを更新しました'
+
+        visit review_path(Review.last)
+        within '.main-block' do
+          expect(page).to have_content 'updated_title1'
+          expect(page).to have_content 'updated_content1'
+          expect(page).to have_content 4.0
+          expect(page).not_to have_selector("img[src$='test_review1.png']")
         end
       end
     end
@@ -115,7 +150,7 @@ RSpec.describe 'Reviews', type: :system, js: true do
   describe 'レビューの削除', js: true do
     before do
       visit user_path user
-      click_link '詳細を見る'
+      click_link '詳細'
     end
 
     it '削除に成功する' do
