@@ -2,9 +2,8 @@
 <section class="home">
   <div class="top-block">
     <h1 class="catchcopy">オフの日、瞑想するなら<br>MediSpot</h1>
-
     <div class="search-block contents-tidy">
-      <%= form_with url: '#', method: :get, local: true ,class: 'search-box' do |f| %>
+      <%= form_with url: spots_path, method: :get, local: true ,class: 'search-box' do |f| %>
         <%= f.text_field :area, class: 'form', placeholder: 'エリア検索 [例: 東京, 新橋]' %>
         <%= f.text_field :keyword, class: 'form', placeholder: 'キーワード検索 [例: 瞑想, ヨガ]' %>
         <%= f.submit '検索', class: 'submit' %>

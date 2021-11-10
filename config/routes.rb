@@ -11,6 +11,6 @@ Rails.application.routes.draw do
     sessions:      'users/sessions',
   }
   resources :users, only:[:show, :edit, :update]
-  resources :spots, only:[:show]
+  resources :spots, only:[:show, :index]
   resources :reviews
 end
