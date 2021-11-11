@@ -1,0 +1,9 @@
+<% isLiked = Like.exists?(user: current_user, review_id: review.id)  %>
+<%= link_to review_like_path(review), class:"cancel-like like-btn #{ 'active' if isLiked }", method: :delete, remote: true do %>
+  <%= image_tag 'after_heart.png' %>
+  <span class="like-count"><%= review.likes.count %></span>
+<% end %>
+<%= link_to review_likes_path(review), class:"add-like like-btn #{ 'active' if !isLiked }", method: :post, remote: true do %>
+  <%= image_tag 'before_heart.png' %>
+  <span class="like-count"><%= review.likes.count %></span>
+<% end %>

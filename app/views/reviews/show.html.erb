@@ -32,13 +32,16 @@
     <h1 class="review-title"><%= @review.title %></h1>
     <p class="review-content"><%= @review.content %></p>
     <ul class="review-image contents-tidy">
-      <% @review.images.each do |image| %>
+      <% @images.each do |image| %>
         <li><%= image_tag(image) %></li>
       <% end %>
     </ul>
       <%= link_to "削除", review_path(@review), data: { confirm: "本当に削除しますか？" }, 
         "data-turbolinks": false, method: :delete if @review.user == current_user
       %>
+    <p class="like-box">
+      <%= render 'shared/like', review: @review %>
+    </p>
     <div class="modal">
       <div class="bigimg"><%=image_tag('') %></div>
       <p class="close-btn"><a href="">✖</a></p>

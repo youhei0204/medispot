@@ -9,6 +9,9 @@ class UsersController < ApplicationController
     @reviews = @user.reviews.order(created_at: :desc).
       includes(:spot, images_attachments: :blob)
     @favorites = @user.favorites.order(created_at: :desc).includes(spot: :reviews)
+
+    liked_review_ids = @user.likes.order(created_at: :desc).pluck(:review_id)
+    @liked_reviews = liked_review_ids.map { |i| Review.find_by(id: i) }
   end
 
   def edit; end

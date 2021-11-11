@@ -1,0 +1,15 @@
+.like-btn{
+  display: none;
+  position: relative;
+  &.active{
+    display: flex;
+    align-items: center;
+  }
+  img{
+    width:22px;
+    padding-right: 5px;
+  }
+  #like_count{
+    font-size: 20px;
+  }
+}

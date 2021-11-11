@@ -15,5 +15,7 @@ Rails.application.routes.draw do
   resources :spots, only:[:show, :index] do
     resources :favorites, only:[:create, :destroy]
   end
-  resources :reviews
+  resources :reviews do
+    resources :likes, only:[:create, :destroy]
+  end
 end
