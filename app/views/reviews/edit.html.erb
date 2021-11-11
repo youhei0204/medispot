@@ -18,7 +18,7 @@
         <%= f.file_field :images, multiple: true, style:'display: none;', id:"img-file" %>
         <div class="image-block">
 
-          <% f.object.images.each do |image| %>
+          <% @images.each do |image| %>
             <div class='image-box initial-image'>
               <div class='item-image'>
                 <%= image_tag image %>
