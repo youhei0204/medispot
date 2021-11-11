@@ -35,7 +35,7 @@
       <div class="tab" id="favorite_tab">
         保存した場所
       </div>
-      <div class="tab" like_tab>
+      <div class="tab" id="like_tab">
         ライク
       </div>
     </div>
@@ -78,7 +78,12 @@
         <% end %>
       </div>
       <div class="content content-width">
-        < ここにライクが入る >
+        <% if @user.likes.empty? %>
+          <div class="no-content-block">
+            ライクしたレビューはありません
+          </div>
+        <% end %>
+        <%= render partial: 'like_review', collection: @liked_reviews, as: 'review' %>
       </div>
     </div>
   </div>
