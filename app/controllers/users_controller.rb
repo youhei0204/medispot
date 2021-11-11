@@ -6,8 +6,9 @@ class UsersController < ApplicationController
   before_action :set_user
 
   def show
-    @reviews = @user.reviews.order(created_at: :desc)
-    @favorites = @user.favorites.order(created_at: :desc).includes([:spot])
+    @reviews = @user.reviews.order(created_at: :desc).
+      includes(:spot, images_attachments: :blob)
+    @favorites = @user.favorites.order(created_at: :desc).includes(spot: :reviews)
   end
 
   def edit; end

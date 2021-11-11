@@ -13,6 +13,7 @@ class ReviewsController < ApplicationController
   end
 
   def edit
+    @images = @review.images.includes(:blob)
   end
 
   def create
