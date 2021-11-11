@@ -27,14 +27,58 @@
     </div>
   </div>
 
+  <div class="tab-block">
+    <div class="tab-area">
+      <div class="tab active" id="review_tab">
+        レビュー
+      </div>
+      <div class="tab" id="favorite_tab">
+        保存した場所
+      </div>
+      <div class="tab" like_tab>
+        ライク
+      </div>
+    </div>
     <div class="content-area">
       <div class="content show content-width" id="review_prev">
         <% if @reviews.empty? %>
-          <h3 class="no-content-block">
-            < このユーザーのレビューはありません >
-          </h3>
+          <div class="no-content-block">
+            このユーザーのレビューはありません
+          </div>
         <% end %>
         <%= render @reviews %>
+      </div>
+      <div class="content content-width">
+        <% if @user.favorites.empty? %>
+          <div class="no-content-block">
+            保存したスポットはありません
+          </div>
+        <% end %>
+        <% @favorites.each do |favorite| %>
+          <%= link_to favorite.spot, class:'box favorite-box contents-tidy' do %>
+            <div class="left-block">
+              <h4 class="name"><%= favorite.spot.name %></h4>
+              <span class="rate" data-score="<%= favorite.spot.average_rate %>"></span>
+              <span><%= favorite.spot.average_rate.round(2) %></span>
+              <h5 class="address">
+                <i class="fas fa-solid fa-map-pin"></i>
+                <%= favorite.spot.address %>
+              </h5>
+            </div>
+            <div class="right-block">
+              <div class="spot-thumbnail">
+                <% if favorite.spot.images(1).empty? %>
+                  <%= image_tag('noimage.png') %>
+                <% else %>
+                  <%= image_tag(favorite.spot.images(1).first) %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+      <div class="content content-width">
+        < ここにライクが入る >
       </div>
     </div>
   </div>
