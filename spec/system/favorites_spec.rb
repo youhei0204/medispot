@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'Reviews', type: :system, js: true do
+RSpec.describe 'Favorites', type: :system, js: true do
   let(:user) { create(:user) }
   let(:spot) { create(:spot) }
   let!(:review) { create(:review, spot_id: spot.id, user_id: user.id) }
@@ -25,10 +25,10 @@ RSpec.describe 'Reviews', type: :system, js: true do
       expect(page).to have_content spot.average_rate
     end
   end
+
   describe 'スポットの保存の解除' do
-    before do
-      user.favorites.create!(spot_id: spot.id)
-    end
+    before { user.favorites.create!(spot_id: spot.id) }
+
     it 'スポットの保存を解除してプロフィール画面で非表示にする' do
       visit spot_path spot.id
       find('.favorite-btn').click
