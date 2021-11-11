@@ -5,7 +5,10 @@ class ReviewsController < ApplicationController
   before_action :set_review, only: [:show, :edit, :update]
 
   def show
-    @other_reviews = @review.spot.reviews.where.not(id: params[:id])
+    @other_reviews = @review.spot.reviews.where.not(id: params[:id]).
+      includes(images_attachments: :blob)
+    @images = @review.images.includes(:blob)
+    @reviewer = @review.user
   end
 
   def new

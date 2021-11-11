@@ -17,25 +17,21 @@
       <i class="fas fa-regular fa-map-pin"></i>
       <span class="spot-address"><%= @spot.address %></span>
     </div>
-
     <div class="spot-images">
       <ul class="slider spot-slider">
-        <% @spot.images(@max_slider_image_num).each do |image| %>
-        <li>
-          <%= image_tag(image, class:'slider-image') %>
-        </li>
+        <% @images.each do |image| %>
+          <li>
+            <%= image_tag(image, class:'slider-image') %>
+          </li>
         <% end %>
       </ul>
-
       <ul class="thumbnail">
-        <% @spot.images(@max_slider_image_num).each do |image| %>
-        <li><%= image_tag(image, class:'slider-image') %></li>
+        <% @images.each do |image| %>
+          <li><%= image_tag(image, class:'slider-image') %></li>
         <% end %>
       </ul>
     </div>
-
   </div>
-
   <div class="review-block" id="review">
     <h2>このスポットのレビュー一覧</h2>
     <% @spot.reviews.each do |review| %>
