@@ -4,6 +4,7 @@
     <div class="spot-info">
       <h1 class="spot-name">
         <%= link_to @review.spot.name, @review.spot %>
+        <span><%= render 'shared/favorite', spot: @review.spot %></span>
       </h1>
       <span class="rate average-rate" data-score="<%= @review.spot.average_rate %>"></span>
       <span><%= @review.spot.average_rate.round(2) %></span>

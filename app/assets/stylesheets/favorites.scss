@@ -1,0 +1,35 @@
+.favorite-btn{
+  display: none;
+  position: relative;
+  width: 100px;
+  height: 26px;
+  font-size: 14px;
+  border: 1px  solid #d2d2d2;
+  border-radius: 4px;
+  color: #595960;
+  font-weight: bold;
+  text-align: center;
+  letter-spacing: 0;
+  vertical-align: middle;
+  line-height: 1;
+  &.active{
+    display: inline-block;
+  }
+  .fa-bookmark, span{
+    position: absolute;
+    top:50%;
+    transform: translateY(-50%);
+  }
+  .fa-bookmark{
+    left:10px;
+    &.true{
+      color: orange;
+    }
+    &.false{
+      color: #DBDBDB;
+    }
+  }
+  span{
+    right: 10px;
+  }
+}

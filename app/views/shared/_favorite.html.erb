@@ -1,0 +1,9 @@
+<% is_favorited = Favorite.exists?(user: current_user, spot_id: spot.id)  %>
+<%= link_to spot_favorite_path(spot), class:"favorite-btn #{'active' if is_favorited}", method: :delete, remote: true do %>
+  <i class="fas fa-solid fa-bookmark true"></i>
+  <span>保存済み</span>
+<% end %>
+<%= link_to spot_favorites_path(spot), class:"favorite-btn #{ 'active' if !is_favorited}", method: :post, remote: true do %>
+  <i class="fas fa-solid fa-bookmark false"></i>
+  <span>保存</span>
+<% end %>
