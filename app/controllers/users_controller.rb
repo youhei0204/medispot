@@ -7,6 +7,7 @@ class UsersController < ApplicationController
 
   def show
     @reviews = @user.reviews.order(created_at: :desc)
+    @favorites = @user.favorites.order(created_at: :desc).includes([:spot])
   end
 
   def edit; end

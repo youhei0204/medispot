@@ -35,6 +35,64 @@
       }
     }
   }
+  .tab-block {
+    background-color: antiquewhite;
+    .tab-area {
+      display: flex;
+      justify-content: flex-start;
+      background-color: antiquewhite;
+      cursor: pointer;
+      .tab {
+        width: 200px;
+        height: 40px;
+        line-height: 40px;
+        text-align: center;
+        font-size: 15px;
+        color: black;
+        border: 1px solid burlywood;
+      }
+      .tab.active {
+        background-color: burlywood;
+        color: #222e3e;
+        border: none;
+      }
+    }
+    .content-area {
+      .content {
+        display: none;
+      }
+      .content.show {
+        margin-top: 20px;
+        display: block;
+        max-width: 750px;
+        height:1000px;
+        .favorite-box{
+          height: 120px;
+          position:relative;
+          .favorite-btn{
+            position: absolute;
+            top:0;
+            span{
+              display: none;
+            }
+          }
+          .address{
+            font-size: 15px!important;
+          }
+          .spot-thumbnail img{
+            height: 100px!important;
+            aspect-ratio: 3/4;
+          }
+        }
+        .no-content-block{
+          width:400px;
+          img{
+            width: 100%;
+          }
+        }
+      }
+    }
+  }
 }
 .user-edit{
   margin: 30px 0;

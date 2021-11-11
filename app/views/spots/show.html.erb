@@ -4,6 +4,7 @@
     <div class="spot-info">
       <div class="spot-name">
         <h1><%= @spot.name %></h1>
+        <span><%= render 'shared/favorite', spot: @spot %></span>
       </div>
       <p class="spot-star">
         <span class="rate" data-score="<%= @spot.average_rate %>"></span>
