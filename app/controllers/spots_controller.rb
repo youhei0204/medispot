@@ -4,8 +4,8 @@ class SpotsController < ApplicationController
   MAX_SEARCH_SPOT_NUM = 100
 
   def show
-    @max_slider_image_num = MAX_SLIDER_IMAGE_NUM_FOR_SHOW
     @spot = Spot.find(params[:id])
+    @images = @spot.images(MAX_SLIDER_IMAGE_NUM_FOR_SHOW)
   end
 
   def index
@@ -15,7 +15,7 @@ class SpotsController < ApplicationController
       redirect_to request.referer
     else
       @max_slider_image_num = MAX_SLIDER_IMAGE_NUM_FOR_INDEX
-      @spots = searched_spot.includes(reviews: [images_attachments: :blob])
+      @spots = searched_spot
     end
   end
 

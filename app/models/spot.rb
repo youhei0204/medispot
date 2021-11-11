@@ -14,7 +14,7 @@ class Spot < ApplicationRecord
   def images(num)
     images = []
     is_break = false
-    reviews.each do |review|
+    reviews.includes(images_attachments: :blob).each do |review|
       review.images.each do |image|
         images << image
         if images.length >= num
