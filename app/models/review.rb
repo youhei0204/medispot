@@ -1,5 +1,6 @@
 class Review < ApplicationRecord
   has_many_attached :images
+  has_many :likes, dependent: :destroy
   belongs_to :user
   belongs_to :spot
   validates :title, presence: true, length: { maximum: 50 }
