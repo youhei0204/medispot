@@ -1,5 +1,5 @@
 $(document).on('turbolinks:load', function () {
-  $('.review-image li').click(function() {
+  $('.view-modal li').click(function() {
     var imgSrc = $(this).children().attr('src');
     $('.bigimg').children().attr('src', imgSrc);
     $('.modal').fadeIn();
