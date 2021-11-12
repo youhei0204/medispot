@@ -34,6 +34,7 @@
       <div class="form-group">
         <%= f.submit 'ログイン', class: 'submit-button' %>
       </div>
+      <%= link_to 'ゲストとしてログイン', users_guest_sign_in_path, method: :post %><br>
       <%= link_to '新規ユーザー登録はこちら', new_user_registration_path %>
     <% end %>
   </div>
