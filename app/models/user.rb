@@ -9,4 +9,13 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable, :confirmable
   validates :name, presence: true, length: { maximum: 30 }
   validates :introduction, length: { maximum: 140 }
+
+  def self.guest
+    find_or_create_by!(email: 'guest@medispot.com') do |user|
+      user.name = 'ゲスト'
+      user.introduction = 'ゲストとしてログインしています。'
+      user.password = SecureRandom.urlsafe_base64
+      user.confirmed_at = Time.now
+    end
+  end
 end

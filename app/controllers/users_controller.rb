@@ -2,6 +2,7 @@
 
 class UsersController < ApplicationController
   before_action :authenticate_user!
+  before_action :guest_user?, only: [:update]
   before_action :own_user?, only: [:edit, :update]
   before_action :set_user
 
@@ -36,6 +37,12 @@ class UsersController < ApplicationController
 
   def own_user?
     redirect_to root_path unless current_user == User.find(params[:id])
+  end
+
+  def guest_user?
+    if User.find_by(id: params[:id]).email == 'guest@medispot.com'
+      redirect_to root_path, alert: 'ゲストユーザーは変更・削除できません。'
+    end
   end
 
   def user_params
