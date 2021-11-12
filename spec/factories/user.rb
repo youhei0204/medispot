@@ -6,5 +6,12 @@ FactoryBot.define do
     sequence(:email) { |n| "email_#{n}@test.com" }
     password { 'testuser' }
     introduction { 'I was created just for testing' }
+
+    trait :guest do
+      name { 'guestuser' }
+      email { 'guest@medispot.com' }
+      password { 'guestuser' }
+      confirmed_at { Time.now }
+    end
   end
 end

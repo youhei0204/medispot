@@ -3,15 +3,14 @@
 require 'rails_helper'
 
 RSpec.describe 'Sessions', type: :system do
-  let!(:user) { create(:user).confirm }
+  let(:user) { User.create(user_params) }
   let(:user_params) { attributes_for(:user) }
   let(:invalid_password) { 'invalid_password' }
 
   before do
+    user.confirm
     visit root_path
-    expect(page).to have_http_status :ok
     click_link 'ログイン'
-    expect(current_path).to eq new_user_session_path
   end
 
   context 'パスワードが正常なとき' do
@@ -23,6 +22,7 @@ RSpec.describe 'Sessions', type: :system do
       expect(page).to have_content 'ログインしました。'
     end
   end
+
   context 'パスワードが不正なとき' do
     it 'ログインに失敗する' do
       fill_in 'user_email', with: user_params[:email]
