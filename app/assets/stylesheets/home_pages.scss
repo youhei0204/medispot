@@ -9,7 +9,12 @@
     background-position: center;
     background-repeat: no-repeat;
     .catchcopy{
-      font-size: 40px;
+      display: inline-block;
+      font-size: 31px;
+      background-color: #9B521F;
+      border-radius: 2px;
+      padding: 30px 40px;
+     
     }
     .search-block{
       position: absolute;
@@ -44,6 +49,7 @@
     align-items: flex-start;
     padding: 0 40px;
     padding-top: 100px;
+    background-color: #FDFCFB;
     .block-title {
       margin-bottom: 5px;
       font-size: 17px;

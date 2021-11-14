@@ -7,7 +7,10 @@
   <div class="header-inner content-width contents-tidy">
     <div class="header-left-block contents-tidy">
       <div class="logo">
-        <%= link_to image_tag('logo.png', alt:'header-logo'), root_path %>
+        <%= link_to root_path, class:'contents-tidy' do %>
+          <%= image_tag('logo.png', alt:'header-logo') %>
+          <h4 class="header-logo-title">MediSpot</h4>
+        <% end %>
       </div>
       <%= form_with url: spots_path, method: :get, local: true ,class: 'search-box' do |f| %>
         <%= f.text_field :area, id: "header-area", class: 'header-form', value: @area, placeholder: 'エリア検索' %>
