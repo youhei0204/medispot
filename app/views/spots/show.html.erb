@@ -19,18 +19,22 @@
       <span class="spot-address"><%= @spot.address %></span>
     </div>
     <div class="spot-images">
-      <ul class="slider spot-slider view-modal">
-        <% @images.each do |image| %>
-          <li>
-            <%= image_tag(image, class:'slider-image') %>
-          </li>
-        <% end %>
-      </ul>
-      <ul class="thumbnail">
-        <% @images.each do |image| %>
-          <li><%= image_tag(image, class:'slider-image') %></li>
-        <% end %>
-      </ul>
+      <% if @images.present? %>
+        <ul class="slider spot-slider view-modal">
+          <% @images.each do |image| %>
+            <li>
+              <%= image_tag(image, class:'slider-image') %>
+            </li>
+          <% end %>
+        </ul>
+        <ul class="thumbnail">
+          <% @images.each do |image| %>
+            <li><%= image_tag(image, class:'slider-image') %></li>
+          <% end %>
+        </ul>
+      <% else %>
+        <p class="no-image">このスポットの写真はありません。</p>
+      <% end %>
     </div>
   </div>
   <div class="review-block" id="review">
