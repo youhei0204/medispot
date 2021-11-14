@@ -1,0 +1,31 @@
+<%= link_to review, class:'box recent-review-box hover-lightgray contents-tidy', id:"review_#{review_counter + 1}" do %>
+  <div class="left-block">
+    <h4 class="name"><%= review.spot.name %></h4>
+    <span class="rate" data-score="<%= review.rate %>"></span>
+    <span><%= review.rate %></span>
+    <h5 class="title"><%= review.title %></h5>
+    <p class="text"><%= review.content %></p>
+    <div class="space-between align-items-end">
+      <div class="contents-tidy align-items-end">
+        <% if review.user.image.attached? %>
+          <%= image_tag(review.user.image, class: 'icon') %>
+        <% else %>
+          <%= image_tag('guest_user.png', class: 'icon') %>
+        <% end %>
+        <div class="reviewer-info">
+          <p><%= review.user.name %></p>
+          <p class="review-date">投稿日：<%= review.created_at.strftime('%Y/%m/%d') %></p>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="right-block">
+    <div class="spot-thumbnail">
+      <% if review.images.attached? %>
+        <%= image_tag(review.images[0])%>
+      <% else %>
+        <%= image_tag('noimage.png') %>
+      <% end %>
+    </div>
+  </div>
+<% end %>
