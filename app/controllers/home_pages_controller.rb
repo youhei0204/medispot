@@ -7,7 +7,9 @@ class HomePagesController < ApplicationController
 
   def home
     @recent_reviews = Review.order(created_at: :desc).
-      includes(:spot, :user).first(MAX_RECENT_REVIEW_NUM)
+      includes(:spot,
+        images_attachments: :blob,
+        user: [image_attachment: :blob]).first(MAX_RECENT_REVIEW_NUM)
     @popular_spots = popular_spots(MAX_POPULAR_SPOT_NUM)
     @max_spot_image_num = MAX_SPOT_IMAGE_NUM
   end

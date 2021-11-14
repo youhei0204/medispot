@@ -1,5 +1,5 @@
 <%= render 'shared/header' %>
-<section class="user-show">
+<section class="user-show content-width">
   <div class="profile-block">
     <div class="profile-block-inner contents-tidy">
       <div class="user-thumbnail">
@@ -19,71 +19,52 @@
           </p>
         <% else %>
           <p class="user-introduction no-introduction">
-            < 自己紹介文はまだありません >
+            自己紹介文はまだありません。
           </p>
         <% end %>
         </p>
       </div>
     </div>
   </div>
-
   <div class="tab-block">
-    <div class="tab-area">
+    <div class="tab-area cursor-pointer">
       <div class="tab active" id="review_tab">
-        レビュー
+        <h3>レビュー</h3>
       </div>
       <div class="tab" id="favorite_tab">
-        保存した場所
+        <h3>保存した場所</h3>
       </div>
       <div class="tab" id="like_tab">
-        ライク
+        <h3>ライク</h3>
       </div>
     </div>
     <div class="content-area">
       <div class="content show content-width" id="review_prev">
         <% if @reviews.empty? %>
           <div class="no-content-block">
-            このユーザーのレビューはありません
+            このユーザーのレビューはありません。
           </div>
+        <% else %>
+          <%= render partial: 'profile_review', collection: @reviews, as: 'review' %>
         <% end %>
-        <%= render @reviews %>
       </div>
       <div class="content content-width">
-        <% if @user.favorites.empty? %>
+        <% if @favorites.empty? %>
           <div class="no-content-block">
-            保存したスポットはありません
+            保存したスポットはありません。
           </div>
-        <% end %>
-        <% @favorites.each do |favorite| %>
-          <%= link_to favorite.spot, class:'box favorite-box contents-tidy' do %>
-            <div class="left-block">
-              <h4 class="name"><%= favorite.spot.name %></h4>
-              <span class="rate" data-score="<%= favorite.spot.average_rate %>"></span>
-              <span><%= favorite.spot.average_rate.round(2) %></span>
-              <h5 class="address">
-                <i class="fas fa-solid fa-map-pin"></i>
-                <%= favorite.spot.address %>
-              </h5>
-            </div>
-            <div class="right-block">
-              <div class="spot-thumbnail">
-                <% if favorite.spot.images(1).empty? %>
-                  <%= image_tag('noimage.png') %>
-                <% else %>
-                  <%= image_tag(favorite.spot.images(1).first) %>
-                <% end %>
-              </div>
-            </div>
-          <% end %>
+        <% else %>
+          <%= render partial: 'favorite_spot', collection: @favorites, as: 'favorite' %>
         <% end %>
       </div>
       <div class="content content-width">
         <% if @user.likes.empty? %>
           <div class="no-content-block">
-            ライクしたレビューはありません
+            ライクしたレビューはありません。
           </div>
+        <% else %>
+          <%= render partial: 'liked_review', collection: @liked_reviews, as: 'review' %>
         <% end %>
-        <%= render partial: 'like_review', collection: @liked_reviews, as: 'review' %>
       </div>
     </div>
   </div>

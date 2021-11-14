@@ -6,7 +6,7 @@ class ReviewsController < ApplicationController
 
   def show
     @other_reviews = @review.spot.reviews.where.not(id: params[:id]).
-      includes(images_attachments: :blob)
+      includes(user: [image_attachment: :blob], images_attachments: :blob)
     @images = @review.images.includes(:blob)
     @reviewer = @review.user
   end
@@ -38,7 +38,7 @@ class ReviewsController < ApplicationController
       @review = spot.reviews.build(review_params)
       @review.user_id = current_user.id
       if @review.save
-        flash[:success] = "投稿が完了しました"
+        flash[:success] = "投稿が完了しました。"
         format.html { redirect_to current_user }
       else
         format.js
@@ -61,7 +61,7 @@ class ReviewsController < ApplicationController
       else
         if @review.update(review_params)
           delete_images.map(&:purge)
-          flash[:success] = "レビューを更新しました"
+          flash[:success] = "レビューを更新しました。"
           format.html { redirect_to current_user }
         else
           format.js
@@ -72,7 +72,7 @@ class ReviewsController < ApplicationController
 
   def destroy
     Review.find(params[:id]).destroy
-    flash[:success] = "レビューを削除しました"
+    flash[:success] = "レビューを削除しました。"
     redirect_to current_user
   end
 end

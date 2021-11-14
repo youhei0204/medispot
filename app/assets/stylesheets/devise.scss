@@ -1,5 +1,5 @@
 .flash{
-  padding:8px 6px;
+  padding:3px 6px;
   width:100%;
   font-size: 14px;
   &.alert{
@@ -35,6 +35,9 @@
   a{
     color: #767676;
     font-size: 17px;
+    &.login-link{
+      color: black;
+    }
   }
   .logo{
     weight: 150px;
@@ -107,7 +110,6 @@
 .signup{
   .signup-left-panel{
     background-image: image-url('signup.jpg');
-    //background-image: image-url('background.jpg');
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
@@ -120,5 +122,15 @@
     .user-form-block{
       width:70%;
     }
+  }
+}
+.newcomer-link {
+  margin-top: 10px;
+}
+.link-icon {
+  margin-right: 3px;
+  & + span{
+    color:black;
+    font-size: 15px!important;
   }
 }

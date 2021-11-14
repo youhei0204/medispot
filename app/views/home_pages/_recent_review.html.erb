@@ -1,27 +1,22 @@
-<div class="box spot-review-box contents-tidy">
+<%= link_to review, class:'box recent-review-box hover-lightgray contents-tidy', id:"review_#{review_counter + 1}" do %>
   <div class="left-block">
+    <h4 class="name"><%= review.spot.name %></h4>
     <span class="rate" data-score="<%= review.rate %>"></span>
     <span><%= review.rate %></span>
     <h5 class="title"><%= review.title %></h5>
-    <p class="text">
-      <%= review.content.slice(0..72) %><%= '...'  if review.content.length > 72 %>
-    </p>
+    <p class="text"><%= review.content %></p>
     <div class="space-between align-items-end">
       <div class="contents-tidy align-items-end">
         <% if review.user.image.attached? %>
-          <%= link_to image_tag(review.user.image, class: 'icon'), user_path(review.user)  %>
+          <%= image_tag(review.user.image, class: 'icon') %>
         <% else %>
-          <%= link_to image_tag('guest_user.png', class: 'icon'), user_path(review.user) %>
+          <%= image_tag('guest_user.png', class: 'icon') %>
         <% end %>
         <div class="reviewer-info">
-          <p><%= link_to review.user.name, user_path(review.user) %></p>
+          <p><%= review.user.name %></p>
           <p class="review-date">投稿日：<%= review.created_at.strftime('%Y/%m/%d') %></p>
         </div>
-        <span>
-          <%= render 'shared/like', review: review %>
-        </span>
       </div>
-      <span><%= link_to '詳細を見る', review %></span>
     </div>
   </div>
   <div class="right-block">
@@ -33,4 +28,4 @@
       <% end %>
     </div>
   </div>
-</div>
+<% end %>

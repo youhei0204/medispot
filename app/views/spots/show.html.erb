@@ -1,6 +1,7 @@
 <%= render 'shared/header' %>
 <section class="spot-show content-width">
   <div class="spot-block">
+  <%= render 'shared/modal' %>
     <div class="spot-info">
       <div class="spot-name">
         <h1><%= @spot.name %></h1>
@@ -11,14 +12,14 @@
         <span><%= @spot.average_rate.round(2) %></span>
         <span class="review-num">
           <i class="fas fa-regular fa-comment-dots"></i>
-          <%= @spot.reviews.count %>件
+          <%= @reviews.count %>件
         </span>
       </p>
-      <i class="fas fa-regular fa-map-pin"></i>
+      <i class="fas fa-map-marker-alt"></i>
       <span class="spot-address"><%= @spot.address %></span>
     </div>
     <div class="spot-images">
-      <ul class="slider spot-slider">
+      <ul class="slider spot-slider view-modal">
         <% @images.each do |image| %>
           <li>
             <%= image_tag(image, class:'slider-image') %>
@@ -33,28 +34,11 @@
     </div>
   </div>
   <div class="review-block" id="review">
-    <h2>このスポットのレビュー一覧</h2>
-    <% @spot.reviews.each do |review| %>
-      <%= link_to review, class:'box review-box contents-tidy' do %>
-        <div class="left-block">
-          <h4 class="name"><%= review.spot.name %></h4>
-          <span class="rate" data-score="<%= review.rate %>"></span>
-          <span><%= review.rate %></span>
-          <h5 class="title"><%= review.title %></h5>
-          <p class="text">
-            <%= review.content.slice(0..72) %><%= '...'  if review.content.length > 72 %>
-          </p>
-        </div>
-        <div class="right-block">
-          <div class="spot-thumbnail">
-            <% if review.images.attached? %>
-              <%= image_tag(review.images[0])%>
-            <% else %>
-              <%= image_tag('noimage.png') %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
+    <h2 class="othres-review-title">このスポットのレビュー一覧</h2>
+    <% if @reviews.empty? %>
+      <p>このスポットのレビューはありません。</p>
+    <% else %>
+      <%= render @reviews %>
     <% end %>
   </div>
 </section>

@@ -18,7 +18,7 @@ $(document).on('turbolinks:load', function () {
                         <img src=${src}>
                       </div>
                       <div class='delete-box'>
-                        <div class='image-delete'>削除</div>
+                        <div class='image-delete cursor-pointer'>削除</div>
                       </div>
                     </div>`
           $('.add-image-box').before(html);

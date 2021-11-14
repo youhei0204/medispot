@@ -6,72 +6,26 @@
       <%= form_with url: spots_path, method: :get, local: true ,class: 'search-box' do |f| %>
         <%= f.text_field :area, class: 'form', placeholder: 'エリア検索 [例: 東京, 新橋]' %>
         <%= f.text_field :keyword, class: 'form', placeholder: 'キーワード検索 [例: 瞑想, ヨガ]' %>
-        <%= f.submit '検索', class: 'submit' %>
+        <%= button_tag :type => "submit", class: 'submit' do %>
+          <span>検索</span>
+          <i class="fas fa-search"></i>
+        <% end %>
       <% end %>
     </div>
   </div>
-  <div class="main-section content-width contents-tidy">
+  <div class="main-section home-content-width contents-tidy">
     <div class="section-left spot-block">
       <h4 class="block-title">いま話題のスポット</h4>
       <div class="spot-box-block">
-        <% @popular_spots.each.with_index(1) do |spot, i| %>
-          <%= link_to spot, class:'spot-box', id:"spot_#{i}" do %>
-            <div class="spot-info">
-              <h3 class="spot-name"><%= spot.name %></h3>
-              <p class="spot-star">
-                <span class="rate" data-score="<%= spot.average_rate %>"></span>
-                <span><%= spot.average_rate.round(2) %></span>
-              </p>
-              <p class="spot-address">
-                <i class="fas fa-solid fa-map-pin"></i>
-                <%= spot.address.gsub(/[0-9０-９].*/, '') %>
-              </p>
-            </div>
-            <% if images = spot.images(@max_spot_image_num) != [] %>
-              <% spot.images(@max_spot_image_num).each do |image| %>
-                <div class="spot-img">
-                  <%= image_tag(image) %>
-                </div>
-              <% end %>
-            <% else %>
-              <div class="spot-img">
-                <%= image_tag('noimage.png') %>
-              </div>
-            <% end %>
-          <% end %>
-        <% end %>
+        <%= render partial: 'popular_spot', collection: @popular_spots, as: 'spot' %>
       </div>
     </div>
     <div class="section-right review-block">
       <h4 class="block-title">最新のレビュー</h4>
-      <% @recent_reviews.each.with_index(1) do |review, i| %>
-        <%= link_to review, class:"review-box", id:"review_#{i}" do %>
-          <div>
-            <h3><%= review.spot.name %></h3>
-            <p>
-              <span class="rate" data-score="<%= review.rate %>"></span>
-              <span><%= review.rate %></span>
-            </p>
-            <div class="review-title">
-              <p><%= review.title %> by</p>
-              <div>
-                <% if review.user.image.attached? %>
-                  <%= image_tag(review.user.image, class: 'icon') %>
-                <% else %>
-                  <%= image_tag('guest_user.png', class: 'icon') %>
-                <% end %>
-              </div>
-              <p><%= review.user.name %></p>
-            </div>
-            <p>
-              <%= review.content.slice(0..120) %><%= '...' if review.content.length > 120 %>
-            </p>
-          </div>
-        <% end %>
-      <% end %>
+      <%= render partial: 'recent_review', collection: @recent_reviews, as: 'review' %>
     </div>
   </div>
-  <div class="about-section content-width">
+  <div class="about-section home-content-width">
     <h2>Medispotとは？</h2>
     <h4>
       MediSpotは、都内でヨガ・瞑想の体験ができるスポットを、
@@ -79,3 +33,6 @@
     </h4>
   </div>
 </section>
+<script>
+  $('.top-block').fadeIn(800);
+</script>

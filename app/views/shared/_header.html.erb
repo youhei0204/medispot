@@ -1,4 +1,9 @@
-<header>
+<header class="<%= controller.controller_name %> <%= controller.action_name %>">
+  <% flash.each do |message_type, message| %>
+    <div class="flash <%= message_type %>">
+      <%= message %>
+    </div>
+  <% end %>
   <div class="header-inner content-width contents-tidy">
     <div class="header-left-block contents-tidy">
       <div class="logo">
@@ -7,35 +12,35 @@
       <%= form_with url: spots_path, method: :get, local: true ,class: 'search-box' do |f| %>
         <%= f.text_field :area, id: "header-area", class: 'header-form', value: @area, placeholder: 'エリア検索' %>
         <%= f.text_field :keyword, id: "header-keyword", class: 'header-form', value: @keyword, placeholder: 'キーワード検索' %>
-        <%= f.submit '検索' %>
+        <%= button_tag :type => "submit", class: 'submit-button' do %>
+          <i class="fas fa-search"></i>
+        <% end %>
       <% end %>
     </div>
     <% if user_signed_in? %>
       <div class="header-right-block contents-tidy">
         <div class="user-menu">
           <% if current_user.image.attached? %>
-            <%= image_tag(current_user.image , class: 'icon', id:'icon') %>
+            <%= image_tag(current_user.image , class: 'header-icon', id:'icon') %>
           <% else %>
-            <%= image_tag('guest_user.png', class: 'icon', id:'icon') %>
+            <%= image_tag('guest_user.png', class: 'header-icon', id:'icon') %>
           <% end %>
           <div class="user-menu-inner">
-            <%= link_to 'マイページ', current_user %>
-            <%= link_to 'プロフィール編集', edit_user_path(current_user), class: 'menu-border' %>
-            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete %>
+            <%= link_to 'マイページ', current_user, class:'hover-gray' %>
+            <%= link_to 'プロフィール編集', edit_user_path(current_user), class: 'menu-border hover-gray' %>
+            <%= link_to 'ログアウト', destroy_user_session_path, method: :delete, class:'hover-gray' %>
           </div>
         </div>
-        <%= link_to '投稿', new_review_path, class: 'button' %>
+        <%= link_to '投稿', new_review_path, class: 'button contents-tidy' %>
       </div>
     <% else %>
-      <div class="header-right-block">
-        <%= link_to '新規登録', new_user_registration_path %>
-        <%= link_to 'ログイン', new_user_session_path %>
+      <div class="header-right-block contents-tidy">
+        <%= link_to new_user_registration_path, class:'contents-tidy nologin' do %>
+          <%= image_tag 'newcomer_icon.png', size:'15x15', class:'newcomer-icon' %>
+          <span>新規登録</span>
+        <% end %>
+        <%= link_to 'ログイン', new_user_session_path, class:'nologin' %>
       </div>
     <% end %>
   </div>
-  <% flash.each do |message_type, message| %>
-    <div class="flash <%= message_type %>">
-      <%= message %>
-    </div>
-  <% end %>
 </header>

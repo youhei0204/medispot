@@ -1,0 +1,27 @@
+<%= link_to favorite.spot, class:'box favorite-box hover-lightgray contents-tidy' do %>
+<div class="left-block">
+  <h4 class="name"><%= favorite.spot.name %></h4>
+  <span class="rate" data-score="<%= favorite.spot.average_rate %>"></span>
+  <span><%= favorite.spot.average_rate.round(2) %></span>
+  <span class="review-num">
+    <i class="fas fa-regular fa-comment-dots"></i>
+    <%= favorite.spot.reviews.count %>件
+  </span>
+  <p class="address">
+    <i class="fas fa-map-marker-alt"></i>
+    <%= favorite.spot.address %>
+  </p>
+  <p class="favorite-time">
+    <%= favorite.created_at.strftime("%Y/%m/%d %H:%M")  %>に保存済み
+  </p>
+</div>
+<div class="right-block">
+  <div class="spot-thumbnail">
+    <% if favorite.spot.images(1).empty? %>
+    <%= image_tag('noimage.png') %>
+    <% else %>
+    <%= image_tag(favorite.spot.images(1).first) %>
+    <% end %>
+  </div>
+</div>
+<% end %>

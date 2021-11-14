@@ -16,9 +16,10 @@ RSpec.describe 'Reviews', type: :system, js: true do
     before do
       visit root_path
       click_link '投稿'
-      fill_in 'keyword', with: '東京スカイツリー'
+      fill_in 'keyword', id:'keyword', with: '東京スカイツリー'
       click_button '検索'
-      find('.spot-dicision').click
+      sleep 5
+      find('.spot-decision').click
     end
 
     context 'フォームの入力値が正常なとき' do
@@ -33,6 +34,7 @@ RSpec.describe 'Reviews', type: :system, js: true do
           make_visible: true
         find('#star').find("img[alt='3']").click
         click_button '投稿'
+        sleep 5
       end
 
       it '新規作成が成功し、プロフィール画面に内容が表示される' do
@@ -62,7 +64,7 @@ RSpec.describe 'Reviews', type: :system, js: true do
         expect(page).to have_current_path(user_path(user))
         expect(page).to have_content '投稿が完了しました'
         visit(spot_path(Review.last.spot))
-        within '.review-box' do
+        within '.spot-review-box' do
           expect(page).to have_content 'title1'
           expect(page).to have_content 'content1'
           expect(page).to have_content 3.0
@@ -85,9 +87,10 @@ RSpec.describe 'Reviews', type: :system, js: true do
     before do
       visit root_path
       click_link '投稿'
-      fill_in 'keyword', with: '東京スカイツリー'
+      fill_in 'keyword', id:'keyword', with: '東京スカイツリー'
       click_button '検索'
-      find('.spot-dicision').click
+      sleep 5
+      find('.spot-decision').click
       fill_in 'review_title', with: 'title1'
       fill_in 'review_content', with: 'content1'
       attach_file 'img-file', file_fixture("test_review1.png"), make_visible: true
@@ -140,8 +143,9 @@ RSpec.describe 'Reviews', type: :system, js: true do
 
     context 'フォームの本文が空のとき' do
       it '更新が失敗する' do
+        click_link '編集', match: :first
         fill_in 'review_content', with: ''
-        click_button '投稿'
+        click_button '更新'
         expect(page).to have_content '本文を入力してください'
       end
     end

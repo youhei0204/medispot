@@ -2,34 +2,5 @@
 <section class="spot-index content-width">
   <h1>スポット検索</h1>
   <h4>検索結果：<%= @spots.count %>件</h4>
-  <% @spots.each do |spot| %>
-    <%= link_to spot, class:'spot-box clearfix' do %>
-      <div class="spot-info">
-        <h1 class="spot-name"><%= spot.name %></h1>
-        <p class="spot-star">
-          <span class="rate" data-score="<%= spot.average_rate %>"></span>
-          <span><%= spot.average_rate.round(2) %></span>
-          <span>
-            <i class="fas fa-regular fa-comment-dots"></i>
-            <%= spot.reviews.count %>件
-          </span>
-        </p>
-        <i class="fas fa-regular fa-map-pin"></i>
-        <span class="spot-address"><%= spot.address %></span>
-      </div>
-      <div class="spot-image">
-        <% if spot.images(@max_slider_image_num).present? %>
-          <ul class="slider-no-allow">
-            <% spot.images(@max_slider_image_num).each do |image| %>
-              <li>
-                <%= image_tag(image) %>
-              </li>
-            <% end %>
-          </ul>
-        <% else %>
-          <%= image_tag('noimage.png') %>
-        <% end %>
-      </div>
-    <% end %>
-  <% end %>
+  <%= render @spots %>
 </section>

@@ -34,7 +34,7 @@ RSpec.describe 'HomePages', type: :system do
       end
     end
     it '最新レビューが5件表示されること' do
-      expect(all('.review-box').count).to eq 5
+      expect(all('.recent-review-box').count).to eq 5
     end
   end
 
