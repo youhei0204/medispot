@@ -3,6 +3,9 @@ html,body,ul,li,input,textarea,button,h1,h2,h3,h4,h5,p{
   padding: 0;
   box-sizing: border-box;
 }
+section{
+  flex: 1;
+}
 input,button{
  font-size: 14px;
  padding-left: 3px!important;
@@ -13,6 +16,9 @@ textarea{
  }
 body{
   background-color: white;
+  display: flex;
+  flex-flow: column;
+  min-height: 100vh;
   &.home_pages{
     min-width: 1380px;
   }
@@ -183,7 +189,7 @@ a{
   }
 }
 .user-review-box{
-  padding: 30px 20px;
+  padding: 20px 10px;;
   border-right: 2px solid #EFF3F4;
   border-left: 2px solid #EFF3F4;
   .right-block .spot-thumbnail img{
@@ -208,9 +214,4 @@ a{
 }
 .othres-review-title{
   font-size: 19px;
-}
-/*footer*/
-footer{
-  background-color: burlywood;
-  padding: 100px 0;
 }
