@@ -13,28 +13,27 @@
       </div>
       <h1 class="user-form-heading">Join MediSpot</h1>
       <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-
-      <%= render "devise/shared/error_messages", resource: resource %>
-      <div class="form-group">
-        <%= f.label :name, 'ユーザーネーム' %>
-        <%= f.text_field :name, autofocus: true %>
-      </div>
-      <div class="form-group">
-        <%= f.label :email, 'メール' %>
-        <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password, "パスワード (#{@minimum_password_length} 文字以上)" %>
-        <%= f.password_field :password, autocomplete: "new-password" %>
-      </div>
-      <div class="form-group">
-        <%= f.label :password_confirmation, 'パスワード再入力' %>
-        <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-      </div>
-      <div class="form-group">
-        <%= f.submit '登録', class: 'submit-button' %>
-      </div>
-      <p>既にアカウントをお持ちですか？ <span><%= link_to 'ログイン', new_user_session_path %></span></p>
+        <%= render "devise/shared/error_messages", resource: resource %>
+        <div class="form-group">
+          <%= f.label :name, 'ユーザーネーム' %>
+          <%= f.text_field :name, autofocus: true %>
+        </div>
+        <div class="form-group">
+          <%= f.label :email, 'メール' %>
+          <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password, "パスワード (#{@minimum_password_length} 文字以上)" %>
+          <%= f.password_field :password, autocomplete: "new-password" %>
+        </div>
+        <div class="form-group">
+          <%= f.label :password_confirmation, 'パスワード再入力' %>
+          <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+        </div>
+        <div class="form-group">
+          <%= f.submit '登録', class: 'submit-button' %>
+        </div>
+        <p>既にアカウントをお持ちですか？ <span><%= link_to 'ログイン', new_user_session_path, class:'login-link' %></span></p>
       <% end %>
     </div>
   </div>

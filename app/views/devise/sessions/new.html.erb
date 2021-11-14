@@ -34,8 +34,14 @@
       <div class="form-group">
         <%= f.submit 'ログイン', class: 'submit-button' %>
       </div>
-      <%= link_to 'ゲストとしてログイン', users_guest_sign_in_path, method: :post %><br>
-      <%= link_to '新規ユーザー登録はこちら', new_user_registration_path %>
+      <%= link_to users_guest_sign_in_path, method: :post, class:'flex-start' do %>
+        <%= image_tag 'guest_icon.png', size:'17x17', class:'link-icon' %>
+        <span>ゲストとしてログイン</span>
+      <% end %>
+      <%= link_to new_user_registration_path, class:'flex-start newcomer-link' do %>
+        <%= image_tag 'newcomer_icon.png', size:'17x17', class:'link-icon' %>
+        <span>新規ユーザー登録はこちら</span>
+      <% end %>
     <% end %>
   </div>
 </section>
