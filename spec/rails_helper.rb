@@ -14,6 +14,8 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+Capybara.default_max_wait_time = 5
+
 Capybara.register_driver :remote_chrome do |app|
   url = "http://chrome:4444/wd/hub"
   caps = ::Selenium::WebDriver::Remote::Capabilities.chrome(
