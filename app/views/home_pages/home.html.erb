@@ -6,11 +6,14 @@
       <%= form_with url: spots_path, method: :get, local: true ,class: 'search-box' do |f| %>
         <%= f.text_field :area, class: 'form', placeholder: 'エリア検索 [例: 東京, 新橋]' %>
         <%= f.text_field :keyword, class: 'form', placeholder: 'キーワード検索 [例: 瞑想, ヨガ]' %>
-        <%= f.submit '検索', class: 'submit' %>
+        <%= button_tag :type => "submit", class: 'submit' do %>
+          <span>検索</span>
+          <i class="fas fa-search"></i>
+        <% end %>
       <% end %>
     </div>
   </div>
-  <div class="main-section content-width contents-tidy">
+  <div class="main-section home-content-width contents-tidy">
     <div class="section-left spot-block">
       <h4 class="block-title">いま話題のスポット</h4>
       <div class="spot-box-block">
@@ -22,7 +25,7 @@
       <%= render partial: 'recent_review', collection: @recent_reviews, as: 'review' %>
     </div>
   </div>
-  <div class="about-section content-width">
+  <div class="about-section home-content-width">
     <h2>Medispotとは？</h2>
     <h4>
       MediSpotは、都内でヨガ・瞑想の体験ができるスポットを、
@@ -30,3 +33,6 @@
     </h4>
   </div>
 </section>
+<script>
+  $('.top-block').fadeIn(800);
+</script>

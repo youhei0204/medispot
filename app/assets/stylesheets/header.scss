@@ -1,0 +1,160 @@
+header{
+  width: 100%;
+  input,button{
+    font-size: 13px;
+   }
+  .header-inner{
+    justify-content: space-between;
+    height: 60px;
+  }
+  .header-left-block{
+    .header-form{
+      height: 40px;
+      padding-left: 16px;
+      border-radius: 3px;
+      border: 1px solid black;
+    }
+    .submit-button{
+      height: 40px;
+      width: 50px;
+      border: none;
+      border-radius: 3px;
+      vertical-align: bottom;
+      color: white;
+      background-color: chocolate;
+      font-size: 15px;
+    }
+    .logo {
+      margin-right: 30px;
+      width:50px;
+      img{
+        width: 100%;
+      }
+    }
+  }
+  .header-right-block{
+    font-size: 15px;
+    .newcomer-icon{
+      width: 15px;
+      height: 15px;
+      margin-right: 2px;
+    }
+    a{
+      color: white;
+      margin-left: 10px;
+      &.nologin{
+        color: black;
+      }
+    }
+    .button{
+      background-color: chocolate;
+      margin-left: 15px;
+      padding: 0 13px;
+      width: 40px;
+      height: 40px;
+      line-height: 40px;
+      border-radius: 3px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .header-icon{
+      vertical-align:middle;
+      border-radius: 50%;
+      width: 40px;
+      height: 40px;
+      object-fit: cover;
+    }
+    .user-menu{
+      display: inline-block;
+      position: relative;
+      .user-menu-inner{
+        background-color: white;
+        width:150px;
+        display: none;
+        position: absolute;
+        z-index:100;
+        bottom: -170px;
+        left:50%;
+        transform: translateX(-50%);
+        border-radius: 4px;
+        box-shadow: 1px 1px 4px;
+        &:before{
+          content: "";
+          background-color: white;
+          position: absolute;
+          top: -6px;
+          right: 50%;
+          width: 12px;
+          height: 12px;
+          margin-right: -6px;
+          transform: rotate(-135deg);
+        }
+        a{
+          color: black;
+          z-index: 1000;
+          display: block;
+          font-size: 12px;
+          padding: 17px 15px;
+          margin-left: 0!important;
+        }
+        .menu-border{
+          position: relative;
+          &::after{
+            content:"";
+            display:block;
+            width: 100%;
+            height:1px;
+            background-color:gray;
+            position:absolute;
+            bottom: 0;
+            left: 0;
+          }
+        }
+        &.active{
+          display: block;
+        }
+      }
+    }
+  }
+  &.home_pages{
+    .header-inner{
+      min-width: 1300px;
+      width: auto;
+      padding: 0 40px;
+    }
+  }
+  &.users, &.spots{
+    border-bottom: 2px solid #CCCCCC;
+  }
+  &.reviews, &.spots{
+    border-bottom: 2px solid #CCCCCC;
+    .header-inner{
+      width: 700px;
+      padding: 0 40px;
+    }
+    &.new, &.edit{
+      .header-icon{
+        width: 45px;
+        height: 45px;
+      }
+      .submit-button{
+        font-size: 13px;
+      }
+      .button{
+        display: none;
+      }
+    }
+    &.show, &.index{
+      input, button, .button{
+        height: 35px!important;
+      }
+      .header-icon{
+        width: 35px;
+        height: 35px;
+      }
+      .submit-button{
+        font-size: 13px;
+      }
+    }
+  }
+}

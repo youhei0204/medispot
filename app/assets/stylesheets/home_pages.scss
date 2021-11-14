@@ -1,11 +1,12 @@
 .home {
   .top-block{
+    display: none;
     color: white;
     position:relative;
     padding: 200px 150px;
     background-image: image-url('background.jpg');
     background-size: cover;
-    background-position: right 0;
+    background-position: center;
     background-repeat: no-repeat;
     .catchcopy{
       font-size: 40px;
@@ -27,67 +28,117 @@
         height: 50%;
         .form{
           width:40%;
-          height: 91%;
+          height: 60px;
           border: 1px solid #d6ceb4;
         }
         .submit{
           width:15%;
-          height: 100%;
+          height: 60px;
         }
       }
     }
   }
   .main-section{
     justify-content: space-between;
-    background-color: antiquewhite;
     flex-flow: row;
     align-items: flex-start;
-    padding: 0 60px;
-    padding-top: 80px;
+    padding: 0 40px;
+    padding-top: 100px;
+    .block-title {
+      margin-bottom: 5px;
+      font-size: 17px;
+    }
     .spot-block{
-      width:60%;
+      width:70%;
+    }
+    .spot-box-block {
+      display: flex;
+      flex-wrap: wrap;
     }
     .spot-box{
+      display: flex;
+      justify-content: space-between;
+      width: calc(50% - 45px);
+      min-width: 400px;
       padding: 15px;
-      margin-top: 10px;
-      background-color: burlywood;
-      align-items:flex-start;
+      margin-right: 10px;
+      background-color: white;
+      align-items: flex-start;
+      border-bottom: 1px solid #CCCCCC;
+      &:first-child, &:nth-child(2){
+        border-top: 1px solid #CCCCCC;
+      }
       .spot-info{
         margin-top: 5px;
-        padding-right: 10px;
-        .spot-detail{
-          margin-top:12px;
+        padding-right: 15px;
+        .spot-name {
+          font-size: 16px;
+          margin-bottom: 4px;
+        }
+        .spot-address {
+          font-size: 15px;
+          margin-top: 7px;
         }
       }
     }
     .spot-img{
       padding: 3px;
-      width: 23%;
       img{
-        width: 100%;
-        height: 150px;
+        width: 200px;
+        height: 170px;
         object-fit: cover;
+        border-radius: 5px;
+        box-shadow: 1px 1px 1px #999;
       }
     }
     .review-block{
-      width:36%;
+      width: 30%;
+      min-width: 400px;
+      margin-left: 10px;
     }
-    .review-box{
-      display: block;
-      padding: 10px;
-      margin-top: 10px;
-      background-color: burlywood;
-    }
-    .review-title{
-      display: flex;
-      justify-content: flex-start;
-    }
-    .icon{
-      width: 40px;
-      height: 40px;
-      img{
-        width:100%;
-        height:100%; 
+    .recent-review-box{
+      background-color: white;
+      padding: 15px;
+      &:first-of-type {
+        border-top: 1px solid #CCCCCC;
+      }
+      .left-block {
+        width: 60%;
+        min-width: 180px;
+        padding-right: 10px;
+        .name {
+          font-size: 16px;
+          font-weight: 500;
+          margin-bottom: 4px;
+        }
+        .title {
+          font-size: 15px;
+          padding: 9px 0;
+        }
+        .text {
+          font-size: 14px;
+          margin-bottom: 10px;
+        }
+        .reviewer-info {
+          margin-left: 5px;
+          margin-right: 10px;
+          font-size: 14px;
+          .review-date {
+            color: gray;
+            font-size: 13px;
+          }
+          p {
+            margin-top: 2px;
+            line-height: 1em;
+          }
+        }
+      }
+      .right-block .spot-thumbnail img {
+        width: 180px;
+        height: 140px;
+        object-fit: cover;
+        border-radius: 5px;
+        box-shadow: 1px 1px 1px #999;
       }
     }
   }
