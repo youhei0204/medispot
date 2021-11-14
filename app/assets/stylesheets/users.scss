@@ -81,7 +81,6 @@
       }
       .content.show {
         display: block;
-        height: 800px;
         .my-review-box .review-date {
           font-size: 16px;
           margin-left: 5px;
@@ -91,7 +90,7 @@
         }
         .favorite-box{
           position: relative;
-          padding: 30px 20px;
+          padding: 20px 10px;
           border-right: 2px solid #EFF3F4;
           border-left: 2px solid #EFF3F4;
           .favorite-btn{
