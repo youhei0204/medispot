@@ -1,4 +1,5 @@
 class SpotsController < ApplicationController
+  before_action :authenticate_user!
   MAX_SLIDER_IMAGE_NUM_FOR_SHOW = 7
   MAX_SLIDER_IMAGE_NUM_FOR_INDEX = 3
   MAX_SEARCH_SPOT_NUM = 100
