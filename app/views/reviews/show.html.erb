@@ -48,33 +48,11 @@
     </div>
   </div>
   <div class="review-block" id="review">
-    <h2>このスポットのその他のレビュー</h2>
-    <% @other_reviews.each do |review| %>
-      <%= link_to review, class:'box review-box contents-tidy' do %>
-        <div class="left-block">
-          <h4 class="name"><%= review.spot.name %></h4>
-          <span class="rate" data-score="<%= review.rate %>"></span>
-          <span><%= review.rate %></span>
-          <h5 class="title"><%= review.title %></h5>
-          <p class="text">
-            <%= review.content.slice(0..72) %><%= '...'  if review.content.length > 72 %>
-          </p>
-        </div>
-        <div class="right-block">
-          <div class="spot-thumbnail">
-            <% if review.images.attached? %>
-              <%= image_tag(review.images[0])%>
-            <% else %>
-              <%= image_tag('noimage.png') %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    <% end %>
+    <h2 class="othres-review-title">このスポットのその他のレビュー</h2>
     <% if @other_reviews.empty? %>
-    <h3>
-      <%= 'その他のレビューはありません' %>
-    </h3>
+      <p>その他のレビューはありません。</p>
+    <% else %>
+      <%= render @other_reviews %>
     <% end %>
   </div>
 </section>

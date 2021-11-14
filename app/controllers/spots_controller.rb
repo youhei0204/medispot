@@ -5,6 +5,7 @@ class SpotsController < ApplicationController
 
   def show
     @spot = Spot.find(params[:id])
+    @reviews = @spot.reviews.includes(user: [image_attachment: :blob])
     @images = @spot.images(MAX_SLIDER_IMAGE_NUM_FOR_SHOW)
   end
 
