@@ -1,0 +1,28 @@
+<%= link_to spot, class:'spot-box hover-lightgray', id:"spot_#{spot_counter + 1}" do %>
+  <div class="spot-info">
+    <h3 class="spot-name"><%= spot.name %></h3>
+    <p class="spot-star">
+      <span class="rate" data-score="<%= spot.average_rate %>"></span>
+      <span><%= spot.average_rate.round(2) %></span>
+      <span class="review-num">
+        <i class="fas fa-regular fa-comment-dots"></i>
+        <%= spot.reviews.count %>件
+      </span>
+    </p>
+    <p class="spot-address">
+      <i class="fas fa-map-marker-alt"></i>
+      <%= spot.address.gsub(/[0-9０-９].*/, '') %>
+    </p>
+  </div>
+  <% if images = spot.images(@max_spot_image_num) != [] %>
+    <% spot.images(@max_spot_image_num).each do |image| %>
+      <div class="spot-img">
+        <%= image_tag(image) %>
+      </div>
+    <% end %>
+  <% else %>
+    <div class="spot-img">
+      <%= image_tag('noimage.png') %>
+    </div>
+  <% end %>
+<% end %>
