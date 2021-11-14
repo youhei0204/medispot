@@ -1,0 +1,37 @@
+<div class="box user-review-box contents-tidy">
+  <div class="left-block">
+    <h4 class="name"><%= link_to review.spot.name, review.spot %></h4>
+    <span class="rate" data-score="<%= review.rate %>"></span>
+    <span><%= review.rate %></span>
+    <h5 class="title"><%= review.title %></h5>
+    <p class="text">
+      <%= review.content.slice(0..72) %><%= '...'  if review.content.length > 72 %>
+    </p>
+    <div class="space-between align-items-end">
+      <div class="contents-tidy align-items-end">
+        <% if review.user.image.attached? %>
+          <%= link_to image_tag(review.user.image, class: 'icon'), user_path(review.user)  %>
+        <% else %>
+          <%= link_to image_tag('guest_user.png', class: 'icon'), user_path(review.user) %>
+        <% end %>
+        <div class="reviewer-info">
+          <p><%= link_to review.user.name, user_path(review.user) %></p>
+          <p class="review-date">投稿日：<%= review.created_at.strftime('%Y/%m/%d') %></p>
+        </div>
+        <span>
+          <%= render 'shared/like', review: review %>
+        </span>
+      </div>
+      <span><%= link_to '詳細を見る', review %></span>
+    </div>
+  </div>
+  <div class="right-block">
+    <div class="spot-thumbnail">
+      <% if review.images.attached? %>
+        <%= image_tag(review.images[0])%>
+      <% else %>
+        <%= image_tag('noimage.png') %>
+      <% end %>
+    </div>
+  </div>
+</div>
