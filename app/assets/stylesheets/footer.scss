@@ -1,0 +1,25 @@
+footer{
+  border-top: 2px solid #CCCCCC;
+  background-color: white;
+  padding: 20px 0;
+  margin-top: 60px;
+  .footer-logo{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img{
+      width: 50px;
+    }
+    .footer-logo-title{
+      font-size: 24px;
+      color: #653819;
+      margin-left: 10px;
+    }
+  }
+  &.homepage-footer{
+    border-top: 5px solid #9E531E;
+    .footer-logo img{
+      width: 55px;
+    }
+  }
+}
