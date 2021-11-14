@@ -16,7 +16,7 @@ RSpec.describe 'Reviews', type: :system, js: true do
     before do
       visit root_path
       click_link '投稿'
-      fill_in 'keyword', id:'keyword', with: '東京スカイツリー'
+      fill_in 'keyword', id: 'keyword', with: '東京スカイツリー'
       click_button '検索'
       sleep 5
       find('.spot-decision').click
@@ -87,7 +87,7 @@ RSpec.describe 'Reviews', type: :system, js: true do
     before do
       visit root_path
       click_link '投稿'
-      fill_in 'keyword', id:'keyword', with: '東京スカイツリー'
+      fill_in 'keyword', id: 'keyword', with: '東京スカイツリー'
       click_button '検索'
       sleep 5
       find('.spot-decision').click

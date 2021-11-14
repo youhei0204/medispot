@@ -19,6 +19,9 @@
     </div>
   </div>
   <div class="main-block">
+  <p class="update-time">
+    <%= @review.created_at.strftime('%Y/%m/%d %H:%M') %>に更新
+  </p> 
     <%= link_to @review.user, class:'user-profile contents-tidy' do %>
       <% if @review.user.image.attached? %>
         <%= image_tag(@review.user.image, size: "35x35", class: 'icon') %>
