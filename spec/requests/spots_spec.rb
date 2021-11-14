@@ -7,19 +7,34 @@ RSpec.describe 'Spot', type: :request do
 
   before do
     user.confirm
-    sign_in user
   end
 
   describe 'GET /spots:id' do
-    before { get spot_path spot }
+    context 'ログイン済みのとき' do
+      before do
+        sign_in user
+        get spot_path spot
+      end
 
-    it 'スポット詳細画面の表示に成功すること' do
-      expect(response).to have_http_status(:success)
+      it 'スポット詳細画面の表示に成功すること' do
+        expect(response).to have_http_status(:success)
+      end
+      it 'スポット情報とレビュー情報が表示されること' do
+        expect(response.body).to include spot.name
+        expect(response.body).to include spot.address
+        expect(response.body).to include review.title
+      end
     end
-    it 'スポット情報とレビュー情報が表示されること' do
-      expect(response.body).to include spot.name
-      expect(response.body).to include spot.address
-      expect(response.body).to include review.title
+
+    context 'ログインしていないとき' do
+      before do
+        get spot_path spot
+      end
+
+      it 'ログインページにリダイレクトされること' do
+        get review_path review
+        expect(response).to redirect_to new_user_session_path
+      end
     end
   end
 
@@ -31,80 +46,91 @@ RSpec.describe 'Spot', type: :request do
       Spot.last.update!(address: "京都")
     end
 
-    context 'エリアのみで検索し、検索結果が存在するとき' do
-      before { get spots_path, params: { area: "東京", keyword: "" } }
+    context 'ログイン済みのとき' do
+      before { sign_in user }
 
-      it 'スポット一覧画面の表示に成功すること' do
-        expect(response).to have_http_status(:success)
-      end
-      it '検索結果のスポット一覧が表示されること' do
-        expect(response.body).to include "東京都"
-        expect(response.body).to include "検索結果：4件"
-      end
-    end
+      context 'エリアのみで検索し、検索結果が存在するとき' do
+        before { get spots_path, params: { area: "東京", keyword: "" } }
 
-    context 'キーワードのみで検索し、検索結果が存在するとき' do
-      before { get spots_path, params: { area: "", keyword: "トーキョー" } }
-
-      it 'スポット一覧画面の表示に成功すること' do
-        expect(response).to have_http_status(:success)
-      end
-      it '検索結果のスポット一覧が表示されること' do
-        expect(response.body).to include "東京都"
-        expect(response.body).to include "検索結果：5件"
-      end
-    end
-
-    context 'エリア・キーワード両方で検索し、検索結果が存在するとき' do
-      before { get spots_path, params: { area: "東京", keyword: "テストタイトル" } }
-
-      it 'スポット一覧画面の表示に成功すること' do
-        expect(response).to have_http_status(:success)
-      end
-      it '検索結果のスポット一覧が表示されること' do
-        expect(response.body).to include "東京都"
-        expect(response.body).to include "検索結果：4件"
-      end
-    end
-
-    context '検索条件が空のとき' do
-      before do
-        get spots_path, params: { area: "", keyword: "" },
-                        headers: { "HTTP_REFERER": "http://example.com/home" }
-      end
-
-      it '遷移元画面の表示に成功すること' do
-        expect(response.status).to eq 302
-        expect(response).to redirect_to('http://example.com/home')
-      end
-    end
-
-    context '検索結果が0件のとき' do
-      before { get spots_path, params: { area: "ニューヨーク", keyword: "" } }
-
-      it 'スポット一覧画面の表示に成功すること' do
-        expect(response).to have_http_status(:success)
-      end
-      it '検索結果のスポット一覧が表示されないこと' do
-        expect(response.body).not_to include "東京"
-        expect(response.body).to include "検索結果：0件"
-      end
-    end
-
-    context '検索結果が100件を超えるとき' do
-      before do
-        create_list(:spot, 101, address: "ニューヨーク").each do |spot|
-          create(:review, :user, spot_id: spot.id)
+        it 'スポット一覧画面の表示に成功すること' do
+          expect(response).to have_http_status(:success)
         end
-        get spots_path, params: { area: "ニューヨーク", keyword: "" }
+        it '検索結果のスポット一覧が表示されること' do
+          expect(response.body).to include "東京都"
+          expect(response.body).to include "検索結果：4件"
+        end
       end
 
-      it 'スポット一覧画面の表示に成功すること' do
-        expect(response).to have_http_status(:success)
+      context 'キーワードのみで検索し、検索結果が存在するとき' do
+        before { get spots_path, params: { area: "", keyword: "トーキョー" } }
+
+        it 'スポット一覧画面の表示に成功すること' do
+          expect(response).to have_http_status(:success)
+        end
+        it '検索結果のスポット一覧が表示されること' do
+          expect(response.body).to include "東京都"
+          expect(response.body).to include "検索結果：5件"
+        end
       end
-      it '検索結果のスポット一覧が100件まで表示されること' do
-        expect(response.body).to include "ニューヨーク"
-        expect(response.body).to include "検索結果：100件"
+
+      context 'エリア・キーワード両方で検索し、検索結果が存在するとき' do
+        before { get spots_path, params: { area: "東京", keyword: "テストタイトル" } }
+
+        it 'スポット一覧画面の表示に成功すること' do
+          expect(response).to have_http_status(:success)
+        end
+        it '検索結果のスポット一覧が表示されること' do
+          expect(response.body).to include "東京都"
+          expect(response.body).to include "検索結果：4件"
+        end
+      end
+
+      context '検索条件が空のとき' do
+        before do
+          get spots_path, params: { area: "", keyword: "" },
+                          headers: { "HTTP_REFERER": "http://example.com/home" }
+        end
+
+        it '遷移元画面の表示に成功すること' do
+          expect(response.status).to eq 302
+          expect(response).to redirect_to('http://example.com/home')
+        end
+      end
+
+      context '検索結果が0件のとき' do
+        before { get spots_path, params: { area: "ニューヨーク", keyword: "" } }
+
+        it 'スポット一覧画面の表示に成功すること' do
+          expect(response).to have_http_status(:success)
+        end
+        it '検索結果のスポット一覧が表示されないこと' do
+          expect(response.body).not_to include "東京"
+          expect(response.body).to include "検索結果：0件"
+        end
+      end
+
+      context '検索結果が100件を超えるとき' do
+        before do
+          create_list(:spot, 101, address: "ニューヨーク").each do |spot|
+            create(:review, :user, spot_id: spot.id)
+          end
+          get spots_path, params: { area: "ニューヨーク", keyword: "" }
+        end
+
+        it 'スポット一覧画面の表示に成功すること' do
+          expect(response).to have_http_status(:success)
+        end
+        it '検索結果のスポット一覧が100件まで表示されること' do
+          expect(response.body).to include "ニューヨーク"
+          expect(response.body).to include "検索結果：100件"
+        end
+      end
+    end
+
+    context 'ログインしていないとき' do
+      it 'ログインページにリダイレクトされること' do
+        get review_path review
+        expect(response).to redirect_to new_user_session_path
       end
     end
   end
