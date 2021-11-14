@@ -12,7 +12,7 @@
       display: inline-block;
       font-size: 31px;
       background-color: #9B521F;
-      border-radius: 2px;
+      border-radius: 5px;
       padding: 30px 40px;
      
     }
@@ -101,12 +101,18 @@
       width: 30%;
       min-width: 400px;
       margin-left: 10px;
+      .review-scroll{
+        height: 843px;
+        overflow-y: scroll;
+        border-top: 1px solid #CCCCCC;
+        border-bottom: 1px solid #CCCCCC;
+      }
     }
     .recent-review-box{
       background-color: white;
       padding: 15px;
-      &:first-of-type {
-        border-top: 1px solid #CCCCCC;
+      &:last-of-type {
+        border-bottom: none;
       }
       .left-block {
         width: 60%;

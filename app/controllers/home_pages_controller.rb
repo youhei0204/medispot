@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class HomePagesController < ApplicationController
-  MAX_RECENT_REVIEW_NUM = 5
+  MAX_RECENT_REVIEW_NUM = 10
   MAX_POPULAR_SPOT_NUM = 8
   MAX_SPOT_IMAGE_NUM = 1
 
