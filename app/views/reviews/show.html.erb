@@ -13,7 +13,7 @@
           <%= @review.spot.reviews.count %>件
       </span>
       <p>
-        <i class="fas fa-regular fa-map-pin"></i>
+        <i class="fas fa-map-marker-alt"></i>
         <span class="spot-address"><%= @review.spot.address %></span>
       </p>
     </div>
@@ -31,7 +31,7 @@
     <span><%= @review.rate %></span>
     <h1 class="review-title"><%= @review.title %></h1>
     <p class="review-content"><%= @review.content %></p>
-    <ul class="review-image contents-tidy">
+    <ul class="review-image contents-tidy view-modal">
       <% @images.each do |image| %>
         <li><%= image_tag(image) %></li>
       <% end %>

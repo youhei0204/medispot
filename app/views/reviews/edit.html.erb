@@ -1,3 +1,4 @@
+<%= render 'shared/header' %>
 <section class="review-new content-width">
   <div class="review-area area" id="review">
     <div class="spot-area">
@@ -25,12 +26,12 @@
                 <%= hidden_field_tag 'initial_image_keys[]', image.key %>
               </div>
               <div class='delete-box'>
-                <div class='initial-image-delete'>削除</div>
+                <div class='initial-image-delete cursor-pointer'>削除</div>
               </div>
             </div>
           <% end %>
 
-          <label for="img-file" class="add-image-box" id="add-image">
+          <label for="img-file" class="add-image-box cursor-pointer" id="add-image">
             <i class="fas fa-solid fa-image"></i>
           </label>
         </div>

@@ -1,9 +1,13 @@
+<%= render 'shared/header' %>
 <section class="review-new content-width">
   <div class="search-area area" id="search">
     <h2 class="search-title">レビューするスポットを選択してください</h2>
     <%= form_with(url: map_request_path, method: :get) do |f| %>
       <%= f.text_field :keyword, id: "keyword", placeholder: "施設、最寄駅等を入力" %>
-      <%= f.submit '検索', class: "submit" %>
+      <%= button_tag :type => "submit", class: 'submit' do %>
+        <span>検索</span>
+        <i class="fas fa-search"></i>
+      <% end %>
     <% end %>
   </div>
   <div class="select-spot-area" id="spot"></div>
@@ -13,7 +17,7 @@
         <div class="spot-info">
           <h3 class="spot-name" id="spot-name"></h3>
           <p class="spot-address" id="spot-address"></p>
-          <h5 onclick="displaySearch()">変更する</h5>
+          <h5 class="cursor-pointer" onclick="displaySearch()">変更する</h5>
         </div>
         <div class="spot-img" id="image">
           <img src="" alt="地図">
@@ -23,10 +27,10 @@
     <%= form_with(model: @review) do |f| %>
       <div class="image-area">
         <p>写真投稿</p>
-        <h5>最大で4枚までアップロードできます</h5>
+        <p class="upload-explanation">最大で4枚までアップロードできます</p>
         <%= f.file_field :images, multiple: true, class:"hidden", id:"img-file" %>
         <div class="image-block">
-          <label for="img-file" class="add-image-box" id="add-image">
+          <label for="img-file" class="add-image-box cursor-pointer" id="add-image">
             <i class="fas fa-solid fa-image"></i>
           </label>
         </div>
