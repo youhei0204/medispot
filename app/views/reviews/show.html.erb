@@ -19,6 +19,9 @@
     </div>
   </div>
   <div class="main-block">
+  <p class="update-time">
+    <%= @review.created_at.strftime('%Y/%m/%d %H:%M') %>に更新
+  </p> 
     <%= link_to @review.user, class:'user-profile contents-tidy' do %>
       <% if @review.user.image.attached? %>
         <%= image_tag(@review.user.image, size: "35x35", class: 'icon') %>
@@ -42,17 +45,14 @@
     <p class="like-box">
       <%= render 'shared/like', review: @review %>
     </p>
-    <div class="modal">
-      <div class="bigimg"><%=image_tag('') %></div>
-      <p class="close-btn"><a href="">✖</a></p>
-    </div>
+    <%= render 'shared/modal' %>
   </div>
   <div class="review-block" id="review">
     <h2 class="othres-review-title">このスポットのその他のレビュー</h2>
     <% if @other_reviews.empty? %>
       <p>その他のレビューはありません。</p>
     <% else %>
-      <%= render @other_reviews %>
+      <%= render @other_reviews ,length: @max_review_content_length %>
     <% end %>
   </div>
 </section>

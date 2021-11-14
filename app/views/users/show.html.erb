@@ -45,7 +45,10 @@
             このユーザーのレビューはありません。
           </div>
         <% else %>
-          <%= render partial: 'profile_review', collection: @reviews, as: 'review' %>
+          <%= render partial: 'profile_review', 
+            collection: @reviews, locals: { length: @max_review_content_length },
+            as: 'review'
+          %>
         <% end %>
       </div>
       <div class="content content-width">
@@ -63,7 +66,10 @@
             ライクしたレビューはありません。
           </div>
         <% else %>
-          <%= render partial: 'liked_review', collection: @liked_reviews, as: 'review' %>
+          <%= render partial: 'liked_review',
+            collection: @liked_reviews, locals: { length: @max_review_content_length },
+            as: 'review'
+          %>
         <% end %>
       </div>
     </div>

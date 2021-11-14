@@ -12,6 +12,7 @@ class HomePagesController < ApplicationController
         user: [image_attachment: :blob]).first(MAX_RECENT_REVIEW_NUM)
     @popular_spots = popular_spots(MAX_POPULAR_SPOT_NUM)
     @max_spot_image_num = MAX_SPOT_IMAGE_NUM
+    @max_review_content_length = MAX_RECENT_REVIEW_CONTENT_LENGTH
   end
 
   private
