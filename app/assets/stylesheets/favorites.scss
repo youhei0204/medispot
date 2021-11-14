@@ -12,6 +12,9 @@
   letter-spacing: 0;
   vertical-align: middle;
   line-height: 1;
+  &:hover {
+    opacity: 1.0;
+  }
   &.active{
     display: inline-block;
   }
@@ -26,7 +29,7 @@
       color: orange;
     }
     &.false{
-      color: #DBDBDB;
+      color: gray;
     }
   }
   span{

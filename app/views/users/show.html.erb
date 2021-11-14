@@ -1,5 +1,5 @@
 <%= render 'shared/header' %>
-<section class="user-show">
+<section class="user-show content-width">
   <div class="profile-block">
     <div class="profile-block-inner contents-tidy">
       <div class="user-thumbnail">
@@ -19,31 +19,30 @@
           </p>
         <% else %>
           <p class="user-introduction no-introduction">
-            < 自己紹介文はまだありません >
+            自己紹介文はまだありません。
           </p>
         <% end %>
         </p>
       </div>
     </div>
   </div>
-
   <div class="tab-block">
-    <div class="tab-area">
+    <div class="tab-area cursor-pointer">
       <div class="tab active" id="review_tab">
-        レビュー
+        <h3>レビュー</h3>
       </div>
       <div class="tab" id="favorite_tab">
-        保存した場所
+        <h3>保存した場所</h3>
       </div>
       <div class="tab" id="like_tab">
-        ライク
+        <h3>ライク</h3>
       </div>
     </div>
     <div class="content-area">
       <div class="content show content-width" id="review_prev">
         <% if @reviews.empty? %>
           <div class="no-content-block">
-            このユーザーのレビューはありません
+            このユーザーのレビューはありません。
           </div>
         <% else %>
           <%= render partial: 'profile_review', collection: @reviews, as: 'review' %>
@@ -52,7 +51,7 @@
       <div class="content content-width">
         <% if @favorites.empty? %>
           <div class="no-content-block">
-            保存したスポットはありません
+            保存したスポットはありません。
           </div>
         <% else %>
           <%= render partial: 'favorite_spot', collection: @favorites, as: 'favorite' %>
