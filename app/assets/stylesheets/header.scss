@@ -25,10 +25,14 @@ header{
       font-size: 15px;
     }
     .logo {
-      margin-right: 30px;
-      width:50px;
+      .header-logo-title{
+        font-size: 24px;
+        color: #653819;
+        margin-right: 30px;
+      }
       img{
-        width: 100%;
+        margin-right: 8px;
+        width: 40px;
       }
     }
   }
@@ -143,6 +147,12 @@ header{
       .button{
         display: none;
       }
+      .logo{
+        margin-right: 30px;
+        .header-logo-title{
+          display: none;
+        }
+      }
     }
     &.show, &.index{
       input, button, .button{
@@ -151,6 +161,9 @@ header{
       .header-icon{
         width: 35px;
         height: 35px;
+      }
+      .header-logo-title{
+        display: none;
       }
       .submit-button{
         font-size: 13px;
