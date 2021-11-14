@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'HomePages', type: :system do
+RSpec.describe 'HomePages', type: :system, js: true do
   let(:user) { create(:user) }
   let(:spot) { create(:spot) }
   let(:review) { create(:review, :spot, user_id: user.id) }
@@ -14,7 +14,7 @@ RSpec.describe 'HomePages', type: :system do
 
   describe '最新レビューの表示' do
     before do
-      create_list(:review, 5, :user, :spot)
+      create_list(:review, 10, :user, :spot)
       sleep 2
       create(
         :review, :user, spot_id: spot.id,
@@ -34,7 +34,7 @@ RSpec.describe 'HomePages', type: :system do
       end
     end
     it '最新レビューが5件表示されること' do
-      expect(all('.recent-review-box').count).to eq 5
+      expect(all('.recent-review-box').count).to eq 10
     end
   end
 
