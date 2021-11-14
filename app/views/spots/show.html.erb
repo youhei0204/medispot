@@ -38,7 +38,7 @@
     <% if @reviews.empty? %>
       <p>このスポットのレビューはありません。</p>
     <% else %>
-      <%= render @reviews %>
+      <%= render @reviews ,length: @max_review_content_length %>
     <% end %>
   </div>
 </section>

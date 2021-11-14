@@ -22,7 +22,10 @@
     </div>
     <div class="section-right review-block">
       <h4 class="block-title">最新のレビュー</h4>
-      <%= render partial: 'recent_review', collection: @recent_reviews, as: 'review' %>
+      <%= render partial: 'recent_review', 
+        collection: @recent_reviews, locals: { length: @max_review_content_length },
+        as: 'review'
+      %>
     </div>
   </div>
   <div class="about-section home-content-width">

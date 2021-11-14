@@ -4,7 +4,9 @@
     <span class="rate" data-score="<%= review.rate %>"></span>
     <span><%= review.rate %></span>
     <h5 class="title"><%= review.title %></h5>
-    <p class="text"><%= review.content %></p>
+    <p class="text">
+      <%= review.content.slice(0..length) %><%= '...'  if review.content.length > length %>
+    </p>
     <div class="space-between align-items-end">
       <div class="contents-tidy align-items-end">
         <% if review.user.image.attached? %>

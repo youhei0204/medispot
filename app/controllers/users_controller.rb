@@ -15,6 +15,7 @@ class UsersController < ApplicationController
     @liked_reviews = Review.where(id: liked_review_ids).
       includes(:spot, images_attachments: :blob, user: [image_attachment: :blob]).
       sort_by { |o| liked_review_ids.index(o.id) }
+    @max_review_content_length = MAX_REVIEW_CONTENT_LENGTH
   end
 
   def edit; end

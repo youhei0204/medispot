@@ -52,7 +52,7 @@
     <% if @other_reviews.empty? %>
       <p>その他のレビューはありません。</p>
     <% else %>
-      <%= render @other_reviews %>
+      <%= render @other_reviews ,length: @max_review_content_length %>
     <% end %>
   </div>
 </section>

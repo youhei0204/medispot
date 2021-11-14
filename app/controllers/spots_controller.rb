@@ -7,6 +7,7 @@ class SpotsController < ApplicationController
     @spot = Spot.find(params[:id])
     @reviews = @spot.reviews.includes(user: [image_attachment: :blob])
     @images = @spot.images(MAX_SLIDER_IMAGE_NUM_FOR_SHOW)
+    @max_review_content_length = MAX_REVIEW_CONTENT_LENGTH
   end
 
   def index
