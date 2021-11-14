@@ -18,7 +18,7 @@ RSpec.describe 'Spot', type: :system do
         visit user_path user
         fill_in 'header-area', with: '東京'
         fill_in 'header-keyword', with: 'テストタイトル'
-        click_button '検索'
+        find('.submit-button').click
       end
 
       it 'スポット詳細画面に検索結果が表示される' do
@@ -37,7 +37,7 @@ RSpec.describe 'Spot', type: :system do
         visit user_path user
         fill_in 'header-area', with: 'ニューヨーク'
         fill_in 'header-keyword', with: 'テストタイトル'
-        click_button '検索'
+        find('.submit-button').click
       end
 
       it 'スポット詳細画面に検索結果が表示されないこと' do
@@ -53,7 +53,7 @@ RSpec.describe 'Spot', type: :system do
         visit user_path user
         fill_in 'header-area', with: ''
         fill_in 'header-keyword', with: ''
-        click_button '検索'
+        find('.submit-button').click
       end
 
       it '遷移元画面にリダイレクトすること' do

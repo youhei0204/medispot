@@ -1,12 +1,15 @@
+.spots.show .rate > img {
+  width: 24px !important;
+}
 .spot-show{
   margin: 0 auto;
   margin-bottom: 50px;
-  padding-top: 80px;
   max-width: 700px;
   .spot-info{
-    padding-bottom: 5px;
+    padding: 20px 10px;
     margin-bottom: 20px;
     border-bottom: 2px dotted #e0dccc;
+    background: linear-gradient(#ECECEC, #FDFCFD);
   }
   .spot-name{
     display: flex;
@@ -14,7 +17,7 @@
     align-items: center;
     margin-bottom: 5px;
     h1{
-      font-size: 30px;
+      font-size: 25px;
       padding-right: 15px;
     }
   }
@@ -52,26 +55,38 @@
     }
   }
   .review-block{
+    padding-top: 5px;
     margin-top: 50px;
   }
 }
 .spot-index{
   margin: 0 auto;
   margin-bottom: 50px;
-  padding-top: 80px;
+  padding-top: 50px;
   width: 700px;
   .spot-box{
     display: block;
-    margin-top: 20px;
-    background-color: #F0F2F2;
-    border: 1px solid #C1C7C6;
-    border-radius: 14px;
-    box-shadow: 5px 5px 5px #999;
+    margin-top: 1px;
+    padding: 10px 0;
+    background-color: white;
+    border-bottom: 1px solid black;
+    &:first-of-type {
+      margin-top: 30px;
+      border-top: 1px solid black;
+    }
   }
   .spot-info{
     display: inline-block;
     width:310px;
     padding: 10px 15px;
+    .spot-name {
+      font-size: 19px;
+      margin-bottom: 10px;
+    }
+    .spot-address {
+      font-size: 17px;
+      margin-top: 10px;
+    }
   }
   .spot-image{
     float: right;
@@ -79,7 +94,7 @@
     padding:13px 15px 7px;
     img{
       width:100%;
-      height:200px;
+      height:150px;
       border-radius: 4px;
       object-fit: cover;
     }

@@ -12,14 +12,14 @@
         <span><%= @spot.average_rate.round(2) %></span>
         <span class="review-num">
           <i class="fas fa-regular fa-comment-dots"></i>
-          <%= @spot.reviews.count %>件
+          <%= @reviews.count %>件
         </span>
       </p>
-      <i class="fas fa-regular fa-map-pin"></i>
+      <i class="fas fa-map-marker-alt"></i>
       <span class="spot-address"><%= @spot.address %></span>
     </div>
     <div class="spot-images">
-      <ul class="slider spot-slider">
+      <ul class="slider spot-slider view-modal">
         <% @images.each do |image| %>
           <li>
             <%= image_tag(image, class:'slider-image') %>
