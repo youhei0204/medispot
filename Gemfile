@@ -29,6 +29,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rubocop', require: false
   gem 'rubocop-airbnb', require: false
+  gem 'rubocop-discourse', require: false
   gem 'rspec-rails'
   gem 'database_cleaner'
 end
