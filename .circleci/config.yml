@@ -16,6 +16,8 @@ jobs:
         environment:
           - MYSQL_ALLOW_EMPTY_PASSWORD: 'true'
           - MYSQL_ROOT_HOST: '%'
+      - image: selenium/standalone-chrome:latest
+        name: chrome
 
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
