@@ -4,6 +4,8 @@
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
 version: 2
+orbs:
+  heroku: circleci/heroku@0.0.8
 jobs:
   build:
     docker:
@@ -81,3 +83,11 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+
+      - deploy:
+          executor: heroku/default # Uses the basic buildpack-deps image, which has the prerequisites for installing heroku's CLI.
+          steps:
+            - checkout
+            - heroku/install # Runs the heroku install command, if necessary.
+            - heroku/deploy-via-git: # Deploys branch to Heroku via git push.
+              only-branch: master #
