@@ -3,6 +3,7 @@ AllCops:
     - "db/schema.rb"
     - "db/migrate/*"
     - "bin/*"
+    - "vendor/**/*"
     - "config/**/*"
     - "Gemfile"
     - "spec/rails_helper.rb"
