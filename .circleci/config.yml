@@ -3,9 +3,9 @@
 #s
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
-version: 2
+version: 2.1
 jobs:
-  build:
+  test:
     docker:
       - image: circleci/ruby:2.6.8-node-browsers
         environment:
@@ -59,3 +59,22 @@ jobs:
       - store_artifacts:
           path: /tmp/test-results
           destination: test-results
+
+  deploy:
+    executor: heroku/default
+    steps:
+      - checkout
+      - heroku/install
+      - heroku/deploy-via-git:
+          only-branch: develop
+
+orbs:
+  heroku: circleci/heroku@0.0.8
+workflows:
+  version: 2.1
+  build:
+    jobs:
+      - test
+      - deploy:
+          requires:
+            - test
