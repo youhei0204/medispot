@@ -70,7 +70,7 @@ jobs:
       - checkout
       - heroku/install # Runs the heroku install command, if necessary.
       - heroku/deploy-via-git: # Deploys branch to Heroku via git push.
-          only-branch: master # 
+          only-branch: citest
 
 orbs:
   heroku: circleci/heroku@0.0.8
