@@ -55,7 +55,7 @@ jobs:
 # rubocopを走らせる記述です。
       - run:
           name: Rubocop
-          command: bundle exec rubocop
+          command: bundle exec rubocop --require rubocop-airbnb
 
 # rspecを走らせる記述です。
       # run tests!
