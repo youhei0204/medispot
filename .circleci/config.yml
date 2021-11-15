@@ -3,7 +3,7 @@
 #s
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
-version: 2
+version: 2.1
 jobs:
   test:
     docker:
@@ -75,7 +75,8 @@ jobs:
 orbs:
   heroku: circleci/heroku@0.0.8
 workflows:
-  heroku_deploy:
+  version: 2.1
+  build:
     jobs:
       - test
       - deploy:
