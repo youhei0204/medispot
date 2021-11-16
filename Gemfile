@@ -23,6 +23,7 @@ gem 'jquery-rails'
 gem 'mini_magick'
 gem 'font-awesome-sass'
 gem 'aws-sdk-s3'
+gem 'faker'
 
 group :development, :test do
   gem 'byebug', platforms: %i[mri mingw x64_mingw]
@@ -33,7 +34,6 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rspec_junit_formatter'
   gem 'database_cleaner'
-  gem 'faker'
 end
 
 group :development do
