@@ -1,18 +1,19 @@
-<% spots.each do |spot| %>
-
-<div class="spot-box contents-tidy">
-  <div class="spot-info">
-    <h3 class="spot-name"><%= spot[:name] %></h3>
-    <p class="spot-address"><%= spot[:formatted_address] %></p>
-    <p class="spot-decision cursor-pointer" onclick="displayReview(<%= spot.to_json %>)">このスポットのレビューを書く</p>
-  </div>
-  <div class="spot-img">
-    <%= image_tag("http://maps.googleapis.com/maps/api/staticmap?markers=#{spot[:geometry][:location][:lat]},#{spot[:geometry][:location][:lng]}&size=240x160&scale=1&zoom=15&key=#{ENV['GOOGLE_API_KEY']}") %>
-  </div>
-</div>
-
+<% if spots.present? %>
+  <% spots.each do |spot| %>
+    <div class="spot-box contents-tidy">
+      <div class="spot-info">
+        <h3 class="spot-name"><%= spot[:name] %></h3>
+        <p class="spot-address"><%= spot[:formatted_address] %></p>
+        <p class="spot-decision cursor-pointer" onclick="displayReview(<%= spot.to_json %>)">このスポットのレビューを書く</p>
+      </div>
+      <div class="spot-img">
+        <%= image_tag("http://maps.googleapis.com/maps/api/staticmap?markers=#{spot[:geometry][:location][:lat]},#{spot[:geometry][:location][:lng]}&size=240x160&scale=1&zoom=15&key=#{ENV['GOOGLE_API_KEY']}") %>
+      </div>
+    </div>
+  <% end %>
+<% else %>
+  <div class="spot-box contents-tidy">お探しのスポットは見つかりませんでした。</div>
 <% end %>
-
 <script>
   function displayReview(spot){
     $('#search').hide();

@@ -2,7 +2,7 @@
   <div class="user-form-block">
     <h1 class="user-form-heading contents-tidy">
       <%= link_to image_tag('logo.png', size:'60x60'), root_path %>
-      Edit Profile
+      <span class="edit-title">Edit Profile</span>
     </h1>
     <%= form_with(model: @user) do |f| %>
       <div id="error_explanation"></div>
