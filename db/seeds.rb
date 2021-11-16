@@ -7,18 +7,18 @@ MIN_IMAGE_NUM_OF_REVIEW = 0
 MAX_IMAGE_NUM_OF_REVIEW = 3
 MIN_LIKE_NUM_PER_USER = 3
 MAX_LIKE_NUM_PER_USER = 4
-MIN_REVIEW_NUM_PER_SPOT= 11
+MIN_REVIEW_NUM_PER_SPOT = 11
 MAX_REVIEW_NUM_PER_SPOT = 25
 
 introduction_pattern = [
   "このご時世ですので、家でできる趣味を探しに始めました。",
-  "よろしくお願いします。", 
+  "よろしくお願いします。",
   "最近の流行りに乗って見ました。",
   "筋トレ、瞑想、家族サービス！",
   "会社でも瞑想週間というものが始まりました。乗るしかないですね、このビッグウェーブに",
   "会社で流行ってたのではじめました。",
   "気になっている人が健康オタクなので、話題作りに始めて見ました。",
-  "瞑想は心がスッキリして良いですね。みなさんのレビューとても参考になります！"
+  "瞑想は心がスッキリして良いですね。みなさんのレビューとても参考になります！",
 ]
 title_pattern = [
   "結構よい場所でした", "初めての瞑想体験", "ちょっと感動しました",
@@ -99,11 +99,11 @@ content_pattern = [
   今回はそんな感想を持って教室を後にしました。劇的な体験とは行きませんでしたが、これからが楽しみです。
   みなさんのレビューも参考にしつつ、色々巡ってみるのもアリですね。",
   "先生が丁寧に説明してくれたので、初心者でも安心でした。指示通りに見様見真似でやっているうちに、あっという間に時間が過ぎて行きました。
-   
+
   肝心の瞑想効果ですが、、、心がかなりスッキリしました！私は考え事をしやすいタイプなので、
   こんな風に何も考えず、今を感じることに集中する時間は大切にすべきだなと思いました。
   でも、瞑想できてる！という実感にはまだまだ遠いかな。
-  それにしても”ジッとしている”というのは結構大変ですね。正直、ここが肝ですね！"
+  それにしても”ジッとしている”というのは結構大変ですね。正直、ここが肝ですね！",
 ]
 
 User.create!(
@@ -349,8 +349,12 @@ Spot.all.each do |spot|
 end
 
 User.all.each_with_index do |user, i|
-  user.image.attach(io: File.open(Rails.root.join("app/assets/images/seeds/profile/user_#{rand(1..SAMPLE_USER_IMAGE_NUM)}.jpg")),
-                    filename: 'profile.jpg',)
+  user.image.attach(
+    io: File.open(
+      Rails.root.join("app/assets/images/seeds/profile/user_#{rand(1..SAMPLE_USER_IMAGE_NUM)}.jpg")
+    ),
+    filename: 'profile.jpg',
+  )
   Review.all.sample(rand(MIN_LIKE_NUM_PER_USER..MAX_LIKE_NUM_PER_USER)).each do |review|
     user.likes.create!(review_id: review.id)
   end
@@ -358,12 +362,16 @@ end
 
 User.find_by(email: 'mso_masuo@email.com').image.
   attach(io: File.open(
-  Rails.root.join("app/assets/images/seeds/profile/masuo.jpg")),
-  filename: 'profile.jpg',)
+    Rails.root.join("app/assets/images/seeds/profile/masuo.jpg")
+  ),
+         filename: 'profile.jpg',)
 
 Review.all.each do |review|
-  [*(1..SAMPLE_REVIEW_IMAGE_NUM)].sample(rand(MIN_IMAGE_NUM_OF_REVIEW..MAX_IMAGE_NUM_OF_REVIEW)).each do |n|
-    review.images.attach(io: File.open(Rails.root.join("app/assets/images/seeds/review/review_#{n}.jpg")),
-                         filename: 'review.jpg',)
+  [*(1..SAMPLE_REVIEW_IMAGE_NUM)].
+    sample(rand(MIN_IMAGE_NUM_OF_REVIEW..MAX_IMAGE_NUM_OF_REVIEW)).each do |n|
+    review.images.attach(
+      io: File.open(Rails.root.join("app/assets/images/seeds/review/review_#{n}.jpg")),
+      filename: 'review.jpg',
+    )
   end
 end
