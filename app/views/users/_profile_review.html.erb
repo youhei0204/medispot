@@ -8,7 +8,7 @@
       <%= review.content.slice(0..length) %><%= '...'  if review.content.length > length %>
     </p>
     <div class="space-between align-items-end">
-      <div class="contents-tidy align-items-end">
+      <div class="contents-tidy">
         <p><%= render 'shared/like', review: review %></p>
         <div class="reviewer-info">
           <span class="review-date">
