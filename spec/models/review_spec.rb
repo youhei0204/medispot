@@ -149,7 +149,7 @@ RSpec.describe Review, type: :model do
       it 'オブジェクトが無効であること' do
         review.rate = 5.1
         expect(review).to be_invalid
-        expect(review.errors.full_messages[0]).to eq('星評価は5.0以下の値にしてください')
+        expect(review.errors.full_messages[0]).to eq('星評価を選択してください')
       end
     end
 
@@ -157,7 +157,7 @@ RSpec.describe Review, type: :model do
       it 'オブジェクトが無効であること' do
         review.rate = -1
         expect(review).to be_invalid
-        expect(review.errors.full_messages[0]).to eq('星評価は0以上の値にしてください')
+        expect(review.errors.full_messages[0]).to eq('星評価を選択してください')
       end
     end
 
@@ -165,7 +165,7 @@ RSpec.describe Review, type: :model do
       it 'オブジェクトが無効であること' do
         review.rate = 'hello'
         expect(review).to be_invalid
-        expect(review.errors.full_messages[0]).to eq('星評価は数値で入力してください')
+        expect(review.errors.full_messages[0]).to eq('星評価を選択してください')
       end
     end
 
@@ -173,7 +173,7 @@ RSpec.describe Review, type: :model do
       it 'オブジェクトが無効であること' do
         review.rate = ''
         expect(review).to be_invalid
-        expect(review.errors.full_messages[0]).to eq('星評価は数値で入力してください')
+        expect(review.errors.full_messages[0]).to eq('星評価を選択してください')
       end
     end
 
@@ -181,7 +181,7 @@ RSpec.describe Review, type: :model do
       it 'オブジェクトが無効であること' do
         review.rate = ' '
         expect(review).to be_invalid
-        expect(review.errors.full_messages[0]).to eq('星評価は数値で入力してください')
+        expect(review.errors.full_messages[0]).to eq('星評価を選択してください')
       end
     end
 
@@ -189,7 +189,7 @@ RSpec.describe Review, type: :model do
       it 'オブジェクトが無効であること' do
         review.rate = nil
         expect(review).to be_invalid
-        expect(review.errors.full_messages[0]).to eq('星評価は数値で入力してください')
+        expect(review.errors.full_messages[0]).to eq('星評価を選択してください')
       end
     end
   end
