@@ -33,7 +33,7 @@
     <span class="rate" data-score="<%= @review.rate %>"></span>
     <span><%= @review.rate %></span>
     <h1 class="review-title"><%= @review.title %></h1>
-    <p class="review-content"><%= @review.content %></p>
+    <p class="review-content"><%= simple_format(@review.content) %></p>
     <ul class="review-image contents-tidy view-modal">
       <% @images.each do |image| %>
         <li><%= image_tag(image) %></li>
