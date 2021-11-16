@@ -33,6 +33,7 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'rspec_junit_formatter'
   gem 'database_cleaner'
+  gem 'faker'
 end
 
 group :development do
