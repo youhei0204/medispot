@@ -17,7 +17,7 @@
   <% if images = spot.images(@max_spot_image_num) != [] %>
     <% spot.images(@max_spot_image_num).each do |image| %>
       <div class="spot-img">
-        <%= image_tag(image) %>
+        <%= image_tag(image.variant(resize: "200x170")) %>
       </div>
     <% end %>
   <% else %>

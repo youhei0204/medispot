@@ -20,7 +20,7 @@
     <% if favorite.spot.images(1).empty? %>
     <%= image_tag('noimage.png') %>
     <% else %>
-    <%= image_tag(favorite.spot.images(1).first) %>
+    <%= image_tag(favorite.spot.images(1).first.variant(resize: "280x160")) %>
     <% end %>
   </div>
 </div>

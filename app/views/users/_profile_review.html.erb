@@ -23,7 +23,7 @@
   <div class="right-block">
     <div class="spot-thumbnail">
       <% if review.images.attached? %>
-        <%= image_tag(review.images[0])%>
+        <%= image_tag(review.images[0].variant(resize: "280x160") )%>
       <% else %>
         <%= image_tag('noimage.png') %>
       <% end %>

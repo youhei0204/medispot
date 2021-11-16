@@ -19,7 +19,7 @@
       <ul class="slider-no-allow">
         <% spot.images(@max_slider_image_num).each do |image| %>
           <li>
-            <%= image_tag(image) %>
+            <%= image_tag(image.variant(resize: "300x150")) %>
           </li>
         <% end %>
       </ul>

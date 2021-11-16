@@ -9,7 +9,7 @@
     <div class="space-between align-items-end">
       <div class="contents-tidy align-items-end">
         <% if review.user.image.attached? %>
-          <%= link_to image_tag(review.user.image, class: 'icon'), user_path(review.user)  %>
+          <%= link_to image_tag(review.user.image.variant(resize: "35x35"), class: 'icon'), user_path(review.user)  %>
         <% else %>
           <%= link_to image_tag('guest_user.png', class: 'icon'), user_path(review.user) %>
         <% end %>
@@ -27,7 +27,7 @@
   <div class="right-block">
     <div class="spot-thumbnail">
       <% if review.images.attached? %>
-        <%= image_tag(review.images[0])%>
+        <%= image_tag(review.images[0].variant(resize: "280x160"))%>
       <% else %>
         <%= image_tag('noimage.png') %>
       <% end %>

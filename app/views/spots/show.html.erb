@@ -29,7 +29,7 @@
         </ul>
         <ul class="thumbnail">
           <% @images.each do |image| %>
-            <li><%= image_tag(image, class:'slider-image') %></li>
+            <li><%= image_tag(image.variant(resize: "70x70"), class:'slider-image') %></li>
           <% end %>
         </ul>
       <% else %>
