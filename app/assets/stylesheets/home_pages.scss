@@ -1,4 +1,25 @@
+
 .home {
+  #loading{
+    display:none;
+    position: relative;
+    background-color: #F9F6F7;
+    height: 100vh;
+    .image-box{
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      transform: translate(-50%,-50%);
+      .loading-text{
+        text-align: center;
+        font-size: 15px;
+        margin-top: 3px;
+      }
+      img{
+        width: 110px;
+      }
+    }
+  }
   .top-block{
     display: none;
     color: white;

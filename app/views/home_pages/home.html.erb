@@ -1,44 +1,53 @@
-<%= render 'shared/header' %>
-<section class="home">
-  <div class="top-block">
-    <h1 class="catchcopy">オフの日、瞑想するなら<br>MediSpot</h1>
-    <div class="search-block contents-tidy">
-      <%= form_with url: spots_path, method: :get, local: true ,class: 'search-box' do |f| %>
-        <%= f.text_field :area, class: 'form', placeholder: 'エリア検索 [例: 東京, 新橋]' %>
-        <%= f.text_field :keyword, class: 'form', placeholder: 'キーワード検索 [例: 瞑想, ヨガ]' %>
-        <%= button_tag :type => "submit", class: 'submit' do %>
-          <span>検索</span>
-          <i class="fas fa-search"></i>
+<div id="loading">
+  <div class="image-box">
+    <%= image_tag('loading.jpg') %>
+    <p class="loading-text">Loading</p>
+  </div>
+</div>
+<div id='toppage'>
+  <%= render 'shared/header' %>
+  <section class="home">
+    <div class="top-block">
+      <h1 class="catchcopy">オフの日、瞑想するなら<br>MediSpot</h1>
+      <div class="search-block contents-tidy">
+        <%= form_with url: spots_path, method: :get, local: true ,class: 'search-box' do |f| %>
+          <%= f.text_field :area, class: 'form', placeholder: 'エリア検索 [例: 東京, 新橋]' %>
+          <%= f.text_field :keyword, class: 'form', placeholder: 'キーワード検索 [例: 瞑想, ヨガ]' %>
+          <%= button_tag :type => "submit", class: 'submit' do %>
+            <span>検索</span>
+            <i class="fas fa-search"></i>
+          <% end %>
         <% end %>
-      <% end %>
-    </div>
-  </div>
-  <div class="main-section home-content-width contents-tidy">
-    <div class="section-left spot-block">
-      <h4 class="block-title">いま話題のスポット</h4>
-      <div class="spot-box-block">
-        <%= render partial: 'popular_spot', collection: @popular_spots, as: 'spot' %>
       </div>
     </div>
-    <div class="section-right review-block">
-      <h4 class="block-title">最新のレビュー</h4>
-      <div class="review-scroll">
-        <%= render partial: 'recent_review', 
-          collection: @recent_reviews, locals: { length: @max_review_content_length },
-          as: 'review'
-        %>
+    <div class="main-section home-content-width contents-tidy">
+      <div class="section-left spot-block">
+        <h4 class="block-title">いま話題のスポット</h4>
+        <div class="spot-box-block">
+          <%= render partial: 'popular_spot', collection: @popular_spots, as: 'spot' %>
+        </div>
+      </div>
+      <div class="section-right review-block">
+        <h4 class="block-title">最新のレビュー</h4>
+        <div class="review-scroll">
+          <%= render partial: 'recent_review', 
+            collection: @recent_reviews, locals: { length: @max_review_content_length },
+            as: 'review'
+          %>
+        </div>
       </div>
     </div>
-  </div>
-  <div class="about-section home-content-width">
-    <h2>Medispotとは？</h2>
-    <h4>
-      MediSpotは、都内でヨガ・瞑想の体験ができるスポットを、
-      ユーザーの体験レビューをもとに検索できるサービスです。
-    </h4>
-  </div>
-</section>
-<%= render 'shared/homepage_footer' %>
+    <div class="about-section home-content-width">
+      <h2>Medispotとは？</h2>
+      <h4>
+        MediSpotは、都内でヨガ・瞑想の体験ができるスポットを、
+        ユーザーの体験レビューをもとに検索できるサービスです。
+      </h4>
+    </div>
+  </section>
+  <%= render 'shared/homepage_footer' %>
+</div>
+
 <script>
   $('.top-block').fadeIn(800);
 </script>
