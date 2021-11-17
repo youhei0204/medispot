@@ -15,15 +15,15 @@ $(function () {
 
       $(window).load(function () {
         $('#loading').fadeOut(800);
-        $('#toppage').fadeIn(700);
+        $('#toppage').fadeIn(1500);
       });
+
+      setTimeout(function(){stopload()},3000);
 
       function stopload(){
         $('#loading').fadeOut(800);
-        $('#toppage').fadeIn(700);
-        console.log('ssss')
+        $('#toppage').fadeIn(1500);
       }
-      setTimeout(stopload(),2500);
     }
   }
   webStorage();
