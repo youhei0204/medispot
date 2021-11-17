@@ -39,7 +39,7 @@
         <li><%= image_tag(image) %></li>
       <% end %>
     </ul>
-      <%= link_to "削除", review_path(@review), data: { confirm: "本当に削除しますか？" }, 
+      <%= link_to "削除", review_path(@review), data: { confirm: "本当に削除しますか？レビューを削除してよろしいですか？" }, 
         "data-turbolinks": false, method: :delete if @review.user == current_user
       %>
     <p class="like-box">

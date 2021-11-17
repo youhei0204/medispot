@@ -160,7 +160,7 @@ RSpec.describe 'Reviews', type: :system, js: true do
     it '削除に成功する' do
       expect do
         click_link '削除'
-        page.accept_confirm '本当に削除しますか？'
+        page.accept_confirm 'レビューを削除してよろしいですか？'
         expect(page).to have_content 'レビューを削除しました'
       end.to change { Review.count }.by(-1)
     end
