@@ -3,6 +3,7 @@ $(function () {
     if (sessionStorage.getItem('access') != 0 ) {
       sessionStorage.setItem('access', 0);
       $('#toppage').hide();
+      $('.top-block').show();
       $('#loading').show();
 
       setInterval(function(){
@@ -13,12 +14,12 @@ $(function () {
         }
       },500);
 
-      $(window).load(function () {
+      $(window).on('load', function () {
         $('#loading').fadeOut(800);
         $('#toppage').fadeIn(1500);
       });
 
-      setTimeout(function(){stopload()},3000);
+      setTimeout(function(){stopload()},5000);
 
       function stopload(){
         $('#loading').fadeOut(800);
