@@ -16,12 +16,15 @@ textarea{
  }
 body{
   font-family: serif;
-  background-color: white;
+  background-color: #FDFCFB;
   display: flex;
   flex-flow: column;
   min-height: 100vh;
   &.home_pages{
     min-width: 1380px;
+  }
+  &.users.show{
+    background-color: white;
   }
   &.users.edit,  &.sessions, &.registrations{
     background-color: #E5E5E5;
@@ -203,16 +206,18 @@ a{
   }
 }
 .spot-review-box{
+  padding: 20px 10px;
+  background-color: #FDFCFB!important;
   &:first-of-type{
     border-top: 1px solid #CCCCCC;
   }
-  padding: 20px 0;
   .left-block{
     .text{
       margin-bottom: 10px;
     }
   } 
 }
-.othres-review-title{
+.others-review-title{
   font-size: 19px;
+  margin-bottom: 5px;
 }
