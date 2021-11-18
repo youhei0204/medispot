@@ -14,6 +14,7 @@ RSpec.describe 'Sessions', type: :system do
       visit root_path
       click_link 'ログイン'
     end
+
     context 'パスワードが正常なとき' do
       it 'ログインに成功する' do
         fill_in 'user_email', with: user_params[:email]
