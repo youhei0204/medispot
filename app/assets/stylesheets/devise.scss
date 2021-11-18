@@ -43,7 +43,7 @@
     width: 120px;
     height: 120px;
     img{
-      weight: 100%;
+      width: 100%;
       height: 100%;
     }
   }
@@ -98,6 +98,15 @@
       }
     }
   }
+  .login-link-box{
+    font-size: 15px;
+    a{
+      font-size: 15px!important;
+    }
+    p{
+      margin-bottom: 5px;
+    }
+  }
   .delete-account{
     width: 100%;
     padding-top: 30px;
@@ -136,5 +145,6 @@
   & + span{
     color:black;
     font-size: 15px!important;
+    line-height: 15px;
   }
 }
