@@ -20,5 +20,5 @@ production:
   database: medispot_production
   username: medispot
   password: <%= ENV['MEDISPOT_DATABASE_PASSWORD'] %>
-  host: 'localhost'
+  host: <%= ENV['MYSQL_HOST'] %>
   url: <%= ENV['JAWSDB_URL']&.sub('mysql://', 'mysql2://') %>
