@@ -1,0 +1,10 @@
+notifications_present = <%= @notifications.present? %>
+if($('.notification-inner').html() == ''){
+  if( notifications_present ){
+    $('.notification-inner').html("<%= j(render @notifications) %>");
+  }else{
+    $('.notification-inner').html(`<p class="notification-box">最新の通知はありません。</p>`);
+  }
+}else{
+  $('.notification-box').remove();
+}
