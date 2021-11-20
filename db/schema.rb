@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_11_11_054338) do
+ActiveRecord::Schema.define(version: 2021_11_20_144800) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -51,6 +51,19 @@ ActiveRecord::Schema.define(version: 2021_11_11_054338) do
     t.index ["user_id"], name: "index_likes_on_user_id"
   end
 
+  create_table "notifications", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.integer "sender_id"
+    t.string "sender_name"
+    t.integer "request_type", null: false
+    t.string "subject"
+    t.integer "link_id"
+    t.boolean "new_flag", default: true, null: false
+    t.bigint "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_notifications_on_user_id"
+  end
+
   create_table "reviews", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "title"
     t.text "content"
@@ -88,6 +101,7 @@ ActiveRecord::Schema.define(version: 2021_11_11_054338) do
     t.datetime "updated_at", null: false
     t.string "name"
     t.text "introduction"
+    t.boolean "new_notification_flag", default: false, null: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -97,6 +111,7 @@ ActiveRecord::Schema.define(version: 2021_11_11_054338) do
   add_foreign_key "favorites", "users"
   add_foreign_key "likes", "reviews"
   add_foreign_key "likes", "users"
+  add_foreign_key "notifications", "users"
   add_foreign_key "reviews", "spots"
   add_foreign_key "reviews", "users"
 end
