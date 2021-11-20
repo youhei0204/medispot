@@ -22,9 +22,16 @@
     </div>
     <% if user_signed_in? %>
       <div class="header-right-block contents-tidy">
+        <div class="notification">
+          <%= link_to user_notifications_path(current_user,format: :js), remote: true do %>
+            <i class="far fa-bell notification-button" id="notification"></i>
+          <% end %>
+          <div class="notification-inner"></div>
+          <% if current_user.new_notification_flag %><span class="new-badge"></span><% end %>
+        </div>
         <div class="user-menu">
           <% if current_user.image.attached? %>
-            <%= image_tag(current_user.image , class: 'header-icon', id:'icon') %>
+            <%= image_tag(current_user.image.variant(resize: "45x45") , class: 'header-icon', id:'icon') %>
           <% else %>
             <%= image_tag('guest_user.png', class: 'header-icon', id:'icon') %>
           <% end %>
