@@ -27,7 +27,7 @@
     }
   }
   .search-area{
-    display: flex;
+    display: none;
     flex-flow: column;
     align-items: stretch;
     width: 100%;
@@ -45,6 +45,10 @@
       }
       .submit{
         width: 80px!important;
+        background-color: #F7E4D6;
+        border: 1px solid black;
+        border-left: none;
+        border-radius: 2px;
       }
     }
   }
@@ -134,7 +138,6 @@
   }
 }
 .review-show{
-  background-color: white;
   margin: 0 auto;
   margin-bottom: 50px;
   padding-top: 40px;

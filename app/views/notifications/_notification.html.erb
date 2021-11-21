@@ -1,0 +1,7 @@
+<%= link_to user_notification_path(current_user.id, notification.id), class:'notification-box' do %>
+  <% if notification.request_type == 1 %>
+    <%= notification.sender_name %>さんが「<%= notification.subject %>」をLIKEしました。
+  <% end %>
+  <span class="passed_time"><%= time_since(notification.created_at) %></span>
+  <% if notification.new_flag %><span class="notice"></span><% end %>
+<% end %>

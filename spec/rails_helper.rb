@@ -53,6 +53,7 @@ RSpec.configure do |config|
   config.include FactoryBot::Syntax::Methods
 
   config.include SignInModule
+  config.include LogoutModule
 
   config.before(:each, type: :system) do
     driven_by :rack_test

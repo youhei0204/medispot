@@ -83,4 +83,28 @@ RSpec.describe User, type: :model do
       end
     end
   end
+
+  describe 'new_notification_flagのバリデーション' do
+    context 'trueのとき' do
+      it 'オブジェクトが有効であること' do
+        user.new_notification_flag = true
+        expect(user).to be_valid
+      end
+    end
+
+    context 'falseのとき' do
+      it 'オブジェクトが有効であること' do
+        user.new_notification_flag = false
+        expect(user).to be_valid
+      end
+    end
+
+    context 'true, false以外のとき' do
+      it 'オブジェクトが無効であること' do
+        user.new_notification_flag = ''
+        expect(user).to be_invalid
+        expect(user.errors.full_messages[0]).to eq('New notification flagは一覧にありません')
+      end
+    end
+  end
 end

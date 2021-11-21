@@ -33,7 +33,15 @@
         <div class="form-group">
           <%= f.submit '登録', class: 'submit-button' %>
         </div>
-        <p>既にアカウントをお持ちですか？ <span><%= link_to 'ログイン', new_user_session_path, class:'login-link' %></span></p>
+        <div class="login-link-box">
+          <p>既にアカウントをお持ちですか？ <span><%= link_to 'ログイン', new_user_session_path, class:'login-link' %></span></p>
+          <p>
+            <%= link_to users_guest_sign_in_path, method: :post, class:'flex-start' do %>
+              <%= image_tag 'guest_icon.png', size:'17x17', class:'link-icon' %>
+              <span>ゲストとしてログイン</span>
+            <% end %>
+          </p>
+        </div>
       <% end %>
     </div>
   </div>

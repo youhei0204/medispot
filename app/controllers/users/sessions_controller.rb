@@ -5,7 +5,7 @@ module Users
     def guest_sign_in
       user = User.guest
       sign_in user
-      redirect_to root_path, notice: 'ゲストとしてログインしました。'
+      redirect_to after_sign_in_path_for(user), notice: 'ゲストとしてログインしました。'
     end
 
     # before_action :configure_sign_in_params, only: [:create]
