@@ -2,7 +2,7 @@
   display: none;
   position: relative;
   &.active{
-    display: flex;
+    display: inline-flex;
     align-items: center;
   }
   img{

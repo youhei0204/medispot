@@ -19,9 +19,9 @@
     </div>
   </div>
   <div class="main-block">
-  <p class="update-time">
-    <%= @review.created_at.strftime('%Y/%m/%d %H:%M') %>に更新
-  </p> 
+    <p class="update-time">
+      <%= @review.created_at.strftime('%Y/%m/%d %H:%M') %>に更新
+    </p> 
     <%= link_to @review.user, class:'user-profile contents-tidy' do %>
       <% if @review.user.image.attached? %>
         <%= image_tag(@review.user.image, size: "35x35", class: 'icon') %>
@@ -39,12 +39,15 @@
         <li><%= image_tag(image) %></li>
       <% end %>
     </ul>
-      <%= link_to "削除", review_path(@review), data: { confirm: "本当に削除しますか？レビューを削除してよろしいですか？" }, 
+    <div class="review-footer flex-start">
+      <%= link_to "削除", review_path(@review), class:'delete-link', data: { confirm: "レビューを削除してよろしいですか？" }, 
         "data-turbolinks": false, method: :delete if @review.user == current_user
       %>
-    <p class="like-box">
-      <%= render 'shared/like', review: @review %>
-    </p>
+      <div class="like-box contents-tidy">
+        <%= render 'shared/like', review: @review %>
+        <%= render 'liked_users', liked_users: @liked_users if @liked_users.present? %>
+      </div>
+    </div>
     <%= render 'shared/modal' %>
   </div>
   <div class="review-block" id="review">

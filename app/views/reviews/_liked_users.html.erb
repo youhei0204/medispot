@@ -1,0 +1,14 @@
+<div class="hover-area">
+  <div class="liked-user-box">
+    <% @liked_users.first(@max_liked_user_num).each_with_index do |user, i| %>
+      <span><%= link_to user.name, (user_path user) %></span>さん
+      <%= ', ' if i+1 < liked_users.size && i+1 < @max_liked_user_num %>
+    <% end %>
+    <%= "他#{liked_users.size - @max_liked_user_num}名" if liked_users.size > @max_liked_user_num %>
+    がライクしました。
+  </div>
+</div>
+<div class="recent-like-box">
+  <span><%= link_to @recent_like.user.name, (user_path @recent_like.user ) %></span>さんがライクしました。
+  <span class="passed_time"><%= time_since(@recent_like.created_at) %></span>
+</div>
