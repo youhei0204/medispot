@@ -1,14 +1,20 @@
 class ReviewsController < ApplicationController
   MAX_IMAGE_UPLOAD_NUM = 4
+  MAX_LIKED_USER_NUM = 10
   before_action :authenticate_user!
   before_action :own_review?, only: [:edit, :update, :destroy]
   before_action :set_review, only: [:show, :edit, :update]
 
   def show
+    @reviewer = @review.user
+    @images = @review.images.includes(:blob)
+
+    @recent_like = @review.likes.order(created_at: :desc).first
+    @liked_users = User.where(id: @review.likes.pluck(:user_id))
+    @max_liked_user_num = MAX_LIKED_USER_NUM
+
     @other_reviews = @review.spot.reviews.where.not(id: params[:id]).
       includes(user: [image_attachment: :blob], images_attachments: :blob)
-    @images = @review.images.includes(:blob)
-    @reviewer = @review.user
     @max_review_content_length = MAX_REVIEW_CONTENT_LENGTH
   end
 
@@ -76,18 +82,18 @@ class ReviewsController < ApplicationController
     flash[:success] = "レビューを削除しました。"
     redirect_to current_user
   end
-end
 
-private
+  private
 
-def set_review
-  @review = Review.find(params[:id])
-end
+  def set_review
+    @review = Review.find(params[:id])
+  end
 
-def own_review?
-  redirect_to root_path unless current_user == Review.find(params[:id]).user
-end
+  def own_review?
+    redirect_to root_path unless current_user == Review.find(params[:id]).user
+  end
 
-def review_params
-  params.require(:review).permit(:review, :title, :content, :rate, images: [])
+  def review_params
+    params.require(:review).permit(:review, :title, :content, :rate, images: [])
+  end
 end
