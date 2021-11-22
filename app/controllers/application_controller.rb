@@ -11,4 +11,12 @@ class ApplicationController < ActionController::Base
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
   end
+
+  def update_new_notification_flag(user)
+    if user.notifications.where(new_flag: true).count.zero?
+      user.update(new_notification_flag: false)
+    else
+      user.update(new_notification_flag: true)
+    end
+  end
 end

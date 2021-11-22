@@ -3,7 +3,7 @@
 module Users
   class RegistrationsController < Devise::RegistrationsController
     before_action :guest_user?, only: [:update, :destroy]
-
+    after_action :update_notification, only: :create
     # before_action :configure_sign_up_params, only: [:create]
     # before_action :configure_account_update_params, only: [:update]
     # GET /resource/sign_up
@@ -61,6 +61,16 @@ module Users
     # def after_inactive_sign_up_path_for(resource)
     #   super(resource)
     # end
+    def update_notification
+      if resource.valid?
+        resource.notifications.create(
+          request_type: 0,
+          subject: 'ようこそMediSpotへ！',
+        )
+        resource.update(new_notification_flag: true)
+      end
+    end
+
     def guest_user?
       if resource.email == 'guest@medispot.com'
         redirect_to root_path, alert: 'ゲストユーザーは変更・削除できません。'
