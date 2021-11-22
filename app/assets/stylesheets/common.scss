@@ -249,21 +249,18 @@ a{
       border-bottom-left-radius: 20px;
     }
     .right-about-block{
-      display: inline-flex;
-      flex-flow: column;
-      align-items: center;
-      justify-content: space-between;
       width: 55%;
       height: 100%;
       padding: 20px 35px;
       .about-title{
+        text-align: center;
         font-size: 30px;
         margin: 20px;
         border-bottom: 1px solid #653819;
       }
       p{
-        font-size: 16px;
-        margin-bottom: 30px;
+        font-size: 15px;
+        margin-top: 20px;
       }
     }
   }
