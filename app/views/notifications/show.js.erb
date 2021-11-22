@@ -1,0 +1,7 @@
+flag = <%= current_user.new_notification_flag %>;
+if (!flag){
+  $('.new-badge').remove();
+}
+$('.about-page-link').children('.notice').remove();
+$('.about-page').show();
+$('.about-page').html("<%= j(render 'shared/about_page') %>");

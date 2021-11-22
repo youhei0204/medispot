@@ -29,7 +29,7 @@ class LikesController < ApplicationController
         subject: Review.find_by(id: params[:review_id]).title,
         link_id: params[:review_id],
       )
-      reviewer.update(new_notification_flag: true)
+      update_new_notification_flag reviewer
     end
   end
 end

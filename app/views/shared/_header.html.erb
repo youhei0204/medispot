@@ -4,6 +4,7 @@
       <%= message %>
     </div>
   <% end %>
+  <div class="about-page"></div>
   <div class="header-inner content-width contents-tidy">
     <div class="header-left-block contents-tidy">
       <div class="logo">
@@ -26,7 +27,7 @@
           <%= link_to user_notifications_path(current_user,format: :js), remote: true do %>
             <i class="far fa-bell notification-button" id="notification"></i>
           <% end %>
-          <div class="notification-inner"></div>
+          <div class="notification-inner"><div class="about-page"></div></div> 
           <% if current_user.new_notification_flag %><span class="new-badge"></span><% end %>
         </div>
         <div class="user-menu">
