@@ -68,7 +68,7 @@ MediSpotは広くリリースするにはまだまだ機能不足ですが、
 
 
 ## ER図
-![ER図](https://github.com/youhei0204/medispot/blob/images/erd%202.pdf)
+![ER図](https://github.com/youhei0204/medispot/blob/images/er.png)
 
 ## 制作に当たって意識したこと
 
