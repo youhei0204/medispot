@@ -1,7 +1,16 @@
-<%= link_to user_notification_path(current_user.id, notification.id), class:'notification-box' do %>
-  <% if notification.request_type == 1 %>
-    <%= notification.sender_name %>さんが「<%= notification.subject %>」をLIKEしました。
+<% if notification.request_type == 0 %>
+  <%= link_to user_notification_path(current_user.id, notification.id, format: :js),
+    class:'notification-box about-page-link', remote: true do %>
+    <%= notification.subject %>
+    <span class="passed_time"><%= time_since(notification.created_at) %></span>
+    <% if notification.new_flag %><span class="notice"></span><% end %>
   <% end %>
-  <span class="passed_time"><%= time_since(notification.created_at) %></span>
-  <% if notification.new_flag %><span class="notice"></span><% end %>
+<% else %>
+  <%= link_to user_notification_path(current_user.id, notification.id), class:'notification-box' do %>
+    <% if notification.request_type == 1 %>
+      <%= notification.sender_name %>さんが「<%= notification.subject %>」をLIKEしました。
+    <% end %>
+    <span class="passed_time"><%= time_since(notification.created_at) %></span>
+    <% if notification.new_flag %><span class="notice"></span><% end %>
+  <% end %>
 <% end %>

@@ -1,5 +1,5 @@
 notifications_present = <%= @notifications.present? %>
-if($('.notification-inner').html() == ''){
+if( !($('.notification-box').length) ){
   if( notifications_present ){
     $('.notification-inner').html("<%= j(render @notifications) %>");
   }else{
