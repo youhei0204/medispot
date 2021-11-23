@@ -37,12 +37,51 @@ RSpec.describe 'Sessions', type: :system do
   end
 
   describe 'ゲストユーザーとしてログイン' do
-    it 'ログインに成功し、直前のページにリダイレクトされること' do
-      visit root_path
-      click_link review.title
-      click_link 'ゲストとしてログイン'
-      expect(current_path).to eq review_path review
-      expect(page).to have_content 'ゲストとしてログインしました。'
+    context 'ゲストユーザー数が5未満のとき' do
+      before do
+        4.times do
+          sign_in_as_guest
+          logout
+        end
+        visit root_path
+        click_link review.title
+      end
+
+      it 'ログインに成功し、直前のページにリダイレクトされること' do
+        click_link 'ゲストとしてログイン'
+        expect(current_path).to eq review_path review
+        expect(page).to have_content 'ゲストとしてログインしました。'
+      end
+      it 'ゲストユーザーが新たに作成されること' do
+        expect do
+          click_link 'ゲストとしてログイン'
+        end.to change { User.where("email like 'guest_%@medispot.com'").count }.by(1)
+      end
+    end
+
+    context 'ゲストユーザー数が5(最大数)のとき' do
+      before do
+        5.times do
+          sign_in_as_guest
+          sleep 1
+          logout
+        end
+        visit root_path
+        click_link review.title
+      end
+
+      it 'ログインに成功し、直前のページにリダイレクトされること' do
+        click_link 'ゲストとしてログイン'
+        expect(current_path).to eq review_path review
+        expect(page).to have_content 'ゲストとしてログインしました。'
+      end
+      it '最終ログインの古いゲストにログインすること' do
+        click_link 'ゲストとしてログイン'
+        find('#icon').click
+        click_link 'マイページ'
+        expect(page).to have_content 'ゲスト(赤)'
+        expect(page).to have_content 'ゲスト(赤)としてログインしています。'
+      end
     end
   end
 end
