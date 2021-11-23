@@ -64,6 +64,7 @@ RSpec.describe 'Users', type: :system do
         find('#icon').click
         click_link 'プロフィール編集'
       end
+
       it '更新が失敗すること' do
         fill_in 'user_name', with: 'EditedUser'
         fill_in 'user_introduction', with: 'EditedIntroduction'

@@ -77,7 +77,7 @@ module Users
         'guest_blue@medispot.com',
         'guest_yellow@medispot.com',
         'guest_purple@medispot.com',
-        'guest_green@medispot.com'
+        'guest_green@medispot.com',
       ]
       if guest_emails.include?(resource.email)
         redirect_to root_path, alert: 'ゲストユーザーは変更・削除できません。'
