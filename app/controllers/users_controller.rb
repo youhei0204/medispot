@@ -43,7 +43,14 @@ class UsersController < ApplicationController
   end
 
   def guest_user?
-    if User.find_by(id: params[:id]).email == 'guest@medispot.com'
+    guest_emails = [
+      'guest_red@medispot.com',
+      'guest_blue@medispot.com',
+      'guest_yellow@medispot.com',
+      'guest_purple@medispot.com',
+      'guest_green@medispot.com'
+    ]
+    if guest_emails.include?(User.find_by(id: params[:id]).email)
       redirect_to root_path, alert: 'ゲストユーザーは変更・削除できません。'
     end
   end
