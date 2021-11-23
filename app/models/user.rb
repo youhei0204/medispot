@@ -19,7 +19,8 @@ class User < ApplicationRecord
 
     guest_users = User.where("email like 'guest_%@medispot.com'").where.not(confirmed_at: nil)
     if guest_users.count == GUEST_USER_NUM
-      guest_users.joins(:notifications).order('notifications.created_at').first
+      guest_users.joins(:notifications).where('notifications.request_type' => 0).
+        order('notifications.created_at').first
     else
       colors.each do |color|
         if !User.find_by(email: "guest_#{color}@medispot.com")
