@@ -1,14 +1,14 @@
 # frozen_string_literal: true
 
-USER_NUM = 120
+USER_NUM = 30
 SAMPLE_USER_IMAGE_NUM = 21
 SAMPLE_REVIEW_IMAGE_NUM = 21
 MIN_IMAGE_NUM_OF_REVIEW = 0
 MAX_IMAGE_NUM_OF_REVIEW = 3
-MIN_LIKE_NUM_PER_USER = 3
-MAX_LIKE_NUM_PER_USER = 4
-MIN_REVIEW_NUM_PER_SPOT = 11
-MAX_REVIEW_NUM_PER_SPOT = 25
+MIN_LIKE_NUM_PER_USER = 8
+MAX_LIKE_NUM_PER_USER = 13
+MIN_REVIEW_NUM_PER_SPOT = 3
+MAX_REVIEW_NUM_PER_SPOT = 10
 
 introduction_pattern = [
   "このご時世ですので、家でできる趣味を探しに始めました。",
@@ -39,16 +39,20 @@ title_pattern = [
   "スッと気が楽に",
   "感謝の気持ちが沸いてくる",
   "植物の心のような",
+  "妻に促されて通い始めました",
+  "日々の仕事疲れの癒しに...",
+  "リピート推奨です！",
+  "自然光に包まれて"
 ]
 content_pattern = [
   "初めての瞑想講座でした。こちらでの体験を参考にして、毎日寝る前に5分間の瞑想を行なっています。
   個人的に一番効果を感じているのは、「寝付きが良くなった」という点です。
-  私自身、昔から寝るのが下手くそなため、ベッドに入ってから数時間何もせずに過ごしてしまう、なんてことがザラにあります。
+  私は昔から寝るのが下手くそで、ベッドに入ってから数時間眠れず過ごしてしまう、なんてことがザラにあります。
   そんなとき、グータラ本を読んだりせずに瞑想をすると、自然と心が落ち着き、寝る体勢に心が落ち着きます。
   よく「心の筋トレ」と表現されることがある瞑想ですが、少し意味が理解できた気がします。
   他の方の体験談も読んでみたいですね。",
   "瞑想ってどんなもの？まったくわからないまま、とりあえず足を運んでみました。
-  「興味を持ったら即アクション」が私の社会に対する基本姿勢です。教室に着くと、
+  「興味を持ったら即アクション」が私の基本姿勢です。教室に着くと、
   すでに何人かの参加者が先生の到着を待っていました。
   中には挨拶を交わし合う人達もいて、常連さん達かな？としばらく見ていると、何人かヨガマットの上に座り、徐に準備体操を始めました。
 
@@ -95,7 +99,7 @@ content_pattern = [
   こんなものかと思いきや、瞑想後の周りの人たちの表情をみていると、なにか瞑想前とは違ったものを感じます。
   顔がスッキリしていて、ポジティブ感が増したように見えました。
   これが中々名状し難いのですが、心のチューニングのようなものかなと感じました。
-  でも、それが何の役に立つの？まだまだ疑問です。考えるより今後も通ってみようと思います。
+  でも、それが何の役に立つのか？まだまだ疑問です。考えるより今後も通ってみようと思います。
   今回はそんな感想を持って教室を後にしました。劇的な体験とは行きませんでしたが、これからが楽しみです。
   みなさんのレビューも参考にしつつ、色々巡ってみるのもアリですね。",
   "先生が丁寧に説明してくれたので、初心者でも安心でした。指示通りに見様見真似でやっているうちに、あっという間に時間が過ぎて行きました。
@@ -104,7 +108,65 @@ content_pattern = [
   こんな風に何も考えず、今を感じることに集中する時間は大切にすべきだなと思いました。
   でも、瞑想できてる！という実感にはまだまだ遠いかな。
   それにしても”ジッとしている”というのは結構大変ですね。正直、ここが肝ですね！",
+  "きっかけはコロナ禍によるストレスなのか、不眠気味で、寝てもスッキリしない日が続いていたからです。
+  そこで、不眠解消方法を色々と調べてみたところ「瞑想すれば気持ちが落ち着き安眠できる」というネットの記事を読んで、費用もあまり掛からなそうだし、試しに体験してみようと思い、教室へ足を運びました。
+  また、私は運動が苦手なので、激しく身体を動かすことのない瞑想であれば出来るかなと、軽い気持ちで挑戦してみました。
+   
+  当日教室に行くと、私以外の皆さんは経験者のようで、慣れたように各々準備運動をしていました。
+  何も知らない私も見様見真似で準備運動をしてみましたが、ヨガマットの上で準備運動をしただけで、瞑想前なのに達成感を味わってしまいました（笑）
+   
+  瞑想が始まると、初めは先生の説明が多く、もっと静かに進むものかと思っていたので意外でした。
+   
+  しかし、瞑想が進むにつれて、いつの間にか集中力が高まり、先生の話が聞こえているけれども気にならない状態、無の境地といえば大袈裟ですが、そんな感覚になっていた気がします。
+   
+  あっという間に瞑想の時間は終わり、終わった後は少し肩の力が抜けた気がします。
+  何も考えずに過ごすだけで、こんなにも身体に変化を与えるものなのかと非常に驚きました。
+   
+  今では不眠気味は解消し、安眠して過ごしています。今後も瞑想習慣を続けていきたいと思います。",
+  "何度か通っていますが、初めてレビューを書かせていただきます！
+  昨年から在宅ワークが多くなり、家にいる時間が増えたため、余暇の時間でできることはないか探した結果こちらに出会いました。
+  日々の運動不足解消だけではなくメンタル調整としても利用しています。
+  講座の内容や効果については他の方の記載がある通り、日々の生活から少し距離を置いたような、穏やかな時間を過ごすことができます。
+  また駅から近く繁華街の中にあることから通いやすいという利点もあり、余暇に友達を誘って、なんてこともしばしば。
+  1人で行うイメージが強いですが、友達やカップルで来ている方もチラホラ見かけます。",
+  "初心者向けのスポットです。
+  先生も優しく教えてくれて、時間はあっという間に感じます。
+  初めて行ったときは、意外とじっとしているのが大変なことに気づくかと思います。
+  かく言う私もそんな一人です。友人に連れられ行ってみると、結構大変でした。
+  しかし先生からもいいお話を聞けたり、体もリラックスでき、ストレス社会を生き抜くにはとても良い趣味だと思いました。
+  ヨガなどは自宅でもできるので、出歩くのが苦手な人にもおすすめです。瞑想もコツをつかめば後は自宅や近所の公園でもできる趣味なので、初心者の方は試してみるのもありです。",
+  "瞑想することを始めたのは約1年前です。
+  友人の紹介でこちらの教室に行ったのがきっかけで、それ以降何度か通ったら、ハマってしまいヨガやスポーツクラブへも通い始めました。
+    
+  最近はコロナも落ち着いてきたので、よく外出し、日の当たる公園で、瞑想しながらのんびり過ごすのが楽しみです。今回行ってきたのは、江戸川区の南部にある葛西臨海公園。水族館などもあり、週末は家族連れやカップルがやってきています。
+  とにかく敷地が広いので、静かな場所を探すといろんなところに良いスポットがあります。最近は少し肌寒くなってきましたが、日の当たる場所も多いです。
+    
+  そんな日光浴も楽しみながら、園内のベンチで静かに瞑想。
+  流れる風の音と葉が揺れる音、また海も近いため、海の音に引き込まれながら、一人の世界へ。
+  瞑想の先生に教わった呼吸法も行いながら、自然光に包まれて瞑想することで、日々の疲れやストレスも浄化されていきました。
+  その後園内を散歩。
+  駅近くにはスターバックスもあり、飲みながら園内へというのもいいものです。
+  観覧車からの眺めはよく、社内で景色を楽しみつつ、物思いにふけるのも乙なものです。
+  公園内はほんとに敷地が広いので、可能なところは自転車等で移動することをお勧めします。
+  外での瞑想好きな方はおすすめです。上級者向きかもしれません。"
 ]
+
+USER_NUM.times do
+  user = User.create!(
+    name: Faker::Name.name,
+    email: Faker::Internet.email,
+    introduction: introduction_pattern.sample,
+    password: "123123",
+    password_confirmation: "123123",
+    confirmed_at: Time.now
+  )
+  user.image.attach(
+    io: File.open(
+      Rails.root.join("app/assets/images/seeds/profile/user_#{rand(1..SAMPLE_USER_IMAGE_NUM)}.jpg")
+    ),
+    filename: 'profile.jpg',
+  )
+end
 
 User.create!(
   name: "フグ田 マスオ",
@@ -114,16 +176,35 @@ User.create!(
   password_confirmation: "123123",
   confirmed_at: Time.now
 )
-USER_NUM.times do
-  User.create!(
-    name: Faker::Name.name,
-    email: Faker::Internet.email,
-    introduction: introduction_pattern.sample,
-    password: "123123",
-    password_confirmation: "123123",
+User.find_by(email: 'mso_masuo@email.com').image.
+  attach(io: File.open(
+    Rails.root.join("app/assets/images/seeds/profile/masuo.jpg")
+    ),filename: 'profile.jpg',
+  )
+
+colors = ['red', 'blue', 'yellow', 'purple', 'green']
+colors_to_jp = { 'red' => '赤', 'blue' => '青', 'yellow' => '黄', 'purple' => '紫', 'green' => '緑' }
+colors.each do |color|
+  user = User.create(
+    name: "ゲスト(#{colors_to_jp[color]})",
+    email: "guest_#{color}@medispot.com",
+    introduction: "ゲスト(#{colors_to_jp[color]})としてログインしています。",
+    password: SecureRandom.urlsafe_base64,
+    new_notification_flag: true,
     confirmed_at: Time.now
   )
+  user.notifications.create(
+    request_type: 0,
+    subject: 'ようこそMediSpotへ！',
+  )
+  user.image.attach(
+    io: File.open(
+      Rails.root.join("app/assets/images/seeds/profile/guest_#{color}.jpg")
+    ),
+    filename: 'profile.jpg',
+  )
 end
+
 
 Spot.create!(
   name: "リベルテ・パティスリー・ブーランジェリ－ 東京吉祥寺",
@@ -323,7 +404,7 @@ Spot.create!(
 )
 Spot.create!(
   name: "Little Lotus Yoga Studio",
-  address: "５１０ビル 401, ５丁目-１５-４ 亀戸 江東区 東京都 136-0071",
+  address: "東京都江東区亀戸５丁目-１５-４ ５１０ビル 401",
   place_id: "ChIJ7ZN-ttaJGGARmCc3gfEucPg",
   lat: 35.7002,
   lng: 139.826,
@@ -348,24 +429,6 @@ Spot.all.each do |spot|
   end
 end
 
-User.all.each_with_index do |user, i|
-  user.image.attach(
-    io: File.open(
-      Rails.root.join("app/assets/images/seeds/profile/user_#{rand(1..SAMPLE_USER_IMAGE_NUM)}.jpg")
-    ),
-    filename: 'profile.jpg',
-  )
-  Review.all.sample(rand(MIN_LIKE_NUM_PER_USER..MAX_LIKE_NUM_PER_USER)).each do |review|
-    user.likes.create!(review_id: review.id)
-  end
-end
-
-User.find_by(email: 'mso_masuo@email.com').image.
-  attach(io: File.open(
-    Rails.root.join("app/assets/images/seeds/profile/masuo.jpg")
-  ),
-         filename: 'profile.jpg',)
-
 Review.all.each do |review|
   [*(1..SAMPLE_REVIEW_IMAGE_NUM)].
     sample(rand(MIN_IMAGE_NUM_OF_REVIEW..MAX_IMAGE_NUM_OF_REVIEW)).each do |n|
@@ -373,5 +436,11 @@ Review.all.each do |review|
       io: File.open(Rails.root.join("app/assets/images/seeds/review/review_#{n}.jpg")),
       filename: 'review.jpg',
     )
+  end
+end
+
+User.all.each_with_index do |user, i|
+  Review.all.sample(rand(MIN_LIKE_NUM_PER_USER..MAX_LIKE_NUM_PER_USER)).each do |review|
+    user.likes.create!(review_id: review.id)
   end
 end
