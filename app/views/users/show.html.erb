@@ -4,7 +4,7 @@
     <div class="profile-block-inner contents-tidy">
       <div class="user-thumbnail">
         <% if @user.image.attached? %>
-          <%= image_tag(@user.image) %>
+          <%= image_tag(@user.image.variant(resize: "200x200")) %>
         <% else %>
           <%= image_tag('guest_user.png') %>
         <% end %>

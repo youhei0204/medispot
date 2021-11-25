@@ -9,7 +9,7 @@ FactoryBot.define do
 
     trait :guest do
       name { 'guestuser' }
-      email { 'guest@medispot.com' }
+      email { 'guest_red@medispot.com' }
       password { 'guestuser' }
       confirmed_at { Time.now }
     end

@@ -67,7 +67,7 @@ RSpec.describe 'Users::Sessions', type: :request do
         expect(response.status).to eq 302
       end
       it 'ゲストユーザーが作成されること' do
-        expect(User.find_by(email: 'guest@medispot.com').present?).to be true
+        expect(User.find_by(email: 'guest_red@medispot.com').present?).to be true
       end
       it 'ホームページにリダイレクトされること' do
         expect(response).to redirect_to root_url

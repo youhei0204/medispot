@@ -72,7 +72,14 @@ module Users
     end
 
     def guest_user?
-      if resource.email == 'guest@medispot.com'
+      guest_emails = [
+        'guest_red@medispot.com',
+        'guest_blue@medispot.com',
+        'guest_yellow@medispot.com',
+        'guest_purple@medispot.com',
+        'guest_green@medispot.com',
+      ]
+      if guest_emails.include?(resource.email)
         redirect_to root_path, alert: 'ゲストユーザーは変更・削除できません。'
       end
     end

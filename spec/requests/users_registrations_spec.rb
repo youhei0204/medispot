@@ -66,7 +66,6 @@ RSpec.describe 'Users::Registrations', type: :request do
   describe 'PUTCH /users' do
     before do
       user.confirm
-      sign_in user
     end
 
     context 'パラメータが正常かつゲストユーザーでないとき' do
@@ -75,6 +74,7 @@ RSpec.describe 'Users::Registrations', type: :request do
           current_password: user_params[:password],
           email: 'updated@test.com'
         }
+        sign_in user
         patch user_registration_path, params: { user: updated_user_params }
       end
 
@@ -91,7 +91,11 @@ RSpec.describe 'Users::Registrations', type: :request do
 
     context 'パラメータが不正かつゲストユーザーでないとき' do
       before do
-        updated_user_params = { current_password: 'invalid_password', email: 'updated@test.com' }
+        updated_user_params = {
+          current_password: 'invalid_password',
+          email: 'updated@test.com'
+        }
+        sign_in user
         patch user_registration_path, params: { user: updated_user_params }
       end
 
@@ -109,7 +113,10 @@ RSpec.describe 'Users::Registrations', type: :request do
     context 'ゲストユーザーであるとき' do
       before do
         sign_in guest_user
-        updated_user_params = { current_password: 'updated_password', email: 'updated@test.com' }
+        updated_user_params = {
+          current_password: 'updated_password',
+          email: 'updated@test.com'
+        }
         patch user_registration_path, params: { user: updated_user_params }
       end
 
@@ -117,7 +124,7 @@ RSpec.describe 'Users::Registrations', type: :request do
         expect(response.status).to eq 302
       end
       it 'アカウント情報が更新されないこと' do
-        expect(guest_user.reload.email).to eq 'guest@medispot.com'
+        expect(guest_user.reload.email).to eq 'guest_red@medispot.com'
       end
       it 'ホームページにリダイレクトされること' do
         expect(response).to redirect_to root_path
